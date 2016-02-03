@@ -11,7 +11,7 @@ function formHeader($title = ""){
 	global $HTML;
 	$HTML[] = <<<EOF
 	<form action="" method="POST" enctype="multipart/form-data">
-	<table class="form-table">
+	<table class="table table-stripped table-hover form-table">
 		<tr>
 			<th colspan="2">{$title}
 		</tr>
@@ -27,6 +27,8 @@ function formFooter($submit = "Submit", $cancel = "Cancel"){
 				<!-- quick hack to back, does not work if person creates new window or writes it itself -->
 				<input type="button" name="cancel" value="{$cancel}" class="btn" onClick="history.go(-1)">
 		</tr>
+	</table>
+	</form>
 EOF;
 }
 
@@ -40,12 +42,15 @@ function formField($title, $name, $type = "text", $value = "", $desc = "", $valu
 		if(isset($_SESSION['POST'][$name])){
 			$value = $_SESSION['POST'][$name];
 		}
+		if(isset($_POST[$name])){
+			$value = $_POST[$name];
+		}
 	}
 	if($type == "textarea"){
 		$HTML[] = <<<EOF
 			<tr>
 				<td colspan="2"><strong>{$title}</strong><br>
-				<textarea name="{$name}" rows="15" class="form-control">{$value}</textarea>
+				<textarea name="{$name}" rows="6" class="form-control">{$value}</textarea>
 			</tr>
 EOF;
 	} else if($type == "select"){
@@ -79,4 +84,33 @@ EOF;
 			</tr>
 EOF;
 	}
+}
+
+function showValues($entry, $allowed){
+	global $HTML;
+	foreach($entry as $k => $v){
+		if(in_array($k, $allowed)){
+			$k = ucfirst($k);
+			$HTML[] = <<<EOF
+				<tr>
+					<td><strong>{$k}</strong>
+					<td>{$v}
+				</tr>
+EOF;
+		}
+	}
+}
+
+$MONTHS = array("", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
+function convertDate($date, $showTime = true){
+	global $MONTHS;
+	$tmp = explode(" ", $date);
+	$tmp1 = explode("-", $tmp[0]);
+	$tmp2 = explode(":", $tmp[1]);
+	$rtn = $tmp1[2] . ". " . $MONTHS[(int) $tmp1[1]] . " " . $tmp1[0];
+	if($showTime){
+		$rtn .= " " . $tmp2[0] . ":" . $tmp2[1];
+	}
+	return $rtn;
 }

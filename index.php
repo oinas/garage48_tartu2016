@@ -10,9 +10,11 @@ require_once "config.php";
 if(isset($_SESSION['user'])){
 	if(!isset($_GET['onlycontent'])){
 		$PAGES[] = "header";
+		$PAGES[] = "wall/leftside";
 	}
 	$PAGES[] = empty($PAGE) ? $DEFAULT_LOGGED_PAGE : $PAGE;
 	if(!isset($_GET['onlycontent'])){
+		$PAGES[] = "wall/rightside";
 		$PAGES[] = "footer";
 	}
 } else {

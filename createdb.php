@@ -7,7 +7,7 @@ $db = $m->cico;
 
 // select collection
 $entries = $db->users;
-
+/*
 
 $entries->insert(
 	array(
@@ -79,3 +79,4 @@ foreach($entries->find() as $k => $v){
 	echo $k . " ";
 	print_r($v);
 }
+*/
