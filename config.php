@@ -17,7 +17,7 @@ $TITLE = "BringMyStuff";
 /** webpage location, so clean urls will work with images */
 $BASEHREF = "/garage48/";
 
-$CORE = "core/";
+$CORE = "page/";
 
 $DEFAULT_LOGGED_PAGE = "main";
 $DEFAULT_FRONT_PAGE = "front_main";
