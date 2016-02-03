@@ -8,7 +8,7 @@ if(isset($_POST['submit'])){
 			// login correct
 			$SUCCESS[] = "Login successful";
 			header("Location: ?wall");
-			$_SESSION['user'] = $v['id'];
+			$_SESSION['user'] = $entry['_id'];
 		} else {
 			$ERROR[] = "User and/or password wrong";
 		}

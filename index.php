@@ -16,7 +16,11 @@ if(isset($_SESSION['user'])){
 		$PAGES[] = "footer";
 	}
 } else {
-	$ALLOWED_PAGES = array("");
+	/** simple hack to not allow user to access login section */
+	$ALLOWED_PAGES = array("about-us", "login", "signup", "concept", "");
+	if(!in_array($PAGE, $ALLOWED_PAGES)){
+		$PAGE = "403";
+	}
 	$PAGES[] = "front_header";
 	$PAGES[] = empty($PAGE) ? $DEFAULT_FRONT_PAGE : $PAGE;
 	$PAGES[] = "front_footer";

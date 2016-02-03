@@ -28,10 +28,10 @@ $HTML[] = <<<EOF
 			<img src="css/logo.png">
 			<div class="menu">
 				<ul class="menu-ul">
-					<li><a href="">Sign Up</a>
-					<li><a href="login">Log in</a>
-					<li><a href="concept">Concept</a>
-					<li><a href="about-us">About Us</a>
+					<li><a href="?signup">Sign Up</a>
+					<li><a href="?">Log in</a>
+					<li><a href="?concept">Concept</a>
+					<li><a href="?about-us">About Us</a>
 				</ul>
 			</div>
 		</div>
