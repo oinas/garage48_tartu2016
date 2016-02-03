@@ -35,3 +35,20 @@ foreach($PAGES as $P){
 if(!isset($_GET['norender'])){
 	echo implode("\n", $HTML);
 }
+
+if(isset($_SESSION['ERROR'])){
+	unset($_SESSION['ERROR']);
+}
+
+if(isset($_SESSION['SUCCESS'])){
+	unset($_SESSION['SUCCESS']);
+}
+
+if(!empty($ERROR)){
+	$_SESSION['ERROR'] = $ERROR;
+}
+
+
+if(!empty($ERROR)){
+	$_SESSION['SUCCESS'] = $SUCCESS;
+}

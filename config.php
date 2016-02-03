@@ -6,7 +6,12 @@
 
 session_start();
 
-require_once "db.php";
+/** mongoDB database */
+$m = new MongoClient();
+
+// select a database, use $db to access it
+$db = $m->cico;
+
 require_once "functions.php";
 
 $HTML = array();
@@ -16,19 +21,28 @@ $ERROR = array();
 /** success handler */
 $SUCCESS = array();
 /** webpage title */
-$TITLE = "BringMyStuff";
+$TITLE = "CICO";
 /** webpage location, so clean urls will work with images */
 $BASEHREF = "/garage48_tartu2016/";
 
 $CORE = "page/";
 
+/** default landing page for logged in user */
 $DEFAULT_LOGGED_PAGE = "wall";
+/** default landing page for unlogged user */
 $DEFAULT_FRONT_PAGE = "front_main";
 
+$tmp = explode("/", isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : "");
+$PAGE = isset($tmp[0]) ? $tmp[0] : null;
+$ACTION = isset($tmp[1]) ? $tmp[1] : null;
+$ID = isset($tmp[2]) ? $tmp[2] : null;
+
+/** clean URLS, we can ignore it for time being? 
 $tmp = explode("/", isset($_GET['q']) ? $_GET['q'] : "");
 $PAGE = isset($tmp[0]) ? $tmp[0] : null;
 $ACTION = isset($tmp[1]) ? $tmp[1] : null;
 $ID = isset($tmp[2]) ? $tmp[2] : null;
+*/
 
 /**
 Examples of $PAGE, $ACTION and $ID.

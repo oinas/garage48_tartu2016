@@ -1,25 +1,81 @@
 <?php
 
-if ($db = new SQLite3('data/data.db')) {
-// first let the engine check table, and create it eventualy
-	@$db->exec('CREATE TABLE IF NOT EXISTS users 
-	(id id, 
-	user VARCHAR(255), 
-	password VARCHAR(255), 
-	first VARCHAR(255), 
-	last VARCHAR(255),  
-	email VARCHAR(255),  
-	facebookid VARCHAR(255),  
-	googleid VARCHAR(255),  
-	date VARCHAR(255),  
-	update VARCHAR(255),  
-	status VARCHAR(255),  
-	description VARCHAR(255),  
-	banstatus VARCHAR(255), 
-	PRIMARY KEY (id))');
+$m = new MongoClient();
 
-	$db->exec("INSERT INTO users 
-		(bar) 
-		VALUES 
-		('This is a test')");
+// select a database
+$db = $m->cico;
+
+// select collection
+$entries = $db->users;
+
+/*
+$entries->insert(
+	array(
+		"user" => "man",
+		"password" => md5("test"),
+		"first" => "Karl",
+		"last" => "Pott",
+		"email" => "karl.pott@cico.com",
+		"facebookid" => "",
+		"googleid" => "",
+		"date" => date("Y-m-d H:i:s"),
+		"last" => microtime(true),
+		"status" => "0",
+		"description" => "I travel a lot!",
+		"banstatus" => 0
+		)
+	);
+$entries->insert(
+		array(
+		"user" => "woman",
+		"password" => md5("test"),
+		"first" => "Mai",
+		"last" => "Sang",
+		"email" => "mai.sang@cico.com",
+		"facebookid" => "",
+		"googleid" => "",
+		"date" => date("Y-m-d H:i:s"),
+		"last" => microtime(true),
+		"status" => "0",
+		"description" => "I buy a lot!",
+		"banstatus" => 0
+		)
+	);
+$entries->insert(
+		array(
+		"user" => "traveler",
+		"password" => md5("test"),
+		"first" => "Marek",
+		"last" => "Pall",
+		"email" => "marek.pall@cico.com",
+		"facebookid" => "",
+		"googleid" => "",
+		"date" => date("Y-m-d H:i:s"),
+		"last" => microtime(true),
+		"status" => "0",
+		"description" => "I am traveler!",
+		"banstatus" => 0
+		)
+	);
+$entries->insert(
+		array(
+		"user" => "requester",
+		"password" => md5("test"),
+		"first" => "Kalle",
+		"last" => "Tald",
+		"email" => "kalle.tald@cico.com",
+		"facebookid" => "",
+		"googleid" => "",
+		"date" => date("Y-m-d H:i:s"),
+		"last" => microtime(true),
+		"status" => "0",
+		"description" => "I request a lot!",
+		"banstatus" => 0
+		)
+	);
+*/
+
+foreach($entries->find() as $k => $v){
+	echo $k . " ";
+	print_r($v);
 }
