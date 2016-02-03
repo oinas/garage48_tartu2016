@@ -8,7 +8,7 @@ $db = $m->cico;
 // select collection
 $entries = $db->users;
 
-/*
+
 $entries->insert(
 	array(
 		"user" => "man",
@@ -73,7 +73,7 @@ $entries->insert(
 		"banstatus" => 0
 		)
 	);
-*/
+
 
 foreach($entries->find() as $k => $v){
 	echo $k . " ";
