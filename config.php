@@ -18,11 +18,11 @@ $SUCCESS = array();
 /** webpage title */
 $TITLE = "BringMyStuff";
 /** webpage location, so clean urls will work with images */
-$BASEHREF = "/garage48/";
+$BASEHREF = "/garage48_tartu2016/";
 
 $CORE = "page/";
 
-$DEFAULT_LOGGED_PAGE = "main";
+$DEFAULT_LOGGED_PAGE = "wall";
 $DEFAULT_FRONT_PAGE = "front_main";
 
 $tmp = explode("/", isset($_GET['q']) ? $_GET['q'] : "");
