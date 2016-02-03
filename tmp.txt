@@ -1,0 +1,10 @@
+Profile ->
+
+Show icons for user what they can carry
+
+References (Positives, 5-0)
+
+
+Location -> should have continent, country or city possibility
+
+MongoDB - database
