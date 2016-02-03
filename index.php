@@ -52,7 +52,6 @@ if(!empty($ERROR)){
 	$_SESSION['ERROR'] = $ERROR;
 }
 
-
-if(!empty($ERROR)){
+if(!empty($SUCCESS)){
 	$_SESSION['SUCCESS'] = $SUCCESS;
 }

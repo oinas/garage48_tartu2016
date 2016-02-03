@@ -11,6 +11,7 @@ if(isset($_POST['submit'])){
 			$_SESSION['user'] = $entry['_id'];
 		} else {
 			$ERROR[] = "User and/or password wrong";
+			header("Location: ?");
 		}
 	}
 }

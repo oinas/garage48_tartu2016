@@ -38,3 +38,15 @@ $HTML[] = <<<EOF
 		<div class="content">
 			<div class="inner">
 EOF;
+
+if(isset($_SESSION['SUCCESS']) && !empty($_SESSION['SUCCESS'])){
+	$HTML[] = '<div class="alert alert-success" role="alert">'
+	 . implode("<li>", $_SESSION['SUCCESS']) . 
+	 '</div>';
+}
+
+if(isset($_SESSION['ERROR']) && !empty($_SESSION['ERROR'])){
+	$HTML[] = '<div class="alert alert-danger" role="alert">'
+	 . implode("<li>", $_SESSION['ERROR']) . 
+	 '</div>';
+}
