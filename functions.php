@@ -126,16 +126,21 @@ function convertDateTime($date, $showTime = true){
 	global $MONTHS;
 	$tmp = explode(" ", $date);
 	$tmp1 = explode("-", $tmp[0]);
-	$tmp2 = explode(":", $tmp[1]);
 	$rtn = $tmp1[2] . ". " . $MONTHS[(int) $tmp1[1]] . " " . $tmp1[0];
-	if($showTime){
-		$rtn .= " " . $tmp2[0] . ":" . $tmp2[1];
+	if($showTime && count($tmp) >= 2){
+		$tmp2 = explode(":", $tmp[1]);
+		if($showTime){
+			$rtn .= " " . $tmp2[0] . ":" . $tmp2[1];
+		}
 	}
 	return $rtn;
 }
 
 function relativeTime($microtime){
 	$diff = microtime(true) - $microtime;
+	if($diff < 0){
+		$diff = -$diff;
+	}
 	if($diff < 60){
 		return "now";
 	} else if($diff < 60 * 60){
@@ -149,4 +154,27 @@ function relativeTime($microtime){
 	} else {
 		return (int) ($diff / 60 / 60 / 24 / 30 / 12) . " years ago";
 	}
+}
+
+function getUser($userid){
+	global $db;
+
+	$user = $db->users;
+
+	$entry = $user->findOne(array("facebookid" => $userid));
+
+	return !empty($entry) ? $entry : null;
+}
+
+/** TODO: THIS IS REALLY DIRTY HACK AND SHOULD NOT BE USED FOR LARGE SITES */
+function getUserPicture($userid){
+	if(empty($userid)){
+		return "css/noimage.jpg";
+	}
+	if(!isset($_SESSION['fb_pictures'][$userid])){
+		$json = file_get_contents("https://graph.facebook.com/" . $userid . "/picture?type=large&redirect=0");
+		$tmp = json_decode($json);
+		$_SESSION['fb_pictures'][$userid] = $tmp->data->url;		
+	}
+	return !empty($_SESSION['fb_pictures'][$userid]) ? $_SESSION['fb_pictures'][$userid] : "css/noimage.jpg";
 }

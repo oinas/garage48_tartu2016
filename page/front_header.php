@@ -35,6 +35,18 @@ $HTML[] = <<<EOF
 				</ul>
 			</div>
 		</div>
+
+<script>
+$( "#searchfrom" ).autocomplete({
+	source: "ajax/cities.php",
+	minLength: 2
+});
+$( "#searchto" ).autocomplete({
+	source: "ajax/cities.php",
+	minLength: 2
+});
+</script>
+
 		<div class="content>
 			<div class="inner">
 EOF;

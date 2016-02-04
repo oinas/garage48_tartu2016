@@ -10,14 +10,7 @@ $menu = array(
 );
 
 // hack otherwise it will not cache the profile picture and will load it every page
-if(!isset($_SESSION['fb_picture']) && isset($_SESSION['fb_id'])){
-	$json = file_get_contents("https://graph.facebook.com/" . $_SESSION['fb_id'] . "/picture?type=large&redirect=0");
-	$tmp = json_decode($json);
-	$_SESSION['fb_picture'] = $tmp->data->url;
-}
-
-$facebook_picture = isset($_SESSION['fb_picture']) ? $_SESSION['fb_picture'] : "css/noimage.jpg";
-//$facebook_picture = "css/noimage.jpg";
+$facebook_picture = getUserPicture($_SESSION['user']);
 
 $HTML[] = <<<EOF
 <div class="container-fluid">

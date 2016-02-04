@@ -1,5 +1,14 @@
 <?php
 
+$to = "";
+$from = "";
+if(isset($_GET['to'])){
+	$to = $_GET['to'];
+}
+if(isset($_GET['from'])){
+	$from = $_GET['from'];
+}
+
 $HTML[] = <<<EOF
 <!DOCTYPE html> 
 <html lang=en>
@@ -27,16 +36,45 @@ $HTML[] = <<<EOF
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 	</head>
 	<body>
+
 	<div class="body">
 		<div class="header">
 			<img src="css/logo.png">
+
+
+			
+
 			<div class="menu">
 				<ul class="menu-ul">
 					<li><a href="?about-us">About Us</a>
 					<li><a href="?logout">Log out</a>
 				</ul>
 			</div>
+
+
+
+			<div class="search">
+				<form action="" method="GET">
+					<input type="hidden" name="q" value="search">
+					<input type="text" name="from" id="searchfrom" value="{$from}" placeholder="Departure" class="form-control form-search">
+					<input type="text" name="to" id="searchto" value="{$to}" placeholder="Arrival" class="form-control form-search">
+					<div class="search-button btn btn-primary" id="sb" onclick="$('#sbclick').click()"><img src="css/search.png" width="20"></div>
+					<input type="submit" name="submit" id="sbclick" value="Search" style="display: none">
+				</form>
+			</div>
 		</div>
+
+<script>
+$( "#searchfrom" ).autocomplete({
+	source: "ajax/existing_cities.php",
+	minLength: 1
+});
+$( "#searchto" ).autocomplete({
+	source: "ajax/existing_cities.php",
+	minLength: 1
+});
+</script>
+
 		<div class="content">
 			<div class="inner">
 EOF;

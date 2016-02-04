@@ -11,6 +11,9 @@ if(isset($_SESSION['user'])){
 	/** upgrade user info */
 	$entries = $db->users;
 	$entry = $entries->findOne(array("facebookid" => $_SESSION['user']));
+	if(isset($_GET['q'])){
+		$PAGE = "search";
+	}
 
 	if(!empty($entry)){
 	  $entry['last'] = microtime(true);
