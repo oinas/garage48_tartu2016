@@ -23,7 +23,13 @@ $SUCCESS = array();
 /** webpage title */
 $TITLE = "CICO";
 /** webpage location, so clean urls will work with images */
-$BASEHREF = "/garage48_tartu2016/";
+if(file_exists("../index2.html")){
+	$BASEHREF = "/garage48_tartu2016/";
+	$URL = "http://cico.com";
+} else {
+	$BASEHREF = "/";
+	$URL = "http://cico.northeurope.cloudapp.azure.com/";
+}
 
 $CORE = "page/";
 
