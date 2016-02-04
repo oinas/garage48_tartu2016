@@ -4,7 +4,7 @@ $menu = array(
 	"wall" => "Home",
 	"travel_plan/add" => "Create travel plan",
 	"product/add" => "Make product request",
-	"travel_plan_view" => "My travel plans",
+	"travel_plan" => "My travel plans",
 	"product_view" => "View product requests",
 );
 
@@ -16,7 +16,7 @@ if(!isset($_SESSION['fb_picture']) && isset($_SESSION['fb_id'])){
 }
 
 $facebook_picture = isset($_SESSION['fb_picture']) ? $_SESSION['fb_picture'] : "css/noimage.jpg";
-$facebook_picture = "css/noimage.jpg";
+//$facebook_picture = "css/noimage.jpg";
 
 $HTML[] = <<<EOF
 <div class="container-fluid">

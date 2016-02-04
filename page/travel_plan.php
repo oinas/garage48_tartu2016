@@ -2,61 +2,54 @@
 
 $travel_plans = $db->travel_plans;
 
-if(isset($_POST['submit'])){
-	$_POST['update'] = microtime(true);
-	$_POST['user'] = $_SESSION['user'];
-	if($ACTION == "add"){
-		$_POST['added'] = date("Y-m-d H:i:s");
-		$travel_plans -> insert($_POST);
-		header("Location: ?travel_plan_view");
-	} else {
-		$_POST['modified'] = date("Y-m-d H:i:s");
-		$travel_plans -> update(array("_id" => new MongoId($ID)), $_POST);
-		header("Location: ?travel_plan_view");
-	}
-}
-
-/** if we edit travel plan, populate fields to $_POST, that are latter used */
-if($ACTION == "edit"){
-	$_POST = $travel_plans->findOne(array("_id" => new MongoId($ID)));
-} else if($ACTION == "delete"){
-	$entry = $travel_plans->findOne(array("_id" => new MongoId($ID)));
-	if(isset($_GET['confirm'])){
-		$travel_plans->remove(array("_id" => new MongoId($ID)));
-		header("Location: ?travel_plan_view");
-	}
-	$entry['date'] = convertDate($entry['date']);
-	$HTML[] = <<<EOF
-		<div class="alert alert-danger center" role="alert">
-			Are your sure you want to delete travel plan from {$entry['from']} to {$entry['to']} ({$entry['date']})?<br><br>
-			<a href="?{$PAGE}/{$ACTION}/{$ID}/&confirm" class="btn btn-danger">Yes</a>
-			&nbsp;&nbsp;
-			<a href="#" onClick="history.go(-1)">No</a>
-		</div>
+$HTML[] = <<<EOF
+	<h1>Travel plans</h1>
 EOF;
-}
-
-if($ACTION != "delete"){
-/** add form */
-formHeader("Add new travel plan");
-formField("From", "from", "text", "", "Departure");
-formField("To", "to", "text", "", "Arrival");
-formField("Date", "date", "text", "", "Date of departure");
-formField("Package size", "size", "text", "", "Package dimensions (WxHxD)");
-formField("Weight", "weight", "text", "", "Maximum lugage weight");
-formField("Additional informations", "description", "textarea");
-formFooter($ACTION == "add" ? "Add new plan" : "Modify plan");
 
 $HTML[] = <<<EOF
+	<table class="table table-hover table-striped tablesorter" id="tablesorter">
+		<thead>
+			<tr>
+				<th>#
+				<th>Departure
+				<th>Arrival
+				<th>Date
+				<th>Lugage size
+				<th>Lugage weight
+			</tr>
+		</thead>
+		<tbody>
+EOF;
+
+
+
+$i = 0;
+foreach($travel_plans->find(array("user" => $_SESSION['user']))->sort(array("date" => -1)) as $k => $v){
+	$i++;
+	$v['date'] = convertDate($v['date'], false);
+	$HTML[] = <<<EOF
+		<tr>
+			<td>{$i}
+			<td><a href="?travel_plan_view/view/{$v['_id']}">{$v['from']}</a> 
+
+				<a href="?travel_plan/edit/{$v['_id']}"><span class="glyphicon glyphicon-edit"></span></a>
+				<a href="?travel_plan/delete/{$v['_id']}"><span class="glyphicon glyphicon-remove"></span></a>
+			<td>{$v['to']}
+			<td>{$v['date']}
+			<td>{$v['size']}
+			<td>{$v['weight']}
+		</tr>
+EOF;
+	}
+
+	$HTML[] = <<<EOF
+			</tbody>
+		</table>
+
 <script>
-$( "#from" ).autocomplete({
-	source: "cities.php",
-	minLength: 2
-});
-$( "#to" ).autocomplete({
-	source: "cities.php",
-	minLength: 2
-});
+$(document).ready(function() { 
+			$("#tablesorter").tablesorter(); 
+		} 
+	); 
 </script>
 EOF;
-}

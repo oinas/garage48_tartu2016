@@ -12,6 +12,11 @@ if(isset($_SESSION['user'])){
 		$PAGES[] = "header";
 		$PAGES[] = "wall/leftside";
 	}
+	if(in_array($ACTION, array("new", "delete", "edit", "add"))){
+		$PAGE .= ".edit";
+	} else if($ACTION == "view"){
+		$PAGE .= ".view";
+	}
 	$PAGES[] = empty($PAGE) ? $DEFAULT_LOGGED_PAGE : $PAGE;
 	if(!isset($_GET['onlycontent'])){
 		$PAGES[] = "wall/rightside";
