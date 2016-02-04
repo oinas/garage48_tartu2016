@@ -8,13 +8,26 @@ $menu = array(
 	"product_view" => "View product requests",
 );
 
+// hack otherwise it will not cache the profile picture and will load it every page
+if(!isset($_SESSION['fb_picture']) && isset($_SESSION['fb_id'])){
+	$json = file_get_contents("https://graph.facebook.com/" . $_SESSION['fb_id'] . "/picture?type=large&redirect=0");
+	$tmp = json_decode($json);
+	$_SESSION['fb_picture'] = $tmp->data->url;
+}
+
+$facebook_picture = isset($_SESSION['fb_picture']) ? $_SESSION['fb_picture'] : "css/noimage.jpg";
+$facebook_picture = "css/noimage.jpg";
+
 $HTML[] = <<<EOF
 <div class="container-fluid">
 	<div class="row">
 		<div class="left-side col-md-3">
 			<h1>Profile</h1>
-			<img src="upload/profile.jpg" width="200">
+			<center>
+				<img src="{$facebook_picture}" width="90%" class="circle">
+				<br>{$_SESSION['fb_name']}
 
+			</center>
 			<ul class="side-bar-menu">
 EOF;
 

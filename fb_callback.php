@@ -4,8 +4,8 @@ require_once "config.php";
 require_once "Facebook/autoload.php";
 
 $fb = new Facebook\Facebook([
-  'app_id' => '{app-id}',
-  'app_secret' => '{app-secret}',
+  'app_id' => '999172896799797',
+  'app_secret' => '5a5e05106f4900298a7fbbb9f1ae9c1a',
   'default_graph_version' => 'v2.2',
   ]);
 
@@ -38,19 +38,19 @@ if (! isset($accessToken)) {
 }
 
 // Logged in
-echo '<h3>Access Token</h3>';
-var_dump($accessToken->getValue());
+/*echo '<h3>Access Token</h3>';
+var_dump($accessToken->getValue());*/
 
 // The OAuth 2.0 client handler helps us manage access tokens
 $oAuth2Client = $fb->getOAuth2Client();
 
 // Get the access token metadata from /debug_token
 $tokenMetadata = $oAuth2Client->debugToken($accessToken);
-echo '<h3>Metadata</h3>';
-var_dump($tokenMetadata);
+/*echo '<h3>Metadata</h3>';
+var_dump($tokenMetadata);*/
 
 // Validation (these will throw FacebookSDKException's when they fail)
-$tokenMetadata->validateAppId($config['app_id']);
+//$tokenMetadata->validateAppId(999172896799797);
 // If you know the user ID this access token belongs to, you can validate it here
 //$tokenMetadata->validateUserId('123');
 $tokenMetadata->validateExpiration();
@@ -66,10 +66,66 @@ if (! $accessToken->isLongLived()) {
 
   echo '<h3>Long-lived</h3>';
   var_dump($accessToken->getValue());
+  exit;
 }
 
 $_SESSION['fb_access_token'] = (string) $accessToken;
 
+$response = $fb->get('/me?fields=id,name,email', $accessToken);
+
+$user = $response->getGraphUser();
+$page = $response->getGraphPage();
+
+$_SESSION['fb_id'] = $user['id'];
+$_SESSION['fb_name'] = $user['name'];
+$_SESSION['fb_email'] = $user['email'];
+
+/** make database entry */
+$entries = $db->users;
+$entry = $entries->findOne(array("facebookid" => $user['id']));
+
+if(empty($entry)){
+  $tmp = explode("@", $user['email']);
+  $entries->insert(
+    array(
+      "user" => $tmp[0],
+      "password" => md5("test"),
+      "first" => $user['name'],
+      "last" => "",   //deprecated, we do not use lastname, the name will come automatically from facebook
+      "email" => $user['email'],
+      "facebookid" => $user['id'],
+      "facebookAccess" => (string) $accessToken,
+      "googleid" => "",
+      "date" => date("Y-m-d H:i:s"),
+      "last" => microtime(true),
+      "status" => "0",
+      "description" => "",
+      "banstatus" => 0
+      )
+    );
+} else {
+  /** update */
+  $entries->update(array("facebookid" => $user['id']),
+      array(
+        "first" => $user['name'],
+        "last" => "",   //deprecated, we do not use lastname, the name will come automatically from facebook
+        "email" => $user['email'],
+        "facebookAccess" => (string) $accessToken,
+        "last" => microtime(true),
+      )
+    );
+}
+
+$_SESSION['user'] = $user['id'];
+
+/*
+print_r($user);
+print_r($page);
+
+print_r($response);
+var_dump($response);
+*/
+
 // User is logged in with a long-lived access token.
 // You can redirect them to a members-only page.
-//header('Location: https://example.com/members.php');
+header("Location: {$BASEHREF}?wall");

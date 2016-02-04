@@ -20,6 +20,7 @@ if(isset($_POST['submit'])){
 }
 
 $HTML[] = <<<EOF
+<!--div class="alert alert-warning" role="alert" style="width: 50%; font-size: 1em;">
 Demo users: man, woman, user, traveler, requester<br>
 Password is test
 EOF;
@@ -29,17 +30,28 @@ formField("User", "user", "text");
 formField("Password", "password", "password");
 formFooter();
 
+$HTML[] = <<<EOF
+</div-->
+EOF;
+
 require_once "Facebook/autoload.php";
 
 $fb = new Facebook\Facebook([
-  'app_id' => '{app-id}',
-  'app_secret' => '{app-secret}',
+  'app_id' => '999172896799797',
+  'app_secret' => '5a5e05106f4900298a7fbbb9f1ae9c1a',
   'default_graph_version' => 'v2.2',
   ]);
 
 $helper = $fb->getRedirectLoginHelper();
 
 $permissions = ['email']; // Optional permissions
-$loginUrl = $helper->getLoginUrl('https://localhost/fb-callback.php', $permissions);
-
-$HTML[] = '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
+$loginUrl = $helper->getLoginUrl('http://cico.com/garage48_tartu2016/fb_callback.php', $permissions);
+$tmp = htmlspecialchars($loginUrl);
+$HTML[] = <<<EOF
+<div class="front-middle">
+<h1>Some motivational slogan</h1>
+Additional description to give better insight of slogan<br><br><br>
+<a href="{$tmp}" class="btn btn-primary btn-lg"><img src="css/fb_white_29.png" style="margin-right: 10px; margin-top: -2px;"> Log in with Facebook!</a>
+<br><br><h1>Quick &amp; easy login</h1>
+</div>
+EOF;

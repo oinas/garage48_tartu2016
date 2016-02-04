@@ -24,7 +24,6 @@ function formFooter($submit = "Submit", $cancel = "Cancel"){
 		<tr>
 			<td colspan="2">
 				<input type="submit" name="submit" value="{$submit}" class="btn btn-primary">
-				<!-- quick hack to back, does not work if person creates new window or writes it itself -->
 				<input type="button" name="cancel" value="{$cancel}" class="btn" onClick="history.go(-1)">
 		</tr>
 	</table>
@@ -50,14 +49,14 @@ function formField($title, $name, $type = "text", $value = "", $desc = "", $valu
 		$HTML[] = <<<EOF
 			<tr>
 				<td colspan="2"><strong>{$title}</strong><br>
-				<textarea name="{$name}" rows="6" class="form-control">{$value}</textarea>
+				<textarea name="{$name}" rows="6" class="form-control" id="{$name}">{$value}</textarea>
 			</tr>
 EOF;
 	} else if($type == "select"){
 		$HTML[] = <<<EOF
 			<tr>
 				<td><strong>{$title}</strong>
-				<td><select name="{$name}" class="form-control">
+				<td><select name="{$name}" class="form-control" id="{$name}">
 					<option value="">{$desc}	
 EOF;
 		foreach($values as $k => $v){
@@ -80,8 +79,17 @@ EOF;
 		$HTML[] = <<<EOF
 			<tr>
 				<td><strong>{$title}</strong>
-				<td><input type="{$type}" name="{$name}" value="{$value}" placeHolder="{$desc}" class="form-control">
+				<td><input type="{$type}" name="{$name}" value="{$value}" placeHolder="{$desc}" class="form-control" id="{$name}" autocomplete="off">
 			</tr>
+EOF;
+	}
+	if($name == "date"){
+		$HTML[] = <<<EOF
+			  <script>
+			  $(function() {
+			    $( "#date" ).datepicker({ dateFormat: 'yy-mm-dd' });
+			  });
+			  </script>
 EOF;
 	}
 }
@@ -103,7 +111,18 @@ EOF;
 
 $MONTHS = array("", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 
-function convertDate($date, $showTime = true){
+function convertDate($date){
+	global $MONTHS;
+	$tmp = array();
+	$tmp = explode("-", $date);
+	if(count($tmp) >= 3){
+		return $tmp[2] . ". " . $MONTHS[(int) $tmp[1]] . " " . $tmp[0];
+	} else {
+		return "";	// invalid date, do not return anything
+	}
+}
+
+function convertDateTime($date, $showTime = true){
 	global $MONTHS;
 	$tmp = explode(" ", $date);
 	$tmp1 = explode("-", $tmp[0]);

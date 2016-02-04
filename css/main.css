@@ -6,6 +6,40 @@ body, html, input, textarea {
 	font-size: 1em;
 }
 
+.front.body {
+	position: absolute;
+	background: url("background.jpg");
+	background-size: cover;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+.front .front-text {
+	margin: auto;
+	width: 90%;
+	background: #fff;
+	opacity: 0.95;
+	padding: 30px;
+	margin-top: 30px;
+}
+
+.front-middle {
+	margin: auto;
+	width: 800px;
+	color: #fff;
+	text-align: center;
+	position: relative;
+	transform: translateY(75%);
+
+}
+
+.front-middle h1 {
+	font-size: 2em;
+	margin-bottom: 15px;
+}
+
 h1 {
 	margin: 0px;
 	padding: 0px;
@@ -83,4 +117,19 @@ ul.side-bar-menu li a {
 
 .center {
 	text-align: center;
+}
+
+table .header {
+	box-shadow: none;
+	background-image: url("sortbh.gif");
+	background-position: 95% 60%;
+	background-repeat: no-repeat;
+}
+
+/** sorting */
+table .headerSortDown {
+	background-image: url("sortdn.gif");
+}
+table .headerSortUp {
+	background-image: url("sortup.gif");
 }

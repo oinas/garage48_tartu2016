@@ -22,21 +22,24 @@ EOF;
 EOF;
 
 	$HTML[] = <<<EOF
-		<table class="table table-hover table-striped">
-			<tr>
-				<th>#
-				<th>Departure
-				<th>Arrival
-				<th>Date
-				<th>Lugage size
-				<th>Lugage weight
-			</tr>
+		<table class="table table-hover table-striped tablesorter" id="tablesorter">
+			<thead>
+				<tr>
+					<th>#
+					<th>Departure
+					<th>Arrival
+					<th>Date
+					<th>Lugage size
+					<th>Lugage weight
+				</tr>
+			</thead>
+			<tbody>
 EOF;
 
 
 
 	$i = 0;
-	foreach($travel_plans->find(array("user" => $_SESSION['user'])) as $k => $v){
+	foreach($travel_plans->find(array("user" => $_SESSION['user']))->sort(array("date" => -1)) as $k => $v){
 		$i++;
 		$v['date'] = convertDate($v['date'], false);
 		$HTML[] = <<<EOF
@@ -55,7 +58,15 @@ EOF;
 	}
 
 	$HTML[] = <<<EOF
+			</tbody>
 		</table>
+
+<script>
+$(document).ready(function() { 
+			$("#tablesorter").tablesorter(); 
+		} 
+	); 
+</script>
 EOF;
 
 }

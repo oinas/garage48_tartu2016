@@ -74,9 +74,8 @@ $entries->insert(
 		)
 	);
 
-
+*/
 foreach($entries->find() as $k => $v){
 	echo $k . " ";
 	print_r($v);
 }
-*/

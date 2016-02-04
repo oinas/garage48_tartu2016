@@ -6,10 +6,11 @@ if(isset($_POST['submit'])){
 	$_POST['update'] = microtime(true);
 	$_POST['user'] = $_SESSION['user'];
 	if($ACTION == "add"){
-		$_POST['date'] = date("Y-m-d H:i:s");
+		$_POST['added'] = date("Y-m-d H:i:s");
 		$travel_plans -> insert($_POST);
 		header("Location: ?travel_plan_view");
 	} else {
+		$_POST['modified'] = date("Y-m-d H:i:s");
 		$travel_plans -> update(array("_id" => new MongoId($ID)), $_POST);
 		header("Location: ?travel_plan_view");
 	}
@@ -24,7 +25,7 @@ if($ACTION == "edit"){
 		$travel_plans->remove(array("_id" => new MongoId($ID)));
 		header("Location: ?travel_plan_view");
 	}
-	$entry['date'] = convertDate($entry['date'], false);
+	$entry['date'] = convertDate($entry['date']);
 	$HTML[] = <<<EOF
 		<div class="alert alert-danger center" role="alert">
 			Are your sure you want to delete travel plan from {$entry['from']} to {$entry['to']} ({$entry['date']})?<br><br>
@@ -45,4 +46,17 @@ formField("Package size", "size", "text", "", "Package dimensions (WxHxD)");
 formField("Weight", "weight", "text", "", "Maximum lugage weight");
 formField("Additional informations", "description", "textarea");
 formFooter($ACTION == "add" ? "Add new plan" : "Modify plan");
+
+$HTML[] = <<<EOF
+<script>
+$( "#from" ).autocomplete({
+	source: "cities.php",
+	minLength: 2
+});
+$( "#to" ).autocomplete({
+	source: "cities.php",
+	minLength: 2
+});
+</script>
+EOF;
 }
