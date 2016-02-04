@@ -24,7 +24,7 @@ if(isset($_SESSION['user'])){
 	}
 } else {
 	/** simple hack to not allow user to access login section */
-	$ALLOWED_PAGES = array("about-us", "login", "signup", "concept", "");
+	$ALLOWED_PAGES = array("about-us", "login", "signup", "concept", "", "how-it-works");
 	if(!in_array($PAGE, $ALLOWED_PAGES)){
 		$PAGE = "403";
 	}

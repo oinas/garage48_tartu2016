@@ -1,0 +1,23 @@
+sudo apt-get update
+sudo apt-get install apache2 php5
+
+sudo apt-get install php5-dev make php-pear
+sudo pecl install mongo
+sudo echo "extension=mongo.so" | tee /etc/php5/mods-available/mongo.ini
+
+sudo add-apt-repository ppa:ondrej/php5-5.6
+sudo apt-get update
+sudo apt-get install python-software-properties
+
+sudo apt-get update
+
+sudo apt-get install php5
+
+sudo apt-get -f upgrade
+
+php5 -v
+
+
+sudo apt-get install apache2 php5 mongodb php5-mongo
+
+git clone https://github.com/oinas/garage48_tartu2016.git /var/www/html/

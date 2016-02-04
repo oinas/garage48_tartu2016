@@ -8,3 +8,13 @@ References (Positives, 5-0)
 Location -> should have continent, country or city possibility
 
 MongoDB - database
+
+
+u: cico
+p: Cicocico0
+
+cico.northeurope.cloudapp.azure.com
+
+13.69.184.210
+
+cico.northeurope.cloudapp.azure.com

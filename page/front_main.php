@@ -35,17 +35,28 @@ $HTML[] = <<<EOF
 EOF;
 
 require_once "Facebook/autoload.php";
-
+if(file_exists("../index2.html")){
 $fb = new Facebook\Facebook([
   'app_id' => '999172896799797',
   'app_secret' => '5a5e05106f4900298a7fbbb9f1ae9c1a',
   'default_graph_version' => 'v2.2',
   ]);
+} else {
+$fb = new Facebook\Facebook([
+  'app_id' => '999171513466602',
+  'app_secret' => '5a5e05106f4900298a7fbbb9f1ae9c1a',
+  'default_graph_version' => 'v2.2',
+  ]);
+}
 
 $helper = $fb->getRedirectLoginHelper();
 
 $permissions = ['email']; // Optional permissions
-$loginUrl = $helper->getLoginUrl('http://cico.com/garage48_tartu2016/fb_callback.php', $permissions);
+if(file_exists("../index2.html")){
+	$loginUrl = $helper->getLoginUrl('http://cico.com/garage48_tartu2016/fb_callback.php', $permissions);
+} else {
+	$loginUrl = $helper->getLoginUrl('http://cico.northeurope.cloudapp.azure.com/fb_callback.php', $permissions);
+}
 $tmp = htmlspecialchars($loginUrl);
 $HTML[] = <<<EOF
 <div class="front-middle">

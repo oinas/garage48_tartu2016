@@ -29,6 +29,7 @@ $HTML[] = <<<EOF
 			<div class="menu">
 				<ul class="menu-ul">
 					<li><a href="?">Log in</a>
+					<li><a href="?how-it-works">How It Works?</a>
 					<li><a href="?concept">Concept</a>
 					<li><a href="?about-us">About Us</a>
 				</ul>
