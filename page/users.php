@@ -26,7 +26,7 @@ EOF;
 $i = 0;
 foreach($users->find()->sort(array("last" => -1)) as $k => $v){
 	$i++;
-	$v['travels'] = 0;
+	$v['travels'] = getCount(getTravels(array("user" => $v['facebookid'])));
 	$v['requests'] = 0;
 	$v['grade'] = 4.6;
 	$v['referrals'] = 26;
@@ -35,7 +35,7 @@ foreach($users->find()->sort(array("last" => -1)) as $k => $v){
 	$HTML[] = @<<<EOF
 		<tr>
 			<td>{$i}
-			<td><a href="?users/view/{$v['user']}">{$v['first']}</a> 
+			<td><a href="?users/view/{$v['facebookid']}">{$v['first']}</a> 
 			<td>{$v['travels']}
 			<td>{$v['requests']}
 			<td>{$v['grade']}

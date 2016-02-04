@@ -53,8 +53,10 @@ h1 {
 	padding: 0px 20px;
 }
 
-.header img {
+.header-logo {
 	float: left;
+	height: 30px;
+	margin-top: 10px;
 }
 
 .menu {
@@ -190,4 +192,8 @@ table .headerSortUp {
 .hand {
 	cursor: hand;
 	cursor: pointer;
+}
+
+.form-table th {
+	font-size: 1.5em;
 }

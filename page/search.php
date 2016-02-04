@@ -68,13 +68,15 @@ if($tmp1 == 0){
 	$HTML[] = "<h1>No entries found, try to change search terms</h1>";
 } else {
 	foreach($results_travelers as $k => $v){
-		$user = getUser($v['user']);
+		$user = @getUser($v['user']);
 		$pic = getUserPicture($user['facebookid']);;
 		$v['from'] = strtoupper($v['from']);
 		$v['to'] = strtoupper($v['to']);
 		$v['date'] = convertDateTime($v['date'], false);
 		$tmp3 = empty($v['size']) ? "" : "";
 		$tmp4 = empty($v['weight']) ? "" : "";
+		// luggage type: <span class="glyphicon glyphicon-briefcase"></span>
+		// info: <span class="glyphicon glyphicon-info-sign"></span>
 		$HTML[] = <<<EOF
 	<div class="search-element hand">
 		<div class="search-profile">

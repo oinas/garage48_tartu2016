@@ -39,13 +39,14 @@ $HTML[] = <<<EOF
 
 	<div class="body">
 		<div class="header">
-			<img src="css/logo.png">
+			<img src="css/logo.png" class="header-logo">
 
 
 			
 
 			<div class="menu">
 				<ul class="menu-ul">
+					<li><a href="?concept">Concept</a>
 					<li><a href="?about-us">About Us</a>
 					<li><a href="?logout">Log out</a>
 				</ul>

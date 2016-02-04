@@ -3,9 +3,9 @@
 $menu = array(
 	"wall" => "Home",
 	"travel_plan/add" => "Create travel plan",
-	"product/add" => "Make product request",
+	"product_request/add" => "Make product request",
 	"travel_plan" => "My travel plans",
-	"product_view" => "View product requests",
+	"product_request" => "My product requests",
 	"users" => "DEBUG User list"
 );
 

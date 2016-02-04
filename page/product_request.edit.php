@@ -38,15 +38,18 @@ EOF;
 
 if($ACTION != "delete"){
 	/** add form */
-	formHeader($ACTION == "add" ? "Add new travel plan" : "Edit existing travel plan");
+	formHeader($ACTION == "add" ? "Add new product request" : "Edit existing product request");
 	formField("From", "from", "text", "", "Departure");
 	formField("To", "to", "text", "", "Arrival");
 	formField("Date", "date", "text", "", "Date of departure");
-	formField("Package size", "size", "text", "", "Package dimensions (WxHxD)");
-	formField("Weight", "weight", "text", "", "Maximum lugage weight");
-	formField("Hand luggage", "handluggage", "checkbox", "", " Some of the items might be restricted");
+	formField("Approximate package size", "size", "text", "", "Package dimensions (WxHxD)");
+	formField("Aprroximate Weight", "weight", "text", "", "Maximum lugage weight");
+	//formField("Hand luggage", "handluggage", "checkbox", "", " Item is allowed");
+	formField("", "fragile", "checkbox", "", " Item is fragile, handle with care");
+	formField("", "solid", "checkbox", "", " Item is solid");
+	formField("", "liquid", "checkbox", "", " Item is liquid");
 	formField("Additional informations", "description", "textarea");
-	formFooter($ACTION == "add" ? "Add new plan" : "Modify plan");
+	formFooter($ACTION == "add" ? "Add new product request" : "Modify existing product request");
 
 	$HTML[] = <<<EOF
 	<script>

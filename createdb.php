@@ -22,7 +22,8 @@ $entries->insert(
 		"last" => microtime(true),
 		"status" => "0",
 		"description" => "I travel a lot!",
-		"banstatus" => 0
+		"banstatus" => 0,
+		"picture" => 0
 		)
 	);
 $entries->insert(

@@ -1,9 +1,9 @@
 <?php
 
-$travel_plans = $db->travel_plans;
+$product_requests = $db->product_requests;
 
 $HTML[] = <<<EOF
-	<h1>Travel plans</h1>
+	<h1>My product requests</h1>
 EOF;
 
 $HTML[] = <<<EOF
@@ -13,9 +13,9 @@ $HTML[] = <<<EOF
 				<th>#
 				<th>Departure
 				<th>Arrival
-				<th>Request ending
-				<th>Lugage size
-				<th>Lugage weight
+				<th>Date
+				<th>Approximate size
+				<th>Approximate weight
 			</tr>
 		</thead>
 		<tbody>
@@ -26,15 +26,15 @@ EOF;
 $i = 0;
 foreach($travel_plans->find(array("user" => $_SESSION['user']))->sort(array("date" => -1)) as $k => $v){
 	$i++;
-	$v['date'] = convertDate($v['date'], false);
+	$v['date'] = convertDate($v['date'], false) . "<br>" . relativeTime(convertDateToTime($v['date'], false));
+
 	$HTML[] = <<<EOF
 		<tr>
 			<td>{$i}
-			<td><a href="?travel_plan/view/{$v['_id']}">{$v['from']}</a> 
+			<td><a href="?product_request/view/{$v['_id']}">{$v['from']}</a> 
 				&nbsp;&nbsp;
-
-				<a href="?travel_plan/edit/{$v['_id']}"><span class="glyphicon glyphicon-edit"></span></a>
-				<a href="?travel_plan/delete/{$v['_id']}"><span class="glyphicon glyphicon-remove"></span></a>
+				<a href="?product_request/edit/{$v['_id']}"><span class="glyphicon glyphicon-edit"></span></a>
+				<a href="?product_request/delete/{$v['_id']}"><span class="glyphicon glyphicon-remove"></span></a>
 			<td>{$v['to']}
 			<td>{$v['date']}
 			<td>{$v['size']}

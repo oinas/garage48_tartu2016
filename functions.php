@@ -75,6 +75,18 @@ EOF;
 				<td><input type="file" name="{$name}" id="{$name}">	
 			</tr>
 EOF;
+	} else if($type == "checkbox"){
+		$tmp = $value == "true" ? " CHECKED" : "";
+		$HTML[] = <<<EOF
+			<tr>
+				<td><strong>{$title}</strong>
+				<td>
+					<label>
+					<input type="checkbox" name="{$name}" id="{$name}" value="true" {$tmp}>	
+					{$desc}
+					</label>
+			</tr>
+EOF;
 	} else {
 		$HTML[] = <<<EOF
 			<tr>
@@ -136,6 +148,21 @@ function convertDateTime($date, $showTime = true){
 	return $rtn;
 }
 
+function convertDateToTime($date, $showTime = true){
+	if($showTime){
+		$tmp = explode(" ", $date);
+		$tmp1 = $tmp[0];
+		$tmp2 = $tmp[1];
+
+		list($year, $month, $day) = explode('-', $tmp1);
+		list($hour, $minut, $second) = explode(':', $tmp2);
+		return mktime($second, $minut, $hour, $month, $day, $year);
+	} else {
+		list($year, $month, $day) = explode('-', $date);
+		return mktime(0, 0, 0, $month, $day, $year);
+	}
+}
+
 function relativeTime($microtime){
 	$diff = microtime(true) - $microtime;
 	if($diff < 0){
@@ -177,4 +204,25 @@ function getUserPicture($userid){
 		$_SESSION['fb_pictures'][$userid] = $tmp->data->url;		
 	}
 	return !empty($_SESSION['fb_pictures'][$userid]) ? $_SESSION['fb_pictures'][$userid] : "css/noimage.jpg";
+}
+
+function getTravels($arr){
+	global $db;
+	if(empty($arr)){
+		return null;
+	}
+
+	$travels = $db->travel_plans;
+
+	$entry = $travels->find($arr);
+
+	return $entry;
+}
+
+function getCount($mongolist){
+	$count = 0;
+	foreach($mongolist as $k => $v){
+		$count++;
+	}
+	return $count;
 }

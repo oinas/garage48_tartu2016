@@ -25,7 +25,7 @@ $HTML[] = <<<EOF
 	<body>
 	<div class="front body">
 		<div class="header">
-			<img src="css/logo.png">
+			<img src="css/logo.png" class="header-logo">
 			<div class="menu">
 				<ul class="menu-ul">
 					<li><a href="?">Log in</a>

@@ -4,6 +4,7 @@ $HTML[] = <<<EOF
 <div class="front-text">
 
 <h1>How Cico works</h1>
+<img src="css/biglogo.png" width="300" style="float: right; margin: 50px;">
 <h4>Have you ever missed a product from your home country or any other country?</br> You are in need of the product you miss, yet you cannot find it in the country you are living in!! 
 Cico can solve this problem--we can make it possible for you by connecting travelers and requesters</h3>
 <br>
