@@ -44,7 +44,7 @@ $fb = new Facebook\Facebook([
 } else {
 $fb = new Facebook\Facebook([
   'app_id' => '999171513466602',
-  'app_secret' => '5a5e05106f4900298a7fbbb9f1ae9c1a',
+  'app_secret' => 'c09515e82d9ff150603a9eaf535b4bad',
   'default_graph_version' => 'v2.2',
   ]);
 }
