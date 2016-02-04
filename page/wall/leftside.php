@@ -6,6 +6,7 @@ $menu = array(
 	"product/add" => "Make product request",
 	"travel_plan" => "My travel plans",
 	"product_view" => "View product requests",
+	"users" => "DEBUG User list"
 );
 
 // hack otherwise it will not cache the profile picture and will load it every page

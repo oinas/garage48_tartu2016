@@ -3,7 +3,7 @@
 $users = $db->users;
 
 $HTML[] = <<<EOF
-	<h1>Travel plans</h1>
+	<h1>List of users</h1>
 EOF;
 
 $HTML[] = <<<EOF
@@ -24,19 +24,18 @@ $HTML[] = <<<EOF
 EOF;
 
 $i = 0;
-foreach($users->find()->sort(array("date" => -1)) as $k => $v){
+foreach($users->find()->sort(array("last" => -1)) as $k => $v){
 	$i++;
-	print_r($v);
 	$v['travels'] = 0;
 	$v['requests'] = 0;
 	$v['grade'] = 4.6;
 	$v['referrals'] = 26;
-	$v['joined'] = @convertDate($v['date'], false);
-	$v['online'] = $v['last'];
+	$v['joined'] = @convertDateTime($v['date'], false);
+	$v['online'] = relativeTime($v['last']);
 	$HTML[] = @<<<EOF
 		<tr>
 			<td>{$i}
-			<td><a href="?travel_plan_view/view/{$v['user']}">{$v['first']}</a> 
+			<td><a href="?users/view/{$v['user']}">{$v['first']}</a> 
 			<td>{$v['travels']}
 			<td>{$v['requests']}
 			<td>{$v['grade']}

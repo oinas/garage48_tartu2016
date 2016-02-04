@@ -8,6 +8,19 @@ require_once "config.php";
 
 /** check if we have logged in, if not, show front page */
 if(isset($_SESSION['user'])){
+	/** upgrade user info */
+	$entries = $db->users;
+	$entry = $entries->findOne(array("facebookid" => $_SESSION['user']));
+
+	if(!empty($entry)){
+	  $entry['last'] = microtime(true);
+	  /** update */
+	  $entries->update(
+	      array("facebookid" => $_SESSION['user']),
+	      $entry
+	    );
+	}
+
 	if(!isset($_GET['onlycontent'])){
 		$PAGES[] = "header";
 		$PAGES[] = "wall/leftside";

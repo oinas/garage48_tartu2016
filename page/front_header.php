@@ -14,7 +14,7 @@ $HTML[] = <<<EOF
 		<meta property="og:site_name" content="{$TITLE}" />
 		<meta property="og:type" content="website" />
 		<meta property="og:description" content="DESCRIPTION GOES HERE" />
-		<meta property="og:url" content="http://localhost" />
+		<meta property="og:url" content="{$URL}" />
 <!-- FACEBOOK END -->
 		<meta name="description" content="DESCRIPTION GOES HERE" />
 		<link rel="stylesheet" type="text/css" href="css/main.css" />

@@ -30,7 +30,7 @@ foreach($travel_plans->find(array("user" => $_SESSION['user']))->sort(array("dat
 	$HTML[] = <<<EOF
 		<tr>
 			<td>{$i}
-			<td><a href="?travel_plan_view/view/{$v['_id']}">{$v['from']}</a> 
+			<td><a href="?travel_plan/view/{$v['_id']}">{$v['from']}</a> 
 
 				<a href="?travel_plan/edit/{$v['_id']}"><span class="glyphicon glyphicon-edit"></span></a>
 				<a href="?travel_plan/delete/{$v['_id']}"><span class="glyphicon glyphicon-remove"></span></a>

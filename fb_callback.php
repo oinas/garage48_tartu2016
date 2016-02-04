@@ -112,16 +112,12 @@ if(empty($entry)){
       )
     );
 } else {
+  $entry['facebookAccess'] = (string) $accessToken;
+  $entry['last'] = microtime(true);
   /** update */
-  $entries->update(array("facebookid" => $user['id']),
-      array(
-        "first" => $user['name'],
-        "last" => "",   //deprecated, we do not use lastname, the name will come automatically from facebook
-        "email" => $user['email'],
-        "facebookAccess" => (string) $accessToken,
-        "facebookid" => $user['id'],
-        "last" => microtime(true),
-      )
+  $entries->update(
+      array("facebookid" => $user['id']),
+      $entry
     );
 }
 

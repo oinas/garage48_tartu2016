@@ -133,3 +133,20 @@ function convertDateTime($date, $showTime = true){
 	}
 	return $rtn;
 }
+
+function relativeTime($microtime){
+	$diff = microtime(true) - $microtime;
+	if($diff < 60){
+		return "now";
+	} else if($diff < 60 * 60){
+		return (int) ($diff / 60) . " minutes ago";
+	} else if($diff < 60 * 60 * 24){
+		return (int) ($diff / 60 / 60) . " hours ago";
+	} else if($diff < 60 * 60 * 24 * 30){
+		return (int) ($diff / 60 / 60 / 24) . " days ago";
+	} else if($diff < 60 * 60 * 24 * 30 * 12){
+		return (int) ($diff / 60 / 60 / 24 / 30) . " months ago";
+	} else {
+		return (int) ($diff / 60 / 60 / 24 / 30 / 12) . " years ago";
+	}
+}
