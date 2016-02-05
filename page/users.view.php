@@ -53,3 +53,7 @@ $HTML[] = <<<EOF
 
 </div>
 EOF;
+
+
+/** show search? */
+require_once "page/search.php";
