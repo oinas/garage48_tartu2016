@@ -197,3 +197,45 @@ table .headerSortUp {
 .form-table th {
 	font-size: 1.5em;
 }
+
+.search-element .search-button {
+	float: right;
+}
+
+.btn-warning a {
+	color: #730;
+}
+
+.content-box {
+	margin: 10px;
+	padding: 20px;
+	border: 1px solid #ccc;
+}
+
+.content-box table td+td {
+	width: 70%;
+}
+
+.chat-picture {
+	width: 50px;
+	float: left;
+	margin-right: 20px;
+}
+
+.request-chat {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 5px;
+	clear: both;
+}
+
+.redback {
+	background: #fca;
+}
+
+.yellowback {
+	background: #ffa;
+}
+
+.btn-success a {
+	color: #030;
+}

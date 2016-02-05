@@ -85,11 +85,16 @@ if($tmp1 == 0){
 		<div class="search-description">
 			{$v['description']}
 		</div>
-		<span class="glyphicon glyphicon-user"></span> {$user['first']}
-		<br>
-		<span class="glyphicon glyphicon-map-marker"></span>FROM <b>{$v['from']}</b> TO <b>{$v['to']}</b>
-		<br>
-		<span class="glyphicon glyphicon-time"></span> {$v['date']} 
+		<div class="search-details">
+			<span class="glyphicon glyphicon-user"></span> {$user['first']}
+			<br>
+			<span class="glyphicon glyphicon-map-marker"></span>FROM <b>{$v['from']}</b> TO <b>{$v['to']}</b>
+			<br>
+			<span class="glyphicon glyphicon-time"></span> {$v['date']} 
+		</div>
+		<div class="search-button btn btn-warning">
+			<a href="?travel_plan/view/{$v['_id']}">More information &amp; Contact traveler</a>
+		</div>
 	</div>
 EOF;
 	}

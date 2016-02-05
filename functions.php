@@ -163,23 +163,29 @@ function convertDateToTime($date, $showTime = true){
 	}
 }
 
+function dateToRelative($date){
+	return relativeTime(convertDateToTime($date, false));
+}
+
 function relativeTime($microtime){
 	$diff = microtime(true) - $microtime;
+	$past = "ago";
 	if($diff < 0){
 		$diff = -$diff;
+		$past = "left";
 	}
 	if($diff < 60){
 		return "now";
 	} else if($diff < 60 * 60){
-		return (int) ($diff / 60) . " minutes ago";
+		return (int) ($diff / 60) . " minutes " . $past;
 	} else if($diff < 60 * 60 * 24){
-		return (int) ($diff / 60 / 60) . " hours ago";
+		return (int) ($diff / 60 / 60) . " hours " . $past;
 	} else if($diff < 60 * 60 * 24 * 30){
-		return (int) ($diff / 60 / 60 / 24) . " days ago";
+		return (int) ($diff / 60 / 60 / 24) . " days " . $past;
 	} else if($diff < 60 * 60 * 24 * 30 * 12){
-		return (int) ($diff / 60 / 60 / 24 / 30) . " months ago";
+		return (int) ($diff / 60 / 60 / 24 / 30) . " months " . $past;
 	} else {
-		return (int) ($diff / 60 / 60 / 24 / 30 / 12) . " years ago";
+		return (int) ($diff / 60 / 60 / 24 / 30 / 12) . " years " . $past;
 	}
 }
 
@@ -191,6 +197,21 @@ function getUser($userid){
 	$entry = $user->findOne(array("facebookid" => $userid));
 
 	return !empty($entry) ? $entry : null;
+}
+
+function generateUserLink($userid){
+	$entry = getUser($userid);
+
+	return <<<EOF
+		<a href="?users/view/{$userid}">{$entry['first']}</a>
+EOF;
+}
+
+function generateUserPicture($userid, $class){
+	$pic = getUserPicture($userid);
+	return <<<EOF
+	<img src="{$pic}" class="{$class}">
+EOF;
 }
 
 /** TODO: THIS IS REALLY DIRTY HACK AND SHOULD NOT BE USED FOR LARGE SITES */
@@ -225,4 +246,44 @@ function getCount($mongolist){
 		$count++;
 	}
 	return $count;
+}
+
+function uploadFile($file, $target_file){
+	if(!isset($_FILES[$file])){
+		if (file_exists("upload/" . $target_file)) {
+			unlink("upload/" . $target_file);
+		}
+		return false;
+	}
+	if($_FILES[$file]['error'] != 0){
+		return false;
+	}
+	$image_file_type = pathinfo($_FILES[$file]["name"], PATHINFO_EXTENSION);
+	if (file_exists("upload/" . $target_file)) {
+		unlink("upload/" . $target_file);
+	}
+	if($image_file_type != "jpg" && $image_file_type != "png" && $image_file_type != "jpeg"
+&& $image_file_type != "gif" ) {
+		return false;
+	}
+	move_uploaded_file($_FILES[$file]["tmp_name"], "upload/" . $target_file);
+}
+
+/** just quick HACK to write wall posts randomly */
+function wallPost($user1, $user2, $event, $page){
+	global $db;
+
+	$walls = $db->walls;
+
+	$walls -> insert(
+		array(
+			"user1" => $user1,
+			"user2" => $user2,
+			"event" => $event,
+			"page" => $page,
+			"date" => date("Y-m-d H:i:s"),
+			"update" => microtime(true),
+			"viewed" => 0
+		)
+	);
 }
