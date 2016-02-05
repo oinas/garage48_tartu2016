@@ -1,11 +1,20 @@
 <?php
 
+$notifications = $db->notifications;
+$n = $notifications->findOne(array("user" => $_SESSION['user']));
+if(isset($n['count']) && $n['count'] > 0){
+	$badge = '<div class="badge">' . $n['count'] . '</div>';
+} else {
+	$badge = "";
+}
+
 $menu = array(
-	"wall" => "Home",
+	"wall" => "Notifications {$badge}",
 	"travel_plan/add" => "Create travel plan",
-	"product_request/add" => "Make product request",
+/*	"product_request/add" => "Make product request",*/
 	"travel_plan" => "My travel plans",
 	"product_request" => "My product requests",
+	"q=search&showall" => "Show all travel plans",
 	"users" => "DEBUG User list"
 );
 

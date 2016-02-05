@@ -8,10 +8,14 @@ if(isset($_POST['submit'])){
 	if($ACTION == "add"){
 		$_POST['added'] = date("Y-m-d H:i:s");
 		$travel_plans -> insert($_POST);
+		$_id = $_POST['_id'];
+		wallPost($_SESSION['user'], $_id, "travelplanadded", "?travel_plan/view/{$ID}");
 		header("Location: ?travel_plan");
 	} else {
 		$_POST['modified'] = date("Y-m-d H:i:s");
 		$travel_plans -> update(array("_id" => new MongoId($ID)), $_POST);
+		$_id = $_POST['_id'];
+		wallPost($_SESSION['user'], $_id, "travelplanupdated", "?travel_plan/view/{$ID}");
 		header("Location: ?travel_plan");
 	}
 }
@@ -23,13 +27,14 @@ if($ACTION == "edit"){
 	$entry = $travel_plans->findOne(array("_id" => new MongoId($ID)));
 	if(isset($_GET['confirm'])){
 		$travel_plans->remove(array("_id" => new MongoId($ID)));
+		wallPost($_SESSION['user'], $_id, "travelplandeleted", "?travel_plan/view/{$ID}");
 		header("Location: ?travel_plan");
 	}
 	$entry['date'] = convertDate($entry['date']);
 	$HTML[] = <<<EOF
 		<div class="alert alert-danger center" role="alert">
 			Are your sure you want to delete travel plan from {$entry['from']} to {$entry['to']} ({$entry['date']})?<br><br>
-			<a href="?{$PAGE}/{$ACTION}/{$ID}/&confirm" class="btn btn-danger">Yes</a>
+			<a href="?travel_plan/{$ACTION}/{$ID}/&confirm" class="btn btn-danger">Yes</a>
 			&nbsp;&nbsp;
 			<a href="#" onClick="history.go(-1)">No</a>
 		</div>

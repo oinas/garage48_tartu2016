@@ -12,10 +12,14 @@ function formHeader($title = ""){
 	$HTML[] = <<<EOF
 	<form action="" method="POST" enctype="multipart/form-data">
 	<table class="table table-stripped table-hover form-table">
+EOF;
+	if(!empty($title)){
+		$HTML[] = <<<EOF
 		<tr>
 			<th colspan="2">{$title}
 		</tr>
 EOF;
+	}
 }
 
 function formFooter($submit = "Submit", $cancel = "Cancel"){
@@ -88,12 +92,18 @@ EOF;
 			</tr>
 EOF;
 	} else {
-		$HTML[] = <<<EOF
-			<tr>
-				<td><strong>{$title}</strong>
-				<td><input type="{$type}" name="{$name}" value="{$value}" placeHolder="{$desc}" class="form-control" id="{$name}" autocomplete="off">
-			</tr>
+		if($type == "hidden"){
+			$HTML[] = <<<EOF
+			<input type="{$type}" name="{$name}" value="{$value}" placeHolder="{$desc}" class="form-control" id="{$name}" autocomplete="off">
 EOF;
+		} else {
+			$HTML[] = <<<EOF
+				<tr>
+					<td><strong>{$title}</strong>
+					<td><input type="{$type}" name="{$name}" value="{$value}" placeHolder="{$desc}" class="form-control" id="{$name}" autocomplete="off">
+				</tr>
+EOF;
+		}
 	}
 	if($name == "date"){
 		$HTML[] = <<<EOF
@@ -272,6 +282,19 @@ function uploadFile($file, $target_file){
 /** just quick HACK to write wall posts randomly */
 function wallPost($user1, $user2, $event, $page){
 	global $db;
+
+	$notifications = $db->notifications;
+	$n = $notifications->findOne(array("user" => $user1));
+	if(empty($n)){
+		$notifications -> insert(
+				array("user" => $user1, "count" => 1)
+			);
+	} else {
+		$notifications -> update(
+			array("user" => $user1),
+			array("user" => $user1, "count" => $n['count'] + 1)
+		);
+	}
 
 	$walls = $db->walls;
 

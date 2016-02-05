@@ -15,6 +15,9 @@ if(isset($_GET['accept'])){
 			array("travel" => $ID, "user" => $_GET['accept']),
 			$tmp
 		);
+	wallPost($_GET['accept'], $_SESSION['user'], "requestaccepted", "?travel_plan/{$ACTION}/{$ID}");
+	wallPost($_SESSION['user'], $_GET['accept'], "requestacceptedadmin", "?travel_plan/{$ACTION}/{$ID}");
+	header("Location: ?travel_plan/{$ACTION}/{$ID}");	
 }
 if(isset($_GET['reject'])){
 	$tmp = $requests->findOne(array("travel" => $ID, "user" => $_GET['reject']));
@@ -23,6 +26,9 @@ if(isset($_GET['reject'])){
 			array("travel" => $ID, "user" => $_GET['reject']),
 			$tmp
 		);
+	wallPost($_GET['reject'], $_SESSION['user'], "requestrejected", "?travel_plan/{$ACTION}/{$ID}");
+	wallPost($_SESSION['user'], $_GET['reject'], "requestrejectedadmin", "?travel_plan/{$ACTION}/{$ID}");
+	header("Location: ?travel_plan/{$ACTION}/{$ID}");	
 }
 
 if(isset($_GET['revoke'])){
@@ -51,7 +57,7 @@ if(isset($_POST['submit']) && $_POST['submit'] == "Send message"){
 		$chats -> insert(
 				array(
 					"travel" => $ID,
-					"user1" => $request['user'],
+					"user1" => $_POST['user1'],
 					"user2" => $entry['user'],
 					"which" => 1,	// which user
 					"message" => $_POST['chat'],
@@ -59,7 +65,7 @@ if(isset($_POST['submit']) && $_POST['submit'] == "Send message"){
 					"update" => microtime(true)
 				)
 			);
-		wallPost($entry['user'], $_SESSION['user'], "newrequestchat", "?travel_plan/{$ACTION}/{$ID}/#chat");
+		wallPost($_POST['user1'], $entry['user'], "newrequestchat", "?travel_plan/{$ACTION}/{$ID}/#chat");
 		header("Location: ?travel_plan/{$ACTION}/{$ID}/#chat{$_POST['pos']}");	
 	}
 	die();
@@ -97,9 +103,11 @@ $tmp = array();
 
 if(isset($wall_post_insert)){
 	wallPost($entry['user'], $_SESSION['user'], "newrequest", "?travel_plan/{$ACTION}/{$ID}");
+	wallPost($_SESSION['user'], $entry['user'], "newrequestclient", "?travel_plan/{$ACTION}/{$ID}");
 }
 if(isset($wall_post_revoke)){
 	wallPost($entry['user'], $_SESSION['user'], "newrequestrevoke", "?travel_plan/{$ACTION}/{$ID}");
+	wallPost($_SESSION['user'], $entry['user'], "newrequestrevokeclient", "?travel_plan/{$ACTION}/{$ID}");
 }
 
 if(isset($entry['size']) && !empty($entry['size'])){
@@ -291,6 +299,7 @@ EOF;
 			}
 			$HTML[] = '<a name="chat{$k}"></a>';
 			formHeader("");
+			formField("", "user1", "hidden", "{$v['user']}");
 			formField("", "pos", "hidden", "{$k}");
 			formField("", "role", "hidden", "traveler");
 			formField("", "chat", "textarea");

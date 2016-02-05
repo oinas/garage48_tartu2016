@@ -4,6 +4,13 @@
 $travelers = $db->travel_plans;
 
 $results_travelers = array();
+$results_requesters = array();
+
+if(isset($_GET['showall'])){
+	foreach($travelers->find()->sort(array("date" => 1)) as $k => $v){
+		$results_travelers[] = $v;
+	}
+} else {
 
 foreach($travelers->find()->sort(array("date" => 1)) as $k => $v){
 	$match = 0;
@@ -26,7 +33,6 @@ foreach($travelers->find()->sort(array("date" => 1)) as $k => $v){
 
 $requesters = $db->requesters;
 
-$results_requesters = array();
 
 foreach($requesters->find()->sort(array("date" => 1)) as $k => $v){
 	$match = 0;
@@ -45,6 +51,8 @@ foreach($requesters->find()->sort(array("date" => 1)) as $k => $v){
 			$results_requesters[] = $v;
 		}
 	}
+}
+
 }
 
 $tmp1 = count($results_travelers);

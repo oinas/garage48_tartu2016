@@ -239,3 +239,9 @@ table .headerSortUp {
 .btn-success a {
 	color: #030;
 }
+
+.wall-event {
+	margin: 3px;
+	padding: 3px;
+	border-bottom: 1px solid #ccc;
+}
