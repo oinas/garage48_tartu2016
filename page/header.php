@@ -23,11 +23,12 @@ $HTML[] = <<<EOF
 		<link rel="stylesheet" href="css/jquery-ui.css">
 		<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <!-- FACEBOOK START -->
-		<meta property="og:title" content="{$PAGE}" />
-		<meta property="og:site_name" content="{$TITLE}" />
+		<meta property="og:title" content="CICO - cico brings what you want" />
+		<meta property="og:site_name" content="CICO" />
 		<meta property="og:type" content="website" />
-		<meta property="og:description" content="DESCRIPTION GOES HERE" />
-		<meta property="og:url" content="{$URL}" />
+		<meta property="og:description" content="" />
+		<meta property="og:url" content="http://cico.northeurope.cloudapp.azure.com" />
+		<meta property="og:image" content="http://cico.northeurope.cloudapp.azure.com/css/biglogo.png" />
 <!-- FACEBOOK END -->
 		<meta name="description" content="DESCRIPTION GOES HERE" />
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
