@@ -1,0 +1,266 @@
+/**
+	Preliminary CSS for Garage48 hackahton
+*/
+body, html, input, textarea {
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+}
+
+.front.body {
+	position: absolute;
+	background: url("background.jpg");
+	background-size: cover;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+.front .front-text {
+	margin: auto;
+	width: 90%;
+	background: #fff;
+	opacity: 0.95;
+	padding: 30px;
+	margin-top: 30px;
+}
+
+.front-middle {
+	margin: auto;
+	width: 800px;
+	color: #fff;
+	text-align: center;
+	position: relative;
+	transform: translateY(75%);
+
+}
+
+.front-middle h1 {
+	font-size: 2em;
+	margin-bottom: 15px;
+}
+
+h1 {
+	margin: 0px;
+	padding: 0px;
+	font-size: 1.5em;
+}
+
+.header {
+	height: 50px;
+	background: #fff;
+	box-shadow: 0px 0px 10px #777;
+	padding: 0px 20px;
+}
+
+.header-logo {
+	float: left;
+	height: 30px;
+	margin-top: 10px;
+}
+
+.menu {
+	float: right;
+	padding-right: 20px;
+	line-height: 50px;
+}
+
+.menu ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.menu ul li {
+	display: inline-block;
+}
+
+.menu ul li a {
+	display: block;
+	padding: 0px 15px;
+}
+
+.footer {
+	background: #000;
+	color: #fff;
+	padding: 10px 20px;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+.content {
+	margin: auto;
+	padding: auto;
+	border-left: 1px solid #777;
+	border-right: 1px solid #777;
+}
+
+.content .inner {
+	padding: 20px;
+}
+
+ul.side-bar-menu {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+ul.side-bar-menu li {
+	margin: 5px;
+	display: block;
+}
+
+ul.side-bar-menu li a {
+	color: #fff;
+	display: block;
+}
+
+.center {
+	text-align: center;
+}
+
+table .header {
+	box-shadow: none;
+	background-image: url("sortbh.gif");
+	background-position: 95% 60%;
+	background-repeat: no-repeat;
+}
+
+/** sorting */
+table .headerSortDown {
+	background-image: url("sortdn.gif");
+}
+table .headerSortUp {
+	background-image: url("sortup.gif");
+}
+
+.search {
+	padding-top: 7px;
+	margin-left: 300px;
+}
+
+.form-search {
+	width: 200px;
+	display: inline-block;
+}
+
+.search-button {
+	margin-top: -1px;
+	cursor: hand;
+}
+
+.right {
+	float: right;
+}
+
+.results {
+	margin-top: 30px;
+}
+
+.search-element {
+	border-radius: 5px;
+	padding: 10px;
+	margin: 10px;
+	margin-bottom: 20px;
+	box-shadow: 0px 0px 10px #777;
+	overflow: hidden;
+}
+
+.search-element:hover {
+	box-shadow: 0px 0px 15px #777;
+}
+
+.search-element .search-profile {
+	float: left;
+	margin-right: 15px;
+}
+
+.search-element .search-description {
+	width: 50%;
+	float: right;
+	position: block-inline;
+}
+
+.search-profile img {
+	height: 100px;
+	border-radius: 5px;
+
+}
+
+.hand {
+	cursor: hand;
+	cursor: pointer;
+}
+
+.form-table th {
+	font-size: 1.5em;
+}
+
+.search-element .search-button {
+	float: right;
+}
+
+.btn-warning a {
+	color: #730;
+}
+
+.content-box {
+	margin: 10px;
+	padding: 20px;
+	border: 1px solid #ccc;
+}
+
+.content-box table td+td {
+	width: 70%;
+}
+
+.chat-picture {
+	width: 50px;
+	float: left;
+	margin-right: 20px;
+}
+
+.request-chat {
+	border-bottom: 1px solid #ccc;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	clear: both;
+}
+
+.redback {
+	background: #fca;
+}
+
+.yellowback {
+	background: #ffa;
+}
+
+.btn-success a {
+	color: #030;
+}
+
+.wall-event {
+	margin: 3px;
+	padding: 3px;
+	border-bottom: 1px solid #ccc;
+}
+
+.request-chat-remove a {
+	float: right;
+	color: #fca;
+	display: block;
+}
+
+.request-chat-remove a:hover {
+	color: #f94;
+}
+
+.user-view-left {
+	float: right;
+}
+
+.user-table-right {
+	width: 50%;
+}

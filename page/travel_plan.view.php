@@ -134,9 +134,60 @@ if(empty($tmp)){
 	$tmp = "<ul><li>" . implode("<li>", $tmp) . "</ul>";
 }
 $usertmp = generateUserPicture($entry['user'], "chat-picture") . " " . generateUserLink($entry['user']);
-$HTML[] = <<<EOF
+
+if(isset($entry['requester'])){
+	$HTML[] = <<<EOF
+
+<a href="#" onclick="history.go(-1)"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+<h1>Product request
+<a href="https://maps.google.com/?q={$entry['from']}" target="_blank">{$entry['from']}</a> 
+<small><span class="glyphicon glyphicon-chevron-right"></span></small>
+<a href="https://maps.google.com/?q={$entry['to']}" target="_blank">{$entry['to']}</a> 
+</h1>
+<div class="content-box">
+
+<table class="table">
+	<tr>
+		<th colspan="2"><span class="glyphicon glyphicon-exclamation-sign"></span> Information
+	</tr>
+	<tr>
+		<td>Posted
+		<td>{$usertmp}
+	</tr>
+	<tr>
+		<td>From
+		<td>{$entry['from']}
+	</tr>
+	<tr>
+		<td>To
+		<td>{$entry['to']}
+	</tr>
+	<tr>
+		<td>Request ends
+		<td>{$entry['date']} - {$when}
+	</tr>
+	<tr>
+		<td>Entry added/changed
+		<td>{$changed}
+	</tr>
+	<tr>
+		<td>Details
+		<td>{$tmp}
+	</tr>
+	<tr>
+		<td>Information about product(s)
+		<td>{$entry['description']}
+	</tr>
+</table>
+
+</div>
+
+EOF;
+} else {
+	$HTML[] = <<<EOF
 <a href="#" onclick="history.go(-1)"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
 <h1>
+Travel plan
 <a href="https://maps.google.com/?q={$entry['from']}" target="_blank">{$entry['from']}</a> 
 <small><span class="glyphicon glyphicon-chevron-right"></span></small>
 <a href="https://maps.google.com/?q={$entry['to']}" target="_blank">{$entry['to']}</a> 
@@ -179,7 +230,7 @@ $HTML[] = <<<EOF
 
 </div>
 EOF;
-
+}
 
 if($_SESSION['user'] != $entry['user']){
 	if(empty($request)){

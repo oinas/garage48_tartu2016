@@ -11,7 +11,7 @@ if(isset($n['count']) && $n['count'] > 0){
 $menu = array(
 	"wall" => "Notifications {$badge}",
 	"travel_plan/add" => "Create travel plan",
-/*	"product_request/add" => "Make product request",*/
+	"product_request/add" => "Make product request",
 	"travel_plan" => "My travel plans",
 	"product_request" => "My product requests",
 	"pending/view/pending" => "Show pending requests",

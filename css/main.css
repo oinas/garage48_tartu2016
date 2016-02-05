@@ -28,7 +28,7 @@ body, html, input, textarea {
 .front-middle {
 	margin: auto;
 	width: 800px;
-	color: #fff;
+	color: #000;
 	text-align: center;
 	position: relative;
 	transform: translateY(75%);
@@ -38,6 +38,7 @@ body, html, input, textarea {
 .front-middle h1 {
 	font-size: 2em;
 	margin-bottom: 15px;
+	color: #000;
 }
 
 h1 {
@@ -81,8 +82,8 @@ h1 {
 }
 
 .footer {
-	background: #000;
-	color: #fff;
+	background: #fff;
+	color: #EC583A;
 	padding: 10px 20px;
 	position: fixed;
 	bottom: 0px;
@@ -99,6 +100,7 @@ h1 {
 
 .content .inner {
 	padding: 20px;
+	background: #C7D0D5;
 }
 
 ul.side-bar-menu {
@@ -113,7 +115,7 @@ ul.side-bar-menu li {
 }
 
 ul.side-bar-menu li a {
-	color: #fff;
+	color: #000;
 	display: block;
 }
 
@@ -263,4 +265,7 @@ table .headerSortUp {
 
 .user-table-right {
 	width: 50%;
+}
+.left-side col-md-3 {
+	background: #93B1C6;
 }
