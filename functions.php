@@ -174,28 +174,31 @@ function convertDateToTime($date, $showTime = true){
 }
 
 function dateToRelative($date){
+	$date = explode(" ", $date)[0];
 	return relativeTime(convertDateToTime($date, false));
 }
 
 function relativeTime($microtime){
 	$diff = microtime(true) - $microtime;
 	$past = "ago";
+	$past2 = "";
 	if($diff < 0){
 		$diff = -$diff;
-		$past = "left";
+		$past = "";
+		$past2 = "in ";
 	}
 	if($diff < 60){
 		return "now";
 	} else if($diff < 60 * 60){
-		return (int) ($diff / 60) . " minutes " . $past;
+		return $past2 . (int) ($diff / 60) . " minute(s) " . $past;
 	} else if($diff < 60 * 60 * 24){
-		return (int) ($diff / 60 / 60) . " hours " . $past;
+		return $past2 . (int) ($diff / 60 / 60) . " hour(s) " . $past;
 	} else if($diff < 60 * 60 * 24 * 30){
-		return (int) ($diff / 60 / 60 / 24) . " days " . $past;
+		return $past2 . (int) ($diff / 60 / 60 / 24) . " day(s) " . $past;
 	} else if($diff < 60 * 60 * 24 * 30 * 12){
-		return (int) ($diff / 60 / 60 / 24 / 30) . " months " . $past;
+		return $past2 . (int) ($diff / 60 / 60 / 24 / 30) . " month(s) " . $past;
 	} else {
-		return (int) ($diff / 60 / 60 / 24 / 30 / 12) . " years " . $past;
+		return $past2 . (int) ($diff / 60 / 60 / 24 / 30 / 12) . " year(s) " . $past;
 	}
 }
 

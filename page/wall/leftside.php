@@ -14,6 +14,9 @@ $menu = array(
 /*	"product_request/add" => "Make product request",*/
 	"travel_plan" => "My travel plans",
 	"product_request" => "My product requests",
+	"pending/view/pending" => "Show pending requests",
+	"pending/view/accepted" => "Show accepted requests",
+	"messages" => "Show messages",
 	"q=search&showall" => "Show all travel plans",
 	"users" => "DEBUG User list"
 );

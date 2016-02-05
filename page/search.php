@@ -80,11 +80,12 @@ if($tmp1 == 0){
 		$pic = getUserPicture($user['facebookid']);;
 		$v['from'] = strtoupper($v['from']);
 		$v['to'] = strtoupper($v['to']);
-		$v['date'] = convertDateTime($v['date'], false);
+		$v['date'] = convertDateTime($v['date'], false) . " - " . dateToRelative($v['date'], false);
 		$tmp3 = empty($v['size']) ? "" : "";
 		$tmp4 = empty($v['weight']) ? "" : "";
 		// luggage type: <span class="glyphicon glyphicon-briefcase"></span>
 		// info: <span class="glyphicon glyphicon-info-sign"></span>
+		$tmp5 = "Created " . relativeTime($v['update']);
 		$HTML[] = <<<EOF
 	<div class="search-element hand">
 		<div class="search-profile">
@@ -99,6 +100,8 @@ if($tmp1 == 0){
 			<span class="glyphicon glyphicon-map-marker"></span>FROM <b>{$v['from']}</b> TO <b>{$v['to']}</b>
 			<br>
 			<span class="glyphicon glyphicon-time"></span> {$v['date']} 
+			<br>
+			{$tmp5}
 		</div>
 		<div class="search-button btn btn-warning">
 			<a href="?travel_plan/view/{$v['_id']}">More information &amp; Contact traveler</a>

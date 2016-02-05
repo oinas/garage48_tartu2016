@@ -133,4 +133,4 @@ var_dump($response);
 
 // User is logged in with a long-lived access token.
 // You can redirect them to a members-only page.
-header("Location: {$BASEHREF}?wall");
+header("Location: {$BASEHREF}?q=search&showall");
