@@ -1,6 +1,6 @@
 <?php
 
-$product_requests = $db->product_requests;
+$requests = $db->requests;
 
 $HTML[] = <<<EOF
 	<h1>My product requests</h1>
@@ -14,31 +14,39 @@ $HTML[] = <<<EOF
 				<th>Departure
 				<th>Arrival
 				<th>Date
-				<th>Approximate size
-				<th>Approximate weight
+				<th>Traveler
+				<th>Status
 			</tr>
 		</thead>
 		<tbody>
 EOF;
 
-
-
 $i = 0;
-foreach($travel_plans->find(array("user" => $_SESSION['user']))->sort(array("date" => -1)) as $k => $v){
+foreach($requests->find(array("user" => $_SESSION['user']))->sort(array("date" => -1)) as $k => $v){
+
+	$travels = $db->travel_plans;
+
+	$travel = $travels->findOne(array("_id" => new MongoId($v['travel'])));
 	$i++;
-	$v['date'] = convertDate($v['date'], false) . "<br>" . relativeTime(convertDateToTime($v['date'], false));
+	$v['date'] = convertDate($travel['date'], false) . "<br>" . relativeTime(convertDateToTime($travel['date'], false));
+
+	$traveler = generateUserLink($travel['user']);
+	if($v['status'] == 0){
+		$status = "pending";
+	} else if($v['status'] == 1){
+		$status = "accepted";
+	} else {
+		$status = "rejected";
+	}
 
 	$HTML[] = <<<EOF
 		<tr>
 			<td>{$i}
-			<td><a href="?product_request/view/{$v['_id']}">{$v['from']}</a> 
-				&nbsp;&nbsp;
-				<a href="?product_request/edit/{$v['_id']}"><span class="glyphicon glyphicon-edit"></span></a>
-				<a href="?product_request/delete/{$v['_id']}"><span class="glyphicon glyphicon-remove"></span></a>
-			<td>{$v['to']}
+			<td><a href="?travel_plan/view/{$v['travel']}">{$travel['from']}</a> 
+			<td>{$travel['to']}
 			<td>{$v['date']}
-			<td>{$v['size']}
-			<td>{$v['weight']}
+			<td>$traveler
+			<td>$status
 		</tr>
 EOF;
 	}

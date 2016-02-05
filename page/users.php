@@ -27,7 +27,7 @@ $i = 0;
 foreach($users->find()->sort(array("last" => -1)) as $k => $v){
 	$i++;
 	$v['travels'] = getCount(getTravels(array("user" => $v['facebookid'])));
-	$v['requests'] = 0;
+	$v['requests'] = getCount(getRequests(array("user" => $v['facebookid'])));
 	$v['grade'] = 4.6;
 	$v['referrals'] = 26;
 	$v['joined'] = @convertDateTime($v['date'], false);

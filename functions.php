@@ -250,6 +250,19 @@ function getTravels($arr){
 	return $entry;
 }
 
+function getRequests($arr){
+	global $db;
+	if(empty($arr)){
+		return null;
+	}
+
+	$requests = $db->requests;
+
+	$entry = $requests->find($arr);
+
+	return $entry;
+}
+
 function getCount($mongolist){
 	$count = 0;
 	foreach($mongolist as $k => $v){
