@@ -97,10 +97,11 @@ EOF;
 			<input type="{$type}" name="{$name}" value="{$value}" placeHolder="{$desc}" class="form-control" id="{$name}" autocomplete="off">
 EOF;
 		} else {
+			$tmp = ($type == "disabled") ? "disabled" : "";
 			$HTML[] = <<<EOF
 				<tr>
 					<td><strong>{$title}</strong>
-					<td><input type="{$type}" name="{$name}" value="{$value}" placeHolder="{$desc}" class="form-control" id="{$name}" autocomplete="off">
+					<td><input type="{$type}" name="{$name}" value="{$value}" placeHolder="{$desc}" class="form-control" id="{$name}" autocomplete="off" {$tmp}>
 				</tr>
 EOF;
 		}
