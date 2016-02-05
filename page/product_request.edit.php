@@ -8,11 +8,11 @@ if(isset($_POST['submit'])){
 	if($ACTION == "add"){
 		$_POST['added'] = date("Y-m-d H:i:s");
 		$travel_plans -> insert($_POST);
-		header("Location: ?travel_plan");
+		header("Location: ?product_request");
 	} else {
 		$_POST['modified'] = date("Y-m-d H:i:s");
 		$travel_plans -> update(array("_id" => new MongoId($ID)), $_POST);
-		header("Location: ?travel_plan");
+		header("Location: ?product_request");
 	}
 }
 

@@ -3,7 +3,7 @@
 $requests = $db->requests;
 
 $HTML[] = <<<EOF
-	<h1>My product requests</h1>
+	<h1>My product requests connected with travel plan</h1>
 EOF;
 
 $HTML[] = <<<EOF
@@ -61,4 +61,8 @@ $(document).ready(function() {
 		} 
 	); 
 </script>
+EOF;
+
+$HTML[] = <<<EOF
+	<h1>My product requests not connected with travel plan</h1>
 EOF;

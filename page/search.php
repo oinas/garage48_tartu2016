@@ -91,9 +91,10 @@ if($tmp1 == 0){
 } else {
 	foreach($results_travelers as $k => $v){
 		$user = @getUser($v['user']);
+		$user['first'] = generateUserLink($v['user']);
 		$pic = getUserPicture($user['facebookid']);;
-		$v['from'] = strtoupper($v['from']);
-		$v['to'] = strtoupper($v['to']);
+		$v['from'] = "<a href='https://maps.google.com/?q={$v['from']}' target='_blank'>" . strtoupper($v['from']) . "</a>";
+		$v['to'] = "<a href='https://maps.google.com/?q={$v['to']}' target='_blank'>" . strtoupper($v['to']) . "</a>";
 		$v['date'] = convertDateTime($v['date'], false) . " - " . dateToRelative($v['date'], false);
 		$tmp3 = empty($v['size']) ? "" : "";
 		$tmp4 = empty($v['weight']) ? "" : "";
@@ -101,7 +102,7 @@ if($tmp1 == 0){
 		// info: <span class="glyphicon glyphicon-info-sign"></span>
 		$tmp5 = "Created " . relativeTime($v['update']);
 		$HTML[] = <<<EOF
-	<div class="search-element hand">
+	<div class="search-element">
 		<div class="search-profile">
 			<img src="$pic">
 		</div>

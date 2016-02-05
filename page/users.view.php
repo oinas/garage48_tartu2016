@@ -8,6 +8,12 @@ $when = dateToRelative($user['date']);
 $user['last'] = relativeTime($user['last']);
 
 $user['pic'] = generateUserPicture($user['facebookid'], "user-view-left");
+if(!isset($user['phone'])){
+	$user['phone'] = "";
+}
+if(!isset($user['location'])){
+	$user['location'] = "";
+}
 
 $HTML[] = <<<EOF
 <h1>Info about {$user['first']}</h1>
