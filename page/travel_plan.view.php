@@ -51,7 +51,7 @@ if(isset($_POST['submit']) && $_POST['submit'] == "Send message"){
 		$chats -> insert(
 				array(
 					"travel" => $ID,
-					"user1" => $_SESSION['user'],
+					"user1" => $request['user'],
 					"user2" => $entry['user'],
 					"which" => 1,	// which user
 					"message" => $_POST['chat'],
@@ -267,7 +267,7 @@ EOF;
 		} else if($v['status'] == 1){
 			$HTML[] = <<<EOF
 			<div class="content-box medium">
-			<h1>Your have accepted following request</h1>
+			<h1>You have accepted following request</h1>
 			{$tmp}
 
 EOF;
