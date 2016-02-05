@@ -26,7 +26,7 @@ $HTML[] = <<<EOF
 	<body>
 	<div class="front body">
 		<div class="header">
-			<a href="?q=search&showall"><img src="css/logo.png" class="header-logo"></a>
+			<a href="?"><img src="css/logo.png" class="header-logo"></a>
 			<div class="menu">
 				<ul class="menu-ul">
 					<li><a href="?">Log in</a>
