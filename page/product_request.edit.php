@@ -49,12 +49,12 @@ if($ACTION != "delete"){
 	formField("From", "from", "text", "", "From");
 	formField("To", "to", "text", "", "To");
 	formField("Requests ends", "date", "text", "", "When would request end");
-	formField("Approximate package size", "size", "text", "", "Package dimensions (WxHxD)");
-	formField("Aprroximate Weight", "weight", "text", "", "Maximum lugage weight");
+//	formField("Approximate package size", "size", "text", "", "Package dimensions (WxHxD)");
+//	formField("Aprroximate Weight", "weight", "text", "", "Maximum lugage weight");
 	//formField("Hand luggage", "handluggage", "checkbox", "", " Item is allowed");
-	formField("", "fragile", "checkbox", "", " Product is fragile, handle with care");
-	formField("", "solid", "checkbox", "", " Product is solid");
-	formField("", "liquid", "checkbox", "", " Product is liquid");
+//	formField("", "fragile", "checkbox", "", " Product is fragile, handle with care");
+//	formField("", "solid", "checkbox", "", " Product is solid");
+//	formField("", "liquid", "checkbox", "", " Product is liquid");
 	formField("Description of product(s)", "description", "textarea");
 	formField("You can add picture of the item", "picture", "file");
 	formFooter($ACTION == "add" ? "Add new product request" : "Modify existing product request");

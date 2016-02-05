@@ -47,9 +47,9 @@ if($ACTION != "delete"){
 	formField("From", "from", "text", "", "Departure");
 	formField("To", "to", "text", "", "Arrival");
 	formField("Date", "date", "text", "", "Date of departure");
-	formField("Package size", "size", "text", "", "Package dimensions (WxHxD)");
-	formField("Weight", "weight", "text", "", "Maximum lugage weight");
-	formField("Hand luggage", "handluggage", "checkbox", "", " Some of the items might be restricted");
+//	formField("Package size", "size", "text", "", "Package dimensions (WxHxD)");
+//	formField("Weight", "weight", "text", "", "Maximum lugage weight");
+//	formField("Hand luggage", "handluggage", "checkbox", "", " Some of the items might be restricted");
 	formField("Additional informations", "description", "textarea");
 	formFooter($ACTION == "add" ? "Add new plan" : "Modify plan");
 

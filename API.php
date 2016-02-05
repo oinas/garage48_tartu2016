@@ -83,7 +83,7 @@ foreach($entries->find() as $k => $v){
 			if((int) $_v != $_v || strlen("" . ((int) $_v)) != strlen($_v)){
 				continue;
 			}
-			$m[$_k . "_picture"] = getUserPicture($_v);
+//			$m[$_k . "_picture"] = getUserPicture($_v);
 			$m[$_k . "_name"] = getUserName($_v);
 			$m[$_k . "_email"] = getUserEmail($_v);
 		}
