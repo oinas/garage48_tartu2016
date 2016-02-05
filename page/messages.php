@@ -7,6 +7,9 @@ $HTML[] = <<<EOF
 EOF;
 
 foreach($chats->find()->sort(array("update" => -1)) as $k => $v){
+	if($v['user1'] != $_SESSION['user'] && $v['user2'] != $_SESSION['user']){
+		continue;
+	}
 	$travel_plans = $db->travel_plans;
 	$travel = $travel_plans->findOne(array("_id" => new MongoId($v['travel'])));
 	$date = convertDate($travel['date']);
