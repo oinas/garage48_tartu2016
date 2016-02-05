@@ -66,3 +66,75 @@ EOF;
 $HTML[] = <<<EOF
 	<h1>My product requests not connected with travel plan</h1>
 EOF;
+
+
+
+$HTML[] = <<<EOF
+	<table class="table table-hover table-striped tablesorter" id="tablesorter2">
+		<thead>
+			<tr>
+				<th>#
+				<th>From
+				<th>To
+				<th>Requests ends
+				<th>Pending/Accepted requests
+			</tr>
+		</thead>
+		<tbody>
+EOF;
+
+$travelers = $db->travel_plans;
+$results_requesters = array();
+
+foreach($travelers->find()->sort(array("date" => 1)) as $k => $v){
+	if(isset($v['user']) && $v['user'] == $_SESSION['user']){
+		if(isset($v['requester'])){
+			$results_requesters[] = $v;
+		}
+	}
+}
+
+$i = 0;
+foreach($results_requesters as $k => $v){
+	$i++;
+	$v['date'] = convertDate($travel['date'], false) . "<br>" . relativeTime(convertDateToTime($travel['date'], false));
+
+	$accepted = 0;
+	$pending = 0;
+	
+	$list = getRequests(array("travel" => "" . $v['_id']));
+	foreach($list as $_k => $_v){
+		if($_v['status'] == 0){
+			$pending++;
+		} else if($_v['status'] == 1){
+			$accepted++;
+		}
+	}
+
+	$HTML[] = <<<EOF
+		<tr>
+			<td>{$i}
+				<a href="?product_request/edit/{$v['_id']}"><span class="glyphicon glyphicon-edit"></span></a>
+				<a href="?product_request/delete/{$v['_id']}"><span class="glyphicon glyphicon-remove"></span></a>
+
+			<td><a href="?travel_plan/view/{$v['_id']}">{$v['from']}</a> 
+			<td>{$v['to']}
+			<td>{$v['date']}
+			<td>$pending/$accepted
+		</tr>
+EOF;
+}
+
+
+
+	$HTML[] = <<<EOF
+			</tbody>
+		</table>
+
+<script>
+$(document).ready(function() { 
+			$("#tablesorter2").tablesorter(); 
+		} 
+	); 
+</script>
+EOF;

@@ -218,31 +218,58 @@ EOF;
 
 if($_SESSION['user'] != $entry['user']){
 	if(empty($request)){
-		/** only if we have not sent request */
-		$HTML[] = <<<EOF
-		<div class="content-box medium">
-		<h1>Make a request to a traveler?</h1>
+		if(isset($entry['requester'])){
+			/** only if we have not sent request */
+			$HTML[] = <<<EOF
+			<div class="content-box medium">
+			<h1>Make a request to bring the product?</h1>
 EOF;
-		formHeader("");
-		formField("Request description", "description", "textarea", "Hey, I saw your traveling plan, could you please fetch me ");
-		formField("You can add picture of the item", "picture", "file");
-		formFooter("Make a request");
-		$HTML[] = <<<EOF
-		</div>
+			formHeader("");
+			formField("Message", "description", "textarea", "Hey, I saw your product request, could you please tell me more about it!");
+			formFooter("Send a message");
+			$HTML[] = <<<EOF
+			</div>
 EOF;
+		} else {
+			/** only if we have not sent request */
+			$HTML[] = <<<EOF
+			<div class="content-box medium">
+			<h1>Make a request to a traveler?</h1>
+EOF;
+			formHeader("");
+			formField("Request description", "description", "textarea", "Hey, I saw your traveling plan, could you please fetch me ");
+			formField("You can add picture of the item", "picture", "file");
+			formFooter("Make a request");
+			$HTML[] = <<<EOF
+			</div>
+EOF;
+		}
 	} else {
 		$tmp = $request['description'];
 		if(file_exists("upload/" . $ID . $_SESSION['user'])){
 			$tmp .= " <img class='right' width='200' src='upload/" . $ID . $_SESSION['user'] . "'>";
 		}
-		$tmp .= "<br><small>Posted by " . generateUserLink($request['user']) . " @ " . relativeTime($request['update']) . "</small>";
+		$t = isset($entry['requester']) ? "Posted by" : "Requested by";
+		$tmp .= "<br><small>" . $t . " " . generateUserLink($request['user']) . " @ " . relativeTime($request['update']) . "</small>";
 
 		if($request['status'] == 0){
 			$HTML[] = <<<EOF
 			<div class="content-box medium yellowback">
-			<h1>Your request is pending</h1>
-			Please wait while traveler will see your notifications and answers to you!<br><br>
-			<div class="btn btn-warning"><a href="?travel_plan/{$ACTION}/{$ID}/&revoke">Revoke request</a>
+			<h1>Your have request pending</h1>
+EOF;
+			if(isset($entry['requester'])){
+			$HTML[] = <<<EOF
+				Traveler is interested in your product request!<br><br>
+			<div class="btn btn-success"><a href="?travel_plan/{$ACTION}/{$ID}/&accept={$_SESSION['user']}">Accept request</a></div>
+			<div class="btn btn-warning"><a href="?travel_plan/{$ACTION}/{$ID}/&reject={$_SESSION['user']}">Reject request</a></div>
+EOF;
+			} else {
+			$HTML[] = <<<EOF
+				Please wait while traveler will see your notifications and answers to you!<br><br>
+				<div class="btn btn-warning"><a href="?travel_plan/{$ACTION}/{$ID}/&revoke">Revoke request</a>
+EOF;
+			}
+			$HTML[] = <<<EOF
 			</div>
 			<br><br>
 			{$tmp}
@@ -251,9 +278,13 @@ EOF;
 EOF;
 		} else if($request['status'] == 1){
 			$ONLYCHAT = count($HTML);
+			$t = "Your request has been accepted";
+			if(isset($entry['requester'])){
+				$t = "You have accepted request";
+			}
 			$HTML[] = <<<EOF
 			<div class="content-box medium">
-			<h1>Your request has been accepted</h1>
+			<h1>{$t}</h1>
 			{$tmp}
 			<div id="chat-box">
 
@@ -327,24 +358,40 @@ EOF;
 		if(file_exists("upload/" . $ID . $v['user'])){
 			$tmp .= " <img class='right' width='200' src='upload/" . $ID . $v['user'] . "'>";
 		}
-		$tmp .= "<br><small>Posted by " . generateUserLink($v['user']) . " @ " . relativeTime($v['update']) . "</small>";
+		$t = isset($v['requester']) ? "Posted by" : "Requested by";
+		$tmp .= "<br><small>" . $t . " " . generateUserLink($v['user']) . " @ " . relativeTime($v['update']) . "</small>";
 
 		if($v['status'] == 0){
 			$HTML[] = <<<EOF
 			<div class="content-box medium yellowback">
 			<h1>Request is pending</h1>
-			Please wait while traveler will see your notifications and answers to you!<br><br>
+EOF;
+			if(isset($entry['requester'])){
+			$HTML[] = <<<EOF
+				You need to wait product requester to accept your request!<br><br>
+			<div class="btn btn-warning"><a href="?travel_plan/{$ACTION}/{$ID}/&revoke">Revoke request</a></div>
+EOF;
+			} else {
+			$HTML[] = <<<EOF
+				You have pending request from product requester to be accepted!<br><br>
 			<div class="btn btn-success"><a href="?travel_plan/{$ACTION}/{$ID}/&accept={$v['user']}">Accept request</a></div>
 			<div class="btn btn-warning"><a href="?travel_plan/{$ACTION}/{$ID}/&reject={$v['user']}">Reject request</a></div>
+EOF;
+			}
+			$HTML[] = <<<EOF
 			<br><br>
 			{$tmp}
-			<div style="clear: both;">
+			<div style="clear: both;"></div>
 			</div>
 EOF;
 		} else if($v['status'] == 1){
+			$t = "You have accepted following request";
+			if(isset($entry['requester'])){
+				$t = "Your request has been accepted";
+			}
 			$HTML[] = <<<EOF
 			<div class="content-box medium">
-			<h1>You have accepted following request</h1>
+			<h1>{$t}</h1>
 			{$tmp}
 
 EOF;

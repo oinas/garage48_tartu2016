@@ -60,8 +60,8 @@ if(file_exists("../index2.html")){
 $tmp = htmlspecialchars($loginUrl);
 $HTML[] = <<<EOF
 <div class="front-middle">
-<h1>Some motivational slogan</h1>
-Additional description to give better insight of slogan<br><br><br>
+<h1>CICO brings you what you desire</h1>
+Travelers can bring you products from all over the world!<br><br><br>
 <a href="{$tmp}" class="btn btn-primary btn-lg"><img src="css/fb_white_29.png" style="margin-right: 10px; margin-top: -2px;"> Log in with Facebook!</a>
 <br><br><h1>Quick &amp; easy login</h1>
 </div>
