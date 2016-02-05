@@ -224,6 +224,7 @@ table .headerSortUp {
 
 .request-chat {
 	border-bottom: 1px solid #ccc;
+	padding-top: 5px;
 	padding-bottom: 5px;
 	clear: both;
 }
@@ -244,4 +245,14 @@ table .headerSortUp {
 	margin: 3px;
 	padding: 3px;
 	border-bottom: 1px solid #ccc;
+}
+
+.request-chat-remove a {
+	float: right;
+	color: #fca;
+	display: block;
+}
+
+.request-chat-remove a:hover {
+	color: #f94;
 }

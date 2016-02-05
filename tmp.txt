@@ -18,3 +18,9 @@ cico.northeurope.cloudapp.azure.com
 13.69.184.210
 
 cico.northeurope.cloudapp.azure.com
+
+local:
+dfsdslj_zamoresky_1454635887@tfbnw.net
+
+nonlocal:
+open_fxhtcum_user@tfbnw.net

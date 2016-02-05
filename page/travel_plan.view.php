@@ -8,6 +8,15 @@ $travel_plans = $db->travel_plans;
 $request = $requests->findOne(array("travel" => $ID, "user" => $_SESSION['user']));
 $entry = $travel_plans->findOne(array("_id" => new MongoId($ID)));
 
+// chat removal
+if(isset($_GET['remove'])){
+	$chats -> remove(
+			array("_id" => new MongoId($_GET['remove']))
+		);
+	header("Location: ?travel_plan/{$ACTION}/{$ID}");
+	die();
+}
+
 if(isset($_GET['accept'])){
 	$tmp = $requests->findOne(array("travel" => $ID, "user" => $_GET['accept']));
 	$tmp['status'] = 1;
@@ -206,10 +215,12 @@ EOF;
 			</div>
 EOF;
 		} else if($request['status'] == 1){
+			$ONLYCHAT = count($HTML);
 			$HTML[] = <<<EOF
 			<div class="content-box medium">
 			<h1>Your request has been accepted</h1>
 			{$tmp}
+			<div id="chat-box">
 
 EOF;
 			foreach($chats->find(array(	"travel" => $ID,
@@ -221,18 +232,39 @@ EOF;
 				} else {
 					$pic = generateUserPicture($v['user2'], "chat-picture");
 				}
+				$id = "" . $v['_id'];
 				$time = relativeTime($v['update']);
+				if($v['which'] == 0){
+					$chatremove = <<<EOF
+						<div class="request-chat-remove">
+							<a href="?travel_plan/{$ACTION}/{$ID}/&remove={$id}" title="Remove message"><span class="glyphicon glyphicon-remove"></span></a>
+						</div>
+EOF;
+				} else {
+					$chatremove = "";
+				}
 				$HTML[] = <<<EOF
 					<div class="request-chat">
+					{$chatremove}
 					{$pic}
 					{$v['message']}<br>
 					<small>{$time}</small>
 					</div>
 EOF;
 			}
-			$HTML[] = '<a name="chat"></a>';
+			$HTML[] = '<a name="chat"></a></div>';
+
+			if(isset($_GET['onlychat'])){
+				for($i = $ONLYCHAT + 1; $i < count($HTML); $i++){
+					echo $HTML[$i];
+				}
+				die();
+			}
 			formHeader("");
 			formField("", "role", "hidden", "requester");
+			$HTML[] = <<<EOF
+
+EOF;
 			formField("", "chat", "textarea");
 			formFooter("Send message");
 			$HTML[] = <<<EOF
@@ -253,7 +285,9 @@ EOF;
 	/** show requests */
 	$request = $requests->find(array("travel" => $ID));
 
+	$l = 0;
 	foreach($request as $k => $v){
+		$l++;
 		$tmp = $v['description'];
 		if(file_exists("upload/" . $ID . $v['user'])){
 			$tmp .= " <img class='right' width='200' src='upload/" . $ID . $v['user'] . "'>";
@@ -289,18 +323,22 @@ EOF;
 					$pic = generateUserPicture($_v['user2'], "chat-picture");
 				}
 				$time = relativeTime($_v['update']);
+				$id = "" . $_v['_id'];
 				$HTML[] = <<<EOF
 					<div class="request-chat">
+						<div class="request-chat-remove">
+							<a href="?travel_plan/{$ACTION}/{$ID}/&remove={$id}" title="Remove message"><span class="glyphicon glyphicon-remove"></span></a>
+						</div>
 					{$pic}
 					{$_v['message']}<br>
 					<small>{$time}</small>
 					</div>
 EOF;
 			}
-			$HTML[] = '<a name="chat{$k}"></a>';
+			$HTML[] = '<a name="chat' . $l . '"></a>';
 			formHeader("");
 			formField("", "user1", "hidden", "{$v['user']}");
-			formField("", "pos", "hidden", "{$k}");
+			formField("", "pos", "hidden", "{$l}");
 			formField("", "role", "hidden", "traveler");
 			formField("", "chat", "textarea");
 			formFooter("Send message");

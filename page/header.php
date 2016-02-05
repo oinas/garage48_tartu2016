@@ -17,11 +17,11 @@ $HTML[] = <<<EOF
 		<meta charset="utf-8" />
 		<base href="{$BASEHREF}" />
 		<link rel="shortcut icon" href="favicon.ico" />
-		<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-		<script src="http://tablesorter.com/__jquery.tablesorter.min.js"></script> 
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<script src="js/jquery-2.2.0.min.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script src="js/jquery.tablesorter.min.js"></script> 
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <!-- FACEBOOK START -->
 		<meta property="og:title" content="{$PAGE}" />
 		<meta property="og:site_name" content="{$TITLE}" />
