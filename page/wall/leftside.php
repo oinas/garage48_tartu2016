@@ -31,7 +31,10 @@ $HTML[] = <<<EOF
 			<h1>Profile</h1>
 			<center>
 				<img src="{$facebook_picture}" width="90%" class="circle">
-				<br>{$_SESSION['fb_name']}
+				<div class="profile-name">
+					<a href="?profile/edit">{$_SESSION['fb_name']}</a>
+					<a href="?user/view/{$_SESSION['fb_name']}"><span class="glyphicon glyphicon-search"></span></a>
+				<div>
 
 			</center>
 			<ul class="side-bar-menu">

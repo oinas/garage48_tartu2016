@@ -256,3 +256,14 @@ table .headerSortUp {
 .request-chat-remove a:hover {
 	color: #f94;
 }
+
+img.user-view-left {
+	float: right;
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+
+.user-table-right {
+	width: 50%;
+}
