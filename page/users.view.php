@@ -54,6 +54,9 @@ $HTML[] = <<<EOF
 </div>
 EOF;
 
+$_GET['user'] = $_SESSION['user'];
+$_GET['showall'] = true;
+$_GET['userprofile'] = true;
 
 /** show search? */
 require_once "page/search.php";

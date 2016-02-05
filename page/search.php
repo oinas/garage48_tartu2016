@@ -2,57 +2,57 @@
 
 /** find travelers */
 $travelers = $db->travel_plans;
+$requesters = $db->requesters;
 
 $results_travelers = array();
 $results_requesters = array();
 
 if(isset($_GET['showall'])){
 	foreach($travelers->find()->sort(array("date" => 1)) as $k => $v){
-		$results_travelers[] = $v;
+		if(isset($_GET['user'])){
+			if(isset($v['user']) && $v['user'] == $_GET['user']){
+				if(isset($v['requester'])){
+					$results_requesters = $v;
+				} else {
+					$results_travelers[] = $v;
+				}
+			}
+		} else {
+			if(isset($v['requester'])){
+				$results_requesters = $v;
+			} else {
+				$results_travelers[] = $v;
+			}
+		}
 	}
 } else {
 
-foreach($travelers->find()->sort(array("date" => 1)) as $k => $v){
-	$match = 0;
-	if(strlen($_GET['from']) > 0 && preg_match("/{$_GET['from']}/i", $v['from'])){
-		$match++;
-	}
-	if(strlen($_GET['to']) > 0 && preg_match("/{$_GET['to']}/i", $v['to'])){
-		$match++;
-	}
-	if(strlen($_GET['from']) > 0 && strlen($_GET['to']) > 0){
-		if($match == 2){
-			$results_travelers[] = $v;
+	foreach($travelers->find()->sort(array("date" => 1)) as $k => $v){
+		$match = 0;
+		if(strlen($_GET['from']) > 0 && preg_match("/{$_GET['from']}/i", $v['from'])){
+			$match++;
 		}
-	} else {
-		if($match == 1){
-			$results_travelers[] = $v;
+		if(strlen($_GET['to']) > 0 && preg_match("/{$_GET['to']}/i", $v['to'])){
+			$match++;
 		}
-	}
-}
-
-$requesters = $db->requesters;
-
-
-foreach($requesters->find()->sort(array("date" => 1)) as $k => $v){
-	$match = 0;
-	if(strlen($_GET['from']) > 0 && preg_match("/{$_GET['from']}/i", $v['from'])){
-		$match++;
-	}
-	if(strlen($_GET['to']) > 0 && preg_match("/{$_GET['to']}/i", $v['to'])){
-		$match++;
-	}
-	if(strlen($_GET['from']) > 0 && strlen($_GET['to']) > 0){
-		if($match == 2){
-			$results_requesters[] = $v;
-		}
-	} else {
-		if($match == 1){
-			$results_requesters[] = $v;
+		if(strlen($_GET['from']) > 0 && strlen($_GET['to']) > 0){
+			if($match == 2){
+				if(isset($v['requester'])){
+					$results_requesters[] = $v;
+				} else {
+					$results_travelers[] = $v;
+				}
+			}
+		} else {
+			if($match == 1){
+				if(isset($v['requester'])){
+					$results_requesters[] = $v;
+				} else {
+					$results_travelers[] = $v;
+				}
+			}
 		}
 	}
-}
-
 }
 
 $tmp1 = count($results_travelers);
@@ -64,16 +64,30 @@ $HTML[] = <<<EOF
 	<div class="btn btn-primary" id="btn_travelers">Travelers <div class="badge">{$tmp1}</div></div>
 	<div class="btn btn-button" id="btn_requesters">Requesters <div class="badge">{$tmp2}</div></div>
 </div>
+EOF;
 
-<h1>Search results</h1>
+if(isset($_GET['userprofile'])){
+	$HTML[] = <<<EOF
+		<h1>List of travel plans and requests</h1>
+EOF;
+} else {
+	$HTML[] = <<<EOF
+		<h1>Search results</h1>
+EOF;
+}
 
+$HTML[] = <<<EOF
 <div class="results">
 
 <div id="view_travelers">
 EOF;
 
 if($tmp1 == 0){
-	$HTML[] = "<h1>No entries found, try to change search terms</h1>";
+	if(isset($_GET['userprofile'])){
+		$HTML[] = "<h1>No entries found</h1>";
+	} else {
+		$HTML[] = "<h1>No entries found, try to change search terms</h1>";
+	}
 } else {
 	foreach($results_travelers as $k => $v){
 		$user = @getUser($v['user']);
