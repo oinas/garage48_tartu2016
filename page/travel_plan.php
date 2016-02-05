@@ -10,9 +10,8 @@ $HTML[] = <<<EOF
 				<th>#
 				<th>Departure
 				<th>Arrival
-				<th>Request ending
-				<th>Lugage size
-				<th>Lugage weight
+				<th>Departure date
+				<th>Pending/Accepted<br>requests
 			</tr>
 		</thead>
 		<tbody>
@@ -22,18 +21,28 @@ $i = 0;
 foreach($travel_plans->find(array("user" => $_SESSION['user']))->sort(array("date" => -1)) as $k => $v){
 	$i++;
 	$v['date'] = convertDate($v['date'], false);
+
+	$accepted = 0;
+	$pending = 0;
+	
+	$list = getRequests(array("travel" => "" . $v['_id']));
+	foreach($list as $_k => $_v){
+		if($_v['status'] == 0){
+			$pending++;
+		} else if($_v['status'] == 1){
+			$accepted++;
+		}
+	}
 	$HTML[] = <<<EOF
 		<tr>
 			<td>{$i}
-			<td><a href="?travel_plan/view/{$v['_id']}">{$v['from']}</a> 
-				&nbsp;&nbsp;
-
 				<a href="?travel_plan/edit/{$v['_id']}"><span class="glyphicon glyphicon-edit"></span></a>
 				<a href="?travel_plan/delete/{$v['_id']}"><span class="glyphicon glyphicon-remove"></span></a>
+			<td><a href="?travel_plan/view/{$v['_id']}">{$v['from']}</a> 
+				&nbsp;&nbsp;
 			<td>{$v['to']}
 			<td>{$v['date']}
-			<td>{$v['size']}
-			<td>{$v['weight']}
+			<td>{$pending}/{$accepted}
 		</tr>
 EOF;
 	}

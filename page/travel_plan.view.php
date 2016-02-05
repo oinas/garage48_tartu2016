@@ -151,7 +151,7 @@ if(isset($entry['requester'])){
 		<th colspan="2"><span class="glyphicon glyphicon-exclamation-sign"></span> Information
 	</tr>
 	<tr>
-		<td>Posted
+		<td>Posted by
 		<td>{$usertmp}
 	</tr>
 	<tr>
@@ -165,14 +165,6 @@ if(isset($entry['requester'])){
 	<tr>
 		<td>Request ends
 		<td>{$entry['date']} - {$when}
-	</tr>
-	<tr>
-		<td>Entry added/changed
-		<td>{$changed}
-	</tr>
-	<tr>
-		<td>Details
-		<td>{$tmp}
 	</tr>
 	<tr>
 		<td>Information about product(s)
@@ -213,14 +205,6 @@ Travel plan
 	<tr>
 		<td>Departure date
 		<td>{$entry['date']} - {$when}
-	</tr>
-	<tr>
-		<td>Entry added/changed
-		<td>{$changed}
-	</tr>
-	<tr>
-		<td>Details
-		<td>{$tmp}
 	</tr>
 	<tr>
 		<td>Additional information

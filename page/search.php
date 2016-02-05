@@ -12,14 +12,14 @@ if(isset($_GET['showall'])){
 		if(isset($_GET['user'])){
 			if(isset($v['user']) && $v['user'] == $_GET['user']){
 				if(isset($v['requester'])){
-					$results_requesters = $v;
+					$results_requesters[] = $v;
 				} else {
 					$results_travelers[] = $v;
 				}
 			}
 		} else {
 			if(isset($v['requester'])){
-				$results_requesters = $v;
+				$results_requesters[] = $v;
 			} else {
 				$results_travelers[] = $v;
 			}
@@ -116,7 +116,6 @@ if($tmp1 == 0){
 			<br>
 			<span class="glyphicon glyphicon-time"></span> {$v['date']} 
 			<br>
-			{$tmp5}
 		</div>
 		<div class="search-button btn btn-warning">
 			<a href="?travel_plan/view/{$v['_id']}">More information &amp; Contact traveler</a>
@@ -133,7 +132,46 @@ $HTML[] = <<<EOF
 EOF;
 
 if($tmp2 == 0){
-	$HTML[] = "<h1>No entries found, try to change search terms</h1>";
+	if(isset($_GET['userprofile'])){
+		$HTML[] = "<h1>No entries found</h1>";
+	} else {
+		$HTML[] = "<h1>No entries found, try to change search terms</h1>";
+	}
+} else {
+	foreach($results_requesters as $k => $v){
+		$user = @getUser($v['user']);
+		$user['first'] = generateUserLink($v['user']);
+		$pic = getUserPicture($user['facebookid']);;
+		$v['from'] = "<a href='https://maps.google.com/?q={$v['from']}' target='_blank'>" . strtoupper($v['from']) . "</a>";
+		$v['to'] = "<a href='https://maps.google.com/?q={$v['to']}' target='_blank'>" . strtoupper($v['to']) . "</a>";
+		$v['date'] = convertDateTime($v['date'], false) . " - " . dateToRelative($v['date'], false);
+		$tmp3 = empty($v['size']) ? "" : "";
+		$tmp4 = empty($v['weight']) ? "" : "";
+		// luggage type: <span class="glyphicon glyphicon-briefcase"></span>
+		// info: <span class="glyphicon glyphicon-info-sign"></span>
+		$tmp5 = "Created " . relativeTime($v['update']);
+		$HTML[] = <<<EOF
+	<div class="search-element">
+		<div class="search-profile">
+			<img src="$pic">
+		</div>
+		<div class="search-description">
+			{$v['description']}
+		</div>
+		<div class="search-details">
+			<span class="glyphicon glyphicon-user"></span> {$user['first']}
+			<br>
+			<span class="glyphicon glyphicon-map-marker"></span>FROM <b>{$v['from']}</b> TO <b>{$v['to']}</b>
+			<br>
+			<span class="glyphicon glyphicon-time"></span> {$v['date']} 
+			<br>
+		</div>
+		<div class="search-button btn btn-warning">
+			<a href="?travel_plan/view/{$v['_id']}">More information &amp; Contact requester</a>
+		</div>
+	</div>
+EOF;
+	}
 }
 
 $HTML[] = <<<EOF
