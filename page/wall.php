@@ -63,6 +63,9 @@ foreach($messages as $k => $v){
 	if($tmp['event'] == "travelplandeleted"){
 		$d = "You have deleted travel plan.";
 	}
+	if($tmp['event'] == "requestmodified"){
+		$d = "You have modified your <a href='{$tmp['page']}'>request</a>.";
+	}
 	if(empty($d)){
 		echo $tmp['event'] . "<br>";
 	}

@@ -1,7 +1,18 @@
 <?php
 
 $HTML[] = <<<EOF
-			<div class="footer">
-				CICO &copy; 2016 | Event SSC@Tartu - <a href="http://garage48.org/events/student-startup-camp-tartu-2016">Garage48 Student Startup Camp Tartu 2016</a>
+			<div class="inside-footer">
+				<ul class="menu-ul-right">
+					<li><a href="?how-it-works">How It Works?</a>
+					<li><a href="?feedback">Feedback</a>
+					<li><a href="?concept">Concept</a>
+					<li><a href="?video">Video</a>
+					<li><a href="?terms">Terms of Use</a>
+					<li><a href="?about-us">About Us</a>
+				</ul>
+
+				<div class="footer-left">
+					CICO &copy; 2016 | <a href="http://garage48.org/events/student-startup-camp-tartu-2016">Event SSC@Tartu 2016</a>
+				</div>
 			</div>
 EOF;

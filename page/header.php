@@ -15,6 +15,15 @@ if(file_exists("../index2.html")){
 	$css = "main.css";
 }
 
+$notifications = $db->notifications;
+$n = $notifications->findOne(array("user" => $_SESSION['user']));
+$n['count'] = 1;
+if(isset($n['count']) && $n['count'] > 0){
+	$badge = '<div class="badge">' . $n['count'] . '</div>';
+} else {
+	$badge = "";
+}
+
 $HTML[] = <<<EOF
 <!DOCTYPE html> 
 <html lang=en>
@@ -52,11 +61,71 @@ $HTML[] = <<<EOF
 			
 
 			<div class="menu">
-				<ul class="menu-ul">
-					<li><a href="?concept">Concept</a>
-					<li><a href="?about-us">About Us</a>
-					<li><a href="?logout">Log out</a>
-				</ul>
+				<a href="?travel_plan"><span class="glyphicon glyphicon-plane icon-large">
+					<div class="icon-large-title">Look your travel plans</div>
+				</span></a>
+				
+				<div class="bigspacer">&nbsp;</div>
+
+				<a href="?product_request"><span class="glyphicon glyphicon-briefcase icon-large">
+					<div class="icon-large-title">Look your product requests</div>
+				</span></a>
+				
+				<div class="bigspacer">&nbsp;</div>
+
+				<a href="?messages"><span class="glyphicon glyphicon-comment icon-large">
+					<div class="icon-large-title">Look your messages</div>
+				</span></a>
+				
+				<div class="bigspacer">&nbsp;</div>
+
+				<a href="?wall"><span class="glyphicon glyphicon-bell icon-large">{$badge}</span>
+				
+				<div class="bigspacer">&nbsp;</div></a>
+
+				<a><div class="glyphicon glyphicon-menu-hamburger icon-large" tabindex="1">
+					<div class="icon-large-menu">
+						<ul>
+EOF;
+
+
+
+$menu = array(
+	"wall" => "Notifications {$badge}",
+	"1" => "Travel plan",
+	"travel_plan/add" => "Create travel plan",
+	"travel_plan" => "My travel plans",
+	"travel_plan" => "Search travel plan",
+	"q=search&showall" => "Show all travel plans",
+	"2" => "Product requests",
+	"product_request/add" => "Make product request",
+	"product_request" => "My product requests",
+	"travel_plan" => "Search product request",
+	"q=search&showall" => "Show all product requests",
+	"pending/view/pending" => "Show pending requests",
+	"pending/view/accepted" => "Show accepted requests",
+	"2" => "&nbsp;",
+	"messages" => "Show messages",
+	"3" => "&nbsp;",
+	"logout" => "Log out"
+);
+
+foreach($menu as $k => $v){
+	if(strlen($k) < 4){
+		$HTML[] = <<<EOF
+			<li>{$v}
+EOF;
+	} else {
+		$HTML[] = <<<EOF
+			<li><a href="?{$k}">{$v}</a>
+EOF;
+	}
+}
+
+	$HTML[] = <<<EOF
+						</ul>
+					</div>
+				</div></a>
 			</div>
 
 

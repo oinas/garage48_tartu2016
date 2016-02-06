@@ -34,7 +34,7 @@ if(file_exists("../index2.html")){
 $CORE = "page/";
 
 /** default landing page for logged in user */
-$DEFAULT_LOGGED_PAGE = "wall";
+$DEFAULT_LOGGED_PAGE = "front_search";
 /** default landing page for unlogged user */
 $DEFAULT_FRONT_PAGE = "front_main";
 

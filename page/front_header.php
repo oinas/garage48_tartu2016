@@ -40,6 +40,7 @@ $HTML[] = <<<EOF
 					<li><a href="?feedback">Feedback</a>
 					<li><a href="?concept">Concept</a>
 					<li><a href="?video">Video</a>
+					<li><a href="?terms">Terms of Use</a>
 					<li><a href="?about-us">About Us</a>
 				</ul>
 			</div>

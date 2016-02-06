@@ -91,6 +91,8 @@ foreach($entries->find() as $k => $v){
 	foreach($m as $_k => $_v){
 		$v[$_k] = $_v;
 	}
+	$tmp = $v['_id'];
+	$v['id'] = "" . $tmp;
 	$res[] = $v;
 }
 echo json_encode($res);
