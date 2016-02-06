@@ -103,6 +103,7 @@ if(!isset($_GET['norender'])){
 
 if(isset($_SESSION['ERROR'])){
 	unset($_SESSION['ERROR']);
+	unset($_SESSION['POST']);
 }
 
 if(isset($_SESSION['SUCCESS'])){
@@ -110,6 +111,7 @@ if(isset($_SESSION['SUCCESS'])){
 }
 
 if(!empty($ERROR)){
+	$_SESSION['POST'] = $_POST;
 	$_SESSION['ERROR'] = $ERROR;
 }
 

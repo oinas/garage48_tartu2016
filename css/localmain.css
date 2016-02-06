@@ -28,7 +28,7 @@ body, html, input, textarea {
 	background: #fff;
 	opacity: 0.95;
 	padding: 30px;
-	margin-top: 30px;
+	margin-top: 90px;
 }
 
 .front-middle {
@@ -390,6 +390,13 @@ table .headerSortUp {
 .icon-large:focus .icon-large-menu,
 .icon-large:active .icon-large-menu {
 	display: block;
+    outline: none;
+    cursor: hand;
+    cursor: pointer;
+}
+
+*:focus {
+    outline: none;
 }
 
 .icon-large-menu {
@@ -447,11 +454,61 @@ table .headerSortUp {
 	padding-left: 10px;
 }
 
-.left-menu-color a:hover {
-	background: #eef;
+ .left-menu-color a:hover {
+	background: #fff;
 }
 
 .circle {
 	border-radius: 10px;
 	margin-bottom: 5px;
+}
+
+.left-menu-color .glyphicon {
+	margin-right: 5px;
+}
+
+.right-space {
+	float: right;
+	margin-left: 10px;
+}
+
+.btn-warning a {
+	display: block;
+	padding: 10px;
+}
+
+.btn-warning {
+	padding: 0px;
+	background: #fea;
+}
+
+.btn-warning:hover a {
+	background: #953;
+	color: #fff;
+	text-decoration: none;
+}
+
+.btn-success a {
+	display: block;
+	padding: 10px;
+}
+
+.btn-success {
+	padding: 0px;
+	background: #9f6;
+}
+
+.btn-success:hover a {
+	background: #393;
+	color: #fff;
+	text-decoration: none;
+}
+
+input.btn {
+	padding: 10px;
+}
+
+a.btn {
+	padding: 10px;
+	color: #000;
 }

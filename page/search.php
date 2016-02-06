@@ -8,6 +8,15 @@ $results_travelers = array();
 
 if(isset($_GET['showall'])){
 	foreach($travelers->find()->sort(array("date" => 1)) as $k => $v){
+		$today = date("Y-m-d");
+		$expire = $v['date'];
+
+		$today_time = strtotime($today);
+		$expire_time = strtotime($expire);
+
+		if ($expire_time < $today_time) { 
+			continue;
+		}
 		if(isset($_GET['user'])){
 			if(isset($v['user']) && $v['user'] == $_GET['user']){
 				if(isset($v['requester'])){
@@ -26,6 +35,15 @@ if(isset($_GET['showall'])){
 	}
 } else {
 	foreach($travelers->find()->sort(array("date" => 1)) as $k => $v){
+		$today = date("Y-m-d");
+		$expire = $v['date'];
+
+		$today_time = strtotime($today);
+		$expire_time = strtotime($expire);
+
+		if ($expire_time < $today_time) { 
+			continue;
+		}
 		$match = 0;
 		if(strlen($_GET['from']) > 0 && preg_match("/{$_GET['from']}/i", $v['from'])){
 			$match++;

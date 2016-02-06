@@ -5,20 +5,31 @@ $requests = $db->requests;
 $travel_plans = $db->travel_plans;
 
 /** check if we have already made a request, then update the same entry only */
-$request = $requests->findOne(array("travel" => $ID, "user" => $_SESSION['user']));
-$entry = $travel_plans->findOne(array("_id" => new MongoId($ID)));
-
+try {
+	$request = $requests->findOne(array("travel" => $ID, "user" => $_SESSION['user']));
+	$entry = $travel_plans->findOne(array("_id" => new MongoId($ID)));
+} catch (Exception $e){
+	header("Location: ?travel_plan");
+}
 // chat removal
 if(isset($_GET['remove'])){
-	$chats -> remove(
+	try {
+		$chats -> remove(
 			array("_id" => new MongoId($_GET['remove']))
 		);
+	} catch (Exception $e){
+	}
 	header("Location: ?travel_plan/{$ACTION}/{$ID}");
 	die();
 }
 
 if(isset($_GET['accept'])){
-	$tmp = $requests->findOne(array("travel" => $ID, "user" => $_GET['accept']));
+	try {
+		$tmp = $requests->findOne(array("travel" => $ID, "user" => $_GET['accept']));
+	} catch (Exception $e){
+		header("Location: ?travel_plan/{$ACTION}/{$ID}");
+		die();
+	}
 	$tmp['status'] = 1;
 	$requests -> update(
 			array("travel" => $ID, "user" => $_GET['accept']),
@@ -29,7 +40,12 @@ if(isset($_GET['accept'])){
 	header("Location: ?travel_plan/{$ACTION}/{$ID}");	
 }
 if(isset($_GET['reject'])){
-	$tmp = $requests->findOne(array("travel" => $ID, "user" => $_GET['reject']));
+	try {
+		$tmp = $requests->findOne(array("travel" => $ID, "user" => $_GET['reject']));
+	} catch (Exception $e){
+		header("Location: ?travel_plan/{$ACTION}/{$ID}");
+		die();
+	}
 	$tmp['status'] = 2;
 	$requests -> update(
 			array("travel" => $ID, "user" => $_GET['reject']),
@@ -42,12 +58,23 @@ if(isset($_GET['reject'])){
 
 if(isset($_GET['revoke'])){
 	// delete request
-	$requests -> remove(array("travel" => $ID, "user" => $_SESSION['user']));
+	try {
+		$requests -> remove(array("travel" => $ID, "user" => $_SESSION['user']));
+	} catch (Exception $e){
+	}
 	header("Location: ?travel_plan/{$ACTION}/{$ID}");	
 	$wall_post_revoke = true;
 }
 
 if(isset($_POST['submit']) && $_POST['submit'] == "Send message"){
+	if(strlen($_POST['user']) < 1 || empty($_POST['user'])){
+		if($_POST['role'] == "requester"){
+			header("Location: ?travel_plan/{$ACTION}/{$ID}/#chat");	
+		} else {
+			header("Location: ?travel_plan/{$ACTION}/{$ID}/#chat{$_POST['pos']}");	
+		}
+		die();
+	}
 	if($_POST['role'] == "requester"){
 		$chats -> insert(
 				array(
@@ -138,7 +165,7 @@ $usertmp = generateUserPicture($entry['user'], "chat-picture") . " " . generateU
 if(isset($entry['requester'])){
 	$HTML[] = <<<EOF
 
-<a href="#" onclick="history.go(-1)"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+<a href="#" onclick="history.go(-1)"><span class="glyphicon glyphicon-chevron-left"></span> Back to search</a>
 <h1>Product request
 <a href="https://maps.google.com/?q={$entry['from']}" target="_blank">{$entry['from']}</a> 
 <small><span class="glyphicon glyphicon-chevron-right"></span></small>
@@ -177,7 +204,7 @@ if(isset($entry['requester'])){
 EOF;
 } else {
 	$HTML[] = <<<EOF
-<a href="#" onclick="history.go(-1)"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+<a href="#" onclick="history.go(-1)"><span class="glyphicon glyphicon-chevron-left"></span> Back to search</a>
 <h1>
 Travel plan
 <a href="https://maps.google.com/?q={$entry['from']}" target="_blank">{$entry['from']}</a> 

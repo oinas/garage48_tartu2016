@@ -1,30 +1,60 @@
 <?php
 
 $travel_plans = $db->travel_plans;
-
 if(isset($_POST['submit'])){
-	$_POST['update'] = microtime(true);
-	$_POST['user'] = $_SESSION['user'];
-	if($ACTION == "add"){
-		$_POST['added'] = date("Y-m-d H:i:s");
-		$travel_plans -> insert($_POST);
-		$_id = $_POST['_id'];
-		wallPost($_SESSION['user'], $_id, "travelplanadded", "?travel_plan/view/{$ID}");
-		header("Location: ?travel_plan");
+	$today = date("Y-m-d");
+	$expire = $_POST['date'];
+
+	$today_time = strtotime($today);
+	$expire_time = strtotime($expire);
+	if(strlen($_POST['from']) < 3){
+		$ERROR[] = "You have not entered departure or is in wrong format";
+	}
+	if(strlen($_POST['to']) < 3){
+		$ERROR[] = "You have not entered destination or is in wrong format";
+	}
+	if(strlen($_POST['date']) < 3 || $expire < $today || 
+		!preg_match("/([0-9]+)\-([0-9]+)\-([0-9]+)/", $_POST['date'])){
+		$ERROR[] = "You have not entered date or is in wrong format";
+	}
+
+	if(empty($ERROR)){
+		$_POST['update'] = microtime(true);
+		$_POST['user'] = $_SESSION['user'];
+		if($ACTION == "add"){
+			$_POST['added'] = date("Y-m-d H:i:s");
+			$travel_plans -> insert($_POST);
+			$_id = $_POST['_id'];
+			wallPost($_SESSION['user'], $_id, "travelplanadded", "?travel_plan/view/{$ID}");
+			header("Location: ?travel_plan");
+			$SUCCESS[] = "You have successfully added new travel plan";
+		} else {
+			$_POST['modified'] = date("Y-m-d H:i:s");
+			$travel_plans -> update(array("_id" => new MongoId($ID)), $_POST);
+			$_id = $_POST['_id'];
+			wallPost($_SESSION['user'], $_id, "travelplanupdated", "?travel_plan/view/{$ID}");
+			header("Location: ?travel_plan");
+			$SUCCESS[] = "You have successfully modified new travel plan";
+		}
 	} else {
-		$_POST['modified'] = date("Y-m-d H:i:s");
-		$travel_plans -> update(array("_id" => new MongoId($ID)), $_POST);
-		$_id = $_POST['_id'];
-		wallPost($_SESSION['user'], $_id, "travelplanupdated", "?travel_plan/view/{$ID}");
-		header("Location: ?travel_plan");
+		header("Location: " . $_SERVER['REQUEST_URI']);
 	}
 }
 
 /** if we edit travel plan, populate fields to $_POST, that are latter used */
 if($ACTION == "edit"){
-	$_POST = $travel_plans->findOne(array("_id" => new MongoId($ID)));
+	try {
+		$_POST = $travel_plans->findOne(array("_id" => new MongoId($ID)));	
+	} catch (Exception $e){
+		header("Location: ?travel_plan");
+		die();
+	}
 } else if($ACTION == "delete"){
-	$entry = $travel_plans->findOne(array("_id" => new MongoId($ID)));
+	try {
+		$entry = $travel_plans->findOne(array("_id" => new MongoId($ID)));
+	} catch (Exception $e){
+		header("Location: ?travel_plan");
+	}
 	if(isset($_GET['confirm'])){
 		$travel_plans->remove(array("_id" => new MongoId($ID)));
 		wallPost($_SESSION['user'], $_id, "travelplandeleted", "?travel_plan/view/{$ID}");

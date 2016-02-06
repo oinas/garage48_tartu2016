@@ -15,6 +15,34 @@ if(!isset($user['location'])){
 	$user['location'] = "";
 }
 
+$tmp = "";
+
+if(isset($user['location']) && !empty($user['location'])){
+	$tmp .= <<<EOF
+	<tr>
+		<td>Location
+		<td>{$user['location']}
+	</tr>
+EOF;
+}
+
+if(isset($user['phone']) && !empty($user['phone'])){
+	$tmp .= <<<EOF
+	<tr>
+		<td>Location
+		<td>{$user['phone']}
+	</tr>
+EOF;
+}
+
+if(isset($user['description']) && !empty($user['description'])){
+	$tmp .= <<<EOF
+	<tr>
+		<td colspan="2">{$user['description']}
+	</tr>
+EOF;
+}
+
 $HTML[] = <<<EOF
 <h1>Info about {$user['first']}</h1>
 
@@ -44,17 +72,7 @@ $HTML[] = <<<EOF
 		<td>Last online
 		<td>{$user['last']}
 	</tr>
-	<tr>
-		<td>Location
-		<td>{$user['location']}
-	</tr>
-	<tr>
-		<td>Phone
-		<td>{$user['phone']}
-	</tr>
-	<tr>
-		<td colspan="2">{$user['description']}
-	</tr>
+	{$tmp}
 </table>
 
 </div>

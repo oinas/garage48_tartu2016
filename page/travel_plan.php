@@ -54,10 +54,10 @@ EOF;
 			</tbody>
 		</table>
 
-<script>
+<!--script>
 $(document).ready(function() { 
-			$("#tablesorter").tablesorter(); 
+			$("#tablesorter").tablesorter({ headers: 'myheaders' }); 
 		} 
 	); 
-</script>
+</script-->
 EOF;

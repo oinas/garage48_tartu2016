@@ -66,11 +66,11 @@ EOF;
 			</tbody>
 		</table>
 
-<script>
+<!--script>
 $(document).ready(function() { 
 			$("#tablesorter").tablesorter(); 
 		} 
 	); 
-</script>
+</script-->
 EOF;
 

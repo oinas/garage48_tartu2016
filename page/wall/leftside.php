@@ -9,11 +9,11 @@ if(isset($n['count']) && $n['count'] > 0){
 }
 
 $menu = array(
-	"users/view/" . $_SESSION['user'] => $_SESSION['fb_name'],
-	"profile/edit" => "Edit profile",
-	"wall" => "Notifications {$badge}",
-	"travel_plan/add" => "Create travel plan",
-	"product_request/add" => "Make product request",
+	"users/view/" . $_SESSION['user'] => '<span class="glyphicon glyphicon-user"></span> ' . $_SESSION['fb_name'],
+	"profile/edit" => '<span class="glyphicon glyphicon-pencil"></span> ' . "Edit profile",
+	"wall" => '<span class="glyphicon glyphicon-bell"></span> ' . "Notifications {$badge}",
+	"travel_plan/add" => '<span class="glyphicon glyphicon-plane"></span> ' . "Create travel plan",
+	"product_request/add" => '<span class="glyphicon glyphicon-briefcase"></span> ' . "Make product request",
 /*	"travel_plan" => "My travel plans",
 	"product_request" => "My product requests",
 	"pending/view/pending" => "Show pending requests",

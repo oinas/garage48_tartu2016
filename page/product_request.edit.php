@@ -3,40 +3,76 @@
 $travel_plans = $db->travel_plans;
 
 if(isset($_POST['submit'])){
-	$_POST['update'] = microtime(true);
-	$_POST['user'] = $_SESSION['user'];
-	$_POST['requester'] = true;	//mark 
-	if($ACTION == "add"){
-		$_POST['added'] = date("Y-m-d H:i:s");
-		$travel_plans -> insert($_POST);
-		$ID = $_POST["_id"];
-		header("Location: ?travel_plan/view/{$ID}");
-		wallPost($_SESSION['user'], $_SESSION['user'], "requestmodified", "?travel_plan/view/{$ID}");
-		uploadFile("picture", $ID . $_SESSION['user']);
+	$today = date("Y-m-d");
+	$expire = $_POST['date'];
+
+	$today_time = strtotime($today);
+	$expire_time = strtotime($expire);
+	if(strlen($_POST['from']) < 3){
+		$ERROR[] = "You have not entered departure or is in wrong format";
+	}
+	if(strlen($_POST['to']) < 3){
+		$ERROR[] = "You have not entered destination or is in wrong format";
+	}
+	if(strlen($_POST['date']) < 3 || $expire < $today || 
+		!preg_match("/([0-9]+)\-([0-9]+)\-([0-9]+)/", $_POST['date'])){
+		$ERROR[] = "You have not entered date or is in wrong format";
+	}
+	
+	if(empty($ERROR)){
+		$_POST['update'] = microtime(true);
+		$_POST['user'] = $_SESSION['user'];
+		$_POST['requester'] = true;	//mark 
+		if($ACTION == "add"){
+			$_POST['added'] = date("Y-m-d H:i:s");
+			$travel_plans -> insert($_POST);
+			$ID = $_POST["_id"];
+			header("Location: ?travel_plan/view/{$ID}");
+			wallPost($_SESSION['user'], $_SESSION['user'], "requestmodified", "?travel_plan/view/{$ID}");
+			uploadFile("picture", $ID . $_SESSION['user']);
+		} else {
+			$_POST['modified'] = date("Y-m-d H:i:s");
+			try {
+				$travel_plans -> update(array("_id" => new MongoId($ID)), $_POST);
+			} catch (Exception $e){
+				header("Location: ?product_request");
+				die();
+			}
+			$ID = $_POST["_id"];
+			header("Location: ?travel_plan/view/{$ID}");
+			wallPost($_SESSION['user'], $_SESSION['user'], "requestcreated", "?travel_plan/view/{$ID}");
+			uploadFile("picture", $ID . $_SESSION['user']);
+		}
 	} else {
-		$_POST['modified'] = date("Y-m-d H:i:s");
-		$travel_plans -> update(array("_id" => new MongoId($ID)), $_POST);
-		$ID = $_POST["_id"];
-		header("Location: ?travel_plan/view/{$ID}");
-		wallPost($_SESSION['user'], $_SESSION['user'], "requestcreated", "?travel_plan/view/{$ID}");
-		uploadFile("picture", $ID . $_SESSION['user']);
+		header("Location: " . $_SERVER['REQUEST_URI']);
 	}
 }
 
 /** if we edit travel plan, populate fields to $_POST, that are latter used */
 if($ACTION == "edit"){
-	$_POST = $travel_plans->findOne(array("_id" => new MongoId($ID)));
+	try {
+		$_POST = $travel_plans->findOne(array("_id" => new MongoId($ID)));
+	} catch (Exception $e){
+		header("Location: ?product_request");
+		die();
+	}
 } else if($ACTION == "delete"){
-	$entry = $travel_plans->findOne(array("_id" => new MongoId($ID)));
+	try {
+		$entry = $travel_plans->findOne(array("_id" => new MongoId($ID)));
+	} catch (Exception $e){
+		header("Location: ?product_request");
+		die();
+	}
 	if(isset($_GET['confirm'])){
 		$travel_plans->remove(array("_id" => new MongoId($ID)));
-		header("Location: ?travel_plan");
+		header("Location: ?product_request");
+		die();
 	}
 	$entry['date'] = convertDate($entry['date']);
 	$HTML[] = <<<EOF
 		<div class="alert alert-danger center" role="alert">
 			Are your sure you want to delete product request from {$entry['from']} to {$entry['to']} ({$entry['date']})?<br><br>
-			<a href="?{$PAGE}/{$ACTION}/{$ID}/&confirm" class="btn btn-danger">Yes</a>
+			<a href="?product_request/{$ACTION}/{$ID}/&confirm" class="btn btn-danger">Yes</a>
 			&nbsp;&nbsp;
 			<a href="#" onClick="history.go(-1)">No</a>
 		</div>

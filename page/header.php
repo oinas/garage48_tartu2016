@@ -102,23 +102,23 @@ EOF;
 
 $menu = array(
 	"1" => "Menu",
-	"wall" => "Notifications {$badge}",
+	"wall" => '<span class="glyphicon glyphicon-bell right-space"></span> ' . "Notifications {$badge}",
 	"2" => "Travel plan",
-	"travel_plan/add" => "<span class='glyphicon glyphicon-plus'></span> Create travel plan",
-	"travel_plan" => "My travel plans",
-	"travel_plan" => "Search travel plan",
-	"q=search&showall" => "Show all travel plans",
+	"travel_plan/add" => "<span class='glyphicon glyphicon-plus right-space'></span> Create travel plan",
+	"travel_plan" => '<span class="glyphicon glyphicon-plane right-space"></span> ' . "My travel plans",
+	"q=search" => '<span class="glyphicon glyphicon-search right-space"></span> ' . "Search travel plan",
+	"q=search&showall" => '<span class="glyphicon glyphicon-plane right-space"></span> ' . "Show all travel plans",
 	"3" => "Product requests",
-	"product_request/add" => "<span class='glyphicon glyphicon-plus'></span> Make product request",
-	"product_request" => "My product requests",
-	"travel_plan" => "Search product request",
-	"q=search_requesters&showall" => "Show all product requests",
-	"pending/view/pending" => "Show pending requests",
-	"pending/view/accepted" => "Show accepted requests",
+	"product_request/add" => "<span class='glyphicon glyphicon-plus right-space'></span> Make product request",
+	"product_request" => '<span class="glyphicon glyphicon-briefcase right-space"></span> ' . "My product requests",
+	"q=search_requesters" => '<span class="glyphicon glyphicon-search right-space"></span> ' . "Search product request",
+	"q=search_requesters&showall" => '<span class="glyphicon glyphicon-briefcase right-space"></span> ' . "Show all product requests",
+	"pending/view/pending" => '<span class="glyphicon glyphicon-hourglass right-space"></span> ' . "Show pending requests",
+	"pending/view/accepted" => '<span class="glyphicon glyphicon-ok right-space"></span> ' . "Show accepted requests",
 	"4" => "&nbsp;",
-	"messages" => "Show messages",
+	"messages" => '<span class="glyphicon glyphicon-comment right-space"></span> ' . "Show messages",
 	"5" => "&nbsp;",
-	"logout" => "Log out"
+	"logout" => '<span class="glyphicon glyphicon-log-out right-space"></span> ' . "Log out"
 );
 
 foreach($menu as $k => $v){
@@ -168,13 +168,13 @@ $( "#searchto" ).autocomplete({
 EOF;
 
 if(isset($_SESSION['SUCCESS']) && !empty($_SESSION['SUCCESS'])){
-	$HTML[] = '<div class="alert alert-success" role="alert">'
+	$HTML[] = '<div class="alert alert-success" role="alert">Following actions were done:<ul><li>'
 	 . implode("<li>", $_SESSION['SUCCESS']) . 
-	 '</div>';
+	 '</ul></div>';
 }
 
 if(isset($_SESSION['ERROR']) && !empty($_SESSION['ERROR'])){
-	$HTML[] = '<div class="alert alert-danger" role="alert">'
+	$HTML[] = '<div class="alert alert-danger" role="alert">Following errors occured:<ul><li>'
 	 . implode("<li>", $_SESSION['ERROR']) . 
-	 '</div>';
+	 '</ul></div>';
 }

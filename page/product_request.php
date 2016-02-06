@@ -4,7 +4,7 @@ $requests = $db->requests;
 
 $HTML[] = <<<EOF
 	<div class="right">
-		<a href="?product/add" class="btn btn-success"><span class='glyphicon glyphicon-plus'></span> Create new product request</a>
+		<a href="?product_request/add" class="btn btn-success"><span class='glyphicon glyphicon-plus'></span> Create new product request</a>
 	</div>
 	<h1>My product requests connected with travel plan</h1>
 EOF;
@@ -58,12 +58,12 @@ EOF;
 			</tbody>
 		</table>
 
-<script>
+<!--script>
 $(document).ready(function() { 
 			$("#tablesorter").tablesorter(); 
 		} 
 	); 
-</script>
+</script-->
 EOF;
 
 $HTML[] = <<<EOF
@@ -134,10 +134,10 @@ EOF;
 			</tbody>
 		</table>
 
-<script>
+<!--script>
 $(document).ready(function() { 
 			$("#tablesorter2").tablesorter(); 
 		} 
 	); 
-</script>
+</script-->
 EOF;
