@@ -61,7 +61,7 @@ $HTML[] = <<<EOF
 
 
 
-			<div class="search">
+			<!--div class="search">
 				<form action="" method="GET">
 					<input type="hidden" name="q" value="search">
 					<input type="text" name="from" id="searchfrom" value="{$from}" placeholder="Departure" class="form-control form-search">
@@ -69,7 +69,7 @@ $HTML[] = <<<EOF
 					<div class="search-button btn btn-primary" id="sb" onclick="$('#sbclick').click()"><img src="css/search.png" width="20"></div>
 					<input type="submit" name="submit" id="sbclick" value="Search" style="display: none">
 				</form>
-			</div>
+			</div-->
 		</div>
 
 <script>

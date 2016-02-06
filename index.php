@@ -35,7 +35,7 @@ if(isset($_SESSION['user'])){
 	$entries = $db->users;
 	$entry = $entries->findOne(array("facebookid" => $_SESSION['user']));
 	if(isset($_GET['q'])){
-		$PAGE = "search";
+		$PAGE = $_GET['q'] == "search" ? "search" : "search_requesters";
 	}
 
 	if(!empty($entry)){
@@ -63,9 +63,11 @@ if(isset($_SESSION['user'])){
 	}
 } else {
 	/** simple hack to not allow user to access login section */
-	$ALLOWED_PAGES = array("about-us", "login", "signup", "concept", "", "how-it-works", "feedback");
+	$ALLOWED_PAGES = array("about-us", "login", "signup", "concept", "", "how-it-works", "feedback", "video");
 	if(!in_array($PAGE, $ALLOWED_PAGES)){
 		$PAGE = "403";
+		// redirect logged out sessions
+		header("Location: {$BASEHREF}?");
 	}
 	$PAGES[] = "front_header";
 	$PAGES[] = empty($PAGE) ? $DEFAULT_FRONT_PAGE : $PAGE;

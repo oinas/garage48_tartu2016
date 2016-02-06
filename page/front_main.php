@@ -68,11 +68,11 @@ $HTML[] = <<<EOF
 
 <div class="front-powered">
 <strong>POWERED BY</strong><br>
-<img src="css/cloudazure.jpg" width="200"><br>
-<img src="css/php.png" width="200"><br>
-<img src="css/garage48.png" width="200" class="makewhiteborder"><br>
-<img src="css/mongodb.png" width="93">
-<img src="css/facebookapi.jpg" width="93"><br>
+<a href="https://azure.microsoft.com/en-us/" target="_blank"><img src="css/cloudazure.jpg" width="200"></a><br>
+<a href="https://php.net" target="_blank"><img src="css/php.png" width="200"></a><br>
+<a href="http://garage48.org" target="_blank"><img src="css/garage48.png" width="200" class="makewhiteborder"></a><br>
+<a href="https://www.mongodb.org/" target="_blank"><img src="css/mongodb.png" width="93"></a>
+<a href="https://developers.facebook.com/" target="_blank"><img src="css/facebookapi.jpg" width="93"></a><br>
 
 </div>
 EOF;

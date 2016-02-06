@@ -26,3 +26,4 @@ nonlocal:
 open_fxhtcum_user@tfbnw.net
 
 while : ; do sleep 60; echo "Updating git"; git checkout master && git pull origin master; done;
+

@@ -1,5 +1,5 @@
 <?php
-
+/** DEPRECATED */
 $travel_plans = $db->travel_plans;
 
 $HTML[] = <<<EOF

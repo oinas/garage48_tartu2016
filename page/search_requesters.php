@@ -65,7 +65,7 @@ EOF;
 
 <div class="front-search">
 	<form action="" method="GET">
-	<input type="hidden" name="q" value="search">
+	<input type="hidden" name="q" value="search_requesters">
 	<input type="hidden" name="type" value="traveler">
 
 	<input type="text" name="from" value="{$from}" placeholder="Departure" class="form-control form-search" autocomplete="off" id="to1">
@@ -86,7 +86,7 @@ $HTML[] = <<<EOF
 <div id="view_travelers">
 EOF;
 
-if($tmp1 == 0){
+if($tmp2 == 0){
 	if(isset($_GET['userprofile'])){
 		$HTML[] = "<h4>No entries found</h4>";
 	} else {
@@ -95,13 +95,13 @@ if($tmp1 == 0){
 		$HTML[] = <<<EOF
 
 	<div class="front-search front-search-extra">
-	or submit request for your product<br><br>
-	<a href="?product_request/add" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> SUBMIT NEW PRODUCT REQUEST</a>
+	or add traveling plan to help others out<br><br>
+	<a href="?travel_plan/add" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> SUBMIT NEW TRAVEL PLAN</a>
 	</div>	
 EOF;
 	}
 } else {
-	foreach($results_travelers as $k => $v){
+	foreach($results_requesters as $k => $v){
 		$user = @getUser($v['user']);
 		$user['first'] = generateUserLink($v['user']);
 		$pic = getUserPicture($user['facebookid']);;
@@ -130,7 +130,7 @@ EOF;
 			<br>
 		</div>
 		<div class="search-button btn btn-warning">
-			<a href="?travel_plan/view/{$v['_id']}">More information &amp; Contact traveler</a>
+			<a href="?travel_plan/view/{$v['_id']}">More information &amp; Contact requester</a>
 		</div>
 	</div>
 EOF;
@@ -142,6 +142,3 @@ $HTML[] = <<<EOF
 </div>
 
 EOF;
-
-
-
