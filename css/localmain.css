@@ -113,7 +113,6 @@ h1 {
 
 .content .inner {
 	padding: 20px;
-	background: #C7D0D5;
 }
 
 ul.side-bar-menu {
@@ -299,4 +298,24 @@ table .headerSortUp {
 
 .makewhiteborder {
 	padding: 10px;
+}
+
+.front-search {
+	padding: 25px;
+	border: 1px solid #ccc;
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+.front-search h1 {
+	margin-bottom: 25px;
+}
+/**text-transform: none|capitalize|uppercase|lowercase|initial|inherit;*/
+.front-search-extra {
+	margin-top: 20px;
+	font-variant: small-caps;
+}
+
+.btn-darkblue {
+	background: #147;
 }

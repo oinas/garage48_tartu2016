@@ -23,10 +23,12 @@ try {
   $accessToken = $helper->getAccessToken();
 } catch(Facebook\Exceptions\FacebookResponseException $e) {
   // When Graph returns an error
+  header("Location: {$BASEHREF}?");
   echo 'Graph returned an error: ' . $e->getMessage();
   exit;
 } catch(Facebook\Exceptions\FacebookSDKException $e) {
   // When validation fails or other local issues
+  header("Location: {$BASEHREF}?");
   echo 'Facebook SDK returned an error: ' . $e->getMessage();
   exit;
 }
@@ -74,6 +76,7 @@ if (! $accessToken->isLongLived()) {
 
   echo '<h3>Long-lived</h3>';
   var_dump($accessToken->getValue());
+  header("Location: {$BASEHREF}?");
   exit;
 }
 
@@ -133,4 +136,4 @@ var_dump($response);
 
 // User is logged in with a long-lived access token.
 // You can redirect them to a members-only page.
-header("Location: {$BASEHREF}?q=search&showall");
+header("Location: {$BASEHREF}?front_search");

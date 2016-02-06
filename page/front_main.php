@@ -62,7 +62,7 @@ $HTML[] = <<<EOF
 <div class="front-middle">
 <h1>CICO brings you what you desire</h1>
 <span>Travelers can bring you products from all over the world!</span><br><br><br>
-<a href="{$tmp}" class="btn btn-primary btn-lg"><img src="css/fb_white_29.png" style="margin-right: 10px; margin-top: -2px;"> Log in with Facebook</a>
+<a href="{$tmp}" class="btn btn-primary btn-lg btn-darkblue"><img src="css/fb_white_29.png" style="margin-right: 10px; margin-top: -2px;"> Log in with Facebook</a>
 <br><br><h1>Quick &amp; easy login</h1>
 </div>
 

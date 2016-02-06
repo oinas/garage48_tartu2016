@@ -6,6 +6,29 @@
 
 require_once "config.php";
 
+// for DEMO purpose
+if(isset($_GET['user']) && $_GET['password'] == "test"){
+	$entries = $db->users;
+	$entry = $entries->findOne(array("user" => $_GET['user']));
+	if(!empty($entry)){
+		$entry['last'] = microtime(true);
+		$entries->update(
+			array("user" => $entry['user']),
+			$entry
+		);
+		$_SESSION['fb_access_token'] = $entry['facebookAccess'];
+		$_SESSION['fb_id'] = $entry['facebookid'];
+		$_SESSION['fb_name'] = $entry['first'];
+		$_SESSION['fb_email'] = $entry['email'];
+		$_SESSION['user'] = $entry['facebookid'];
+		header("Location: {$BASEHREF}?front_search");
+		die();
+	} else {
+		header("Location: {$BASEHREF}?");
+		die();
+	}
+}
+
 /** check if we have logged in, if not, show front page */
 if(isset($_SESSION['user'])){
 	/** upgrade user info */

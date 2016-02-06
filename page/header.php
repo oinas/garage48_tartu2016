@@ -46,7 +46,7 @@ $HTML[] = <<<EOF
 
 	<div class="body">
 		<div class="header">
-			<a href="?q=search&showall"><img src="css/logo.png" class="header-logo"></a>
+			<a href="?front_search"><img src="css/logo.png" class="header-logo"></a>
 
 
 			
