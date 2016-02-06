@@ -14,7 +14,7 @@ $HTML[] = <<<EOF
 		<meta charset="utf-8" />
 		<base href="{$BASEHREF}" />
 		<link rel="shortcut icon" href="favicon.ico?v1" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 <!-- FACEBOOK START -->
 		<meta property="og:title" content="CICO brings you what you desire" />
 		<meta property="og:site_name" content="CICO" />
@@ -43,17 +43,6 @@ $HTML[] = <<<EOF
 				</ul>
 			</div>
 		</div>
-
-<script>
-$( "#searchfrom" ).autocomplete({
-	source: "ajax/cities.php",
-	minLength: 2
-});
-$( "#searchto" ).autocomplete({
-	source: "ajax/cities.php",
-	minLength: 2
-});
-</script>
 
 		<div class="content>
 			<div class="inner">

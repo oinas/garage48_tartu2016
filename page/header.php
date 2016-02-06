@@ -27,7 +27,7 @@ $HTML[] = <<<EOF
 		<script src="js/jquery-ui.js"></script>
 		<script src="js/jquery.tablesorter.min.js"></script> 
 		<link rel="stylesheet" href="css/jquery-ui.css">
-		<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 <!-- FACEBOOK START -->
 		<meta property="og:title" content="CICO - cico brings what you want" />
 		<meta property="og:site_name" content="CICO" />
