@@ -12,11 +12,12 @@ That was the point, I thought to connect millions of travelers to the people in 
 <h1>Team Members</h1>
 Founder presented his idea at <em>Garage48 startup camp</em> event in Tartu, Estonia where an awesome team was created which comprised of following members;
 <ol>
-<li>Martti Vasar &dash; front and back-end developer</li>
-<li>Zura Isakzade &dash; back-end and Android developer</li>
-<li>Laura Lilleste &dash; process logic and designer</li>
-<li>Keto &dash; Android developer</li>
-<li>Nikkolai &dash; Advertising and Business/Legal administrative</li>
+<li>Adeel al Rahman &dash; Leader and Business</li>
+<li>Mykola Demchuk &dash; Marketing and Business/Legal counsel</li>
+<li>Zura Isakzade &dash; Back-end and Android developer</li>
+<li>Laura Lilleste &dash; Process logic and designer</li>
+<li>Konstantine Ujmajuridze &dash; Android developer</li>
+<li>Martti Vasar &dash; Front and back-end developer</li>
 </ol>
 </p>
 </div>
