@@ -9,6 +9,12 @@ if(isset($_GET['from'])){
 	$from = $_GET['from'];
 }
 
+if(file_exists("../index2.html")){
+	$css = "localmain.css";
+} else {
+	$css = "main.css";
+}
+
 $HTML[] = <<<EOF
 <!DOCTYPE html> 
 <html lang=en>
@@ -16,7 +22,7 @@ $HTML[] = <<<EOF
 		<title>{$TITLE} &middot; {$PAGE}</title>
 		<meta charset="utf-8" />
 		<base href="{$BASEHREF}" />
-		<link rel="shortcut icon" href="favicon.ico" />
+		<link rel="shortcut icon" href="favicon.ico?v1" />
 		<script src="js/jquery-2.2.0.min.js"></script>
 		<script src="js/jquery-ui.js"></script>
 		<script src="js/jquery.tablesorter.min.js"></script> 
@@ -26,12 +32,12 @@ $HTML[] = <<<EOF
 		<meta property="og:title" content="CICO - cico brings what you want" />
 		<meta property="og:site_name" content="CICO" />
 		<meta property="og:type" content="website" />
-		<meta property="og:description" content="" />
+		<meta property="og:description" content="Travelers can bring you products from all over the world!" />
 		<meta property="og:url" content="http://cico.northeurope.cloudapp.azure.com" />
 		<meta property="og:image" content="http://cico.northeurope.cloudapp.azure.com/css/biglogo.png" />
 <!-- FACEBOOK END -->
-		<meta name="description" content="DESCRIPTION GOES HERE" />
-		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<meta name="description" content="Travelers can bring you products from all over the world!" />
+		<link rel="stylesheet" type="text/css" href="css/{$css}" />
 		<link rel="stylesheet" media="(max-width: 800px)" href="css/mobile.css" />
 		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />

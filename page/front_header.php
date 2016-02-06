@@ -1,5 +1,11 @@
 <?php
 
+if(file_exists("../index2.html")){
+	$css = "localmain.css";
+} else {
+	$css = "main.css";
+}
+
 $HTML[] = <<<EOF
 <!DOCTYPE html> 
 <html lang=en>
@@ -7,18 +13,18 @@ $HTML[] = <<<EOF
 		<title>{$TITLE} &middot; {$PAGE}</title>
 		<meta charset="utf-8" />
 		<base href="{$BASEHREF}" />
-		<link rel="shortcut icon" href="favicon.ico" />
+		<link rel="shortcut icon" href="favicon.ico?v1" />
 		<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <!-- FACEBOOK START -->
 		<meta property="og:title" content="CICO brings you what you desire" />
 		<meta property="og:site_name" content="CICO" />
 		<meta property="og:type" content="website" />
-		<meta property="og:description" content="" />
+		<meta property="og:description" content="Travelers can bring you products from all over the world!" />
 		<meta property="og:url" content="http://cico.northeurope.cloudapp.azure.com" />
 		<meta property="og:image" content="http://cico.northeurope.cloudapp.azure.com/css/biglogo.png" />
 <!-- FACEBOOK END -->
-		<meta name="description" content="" />
-		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<meta name="description" content="Travelers can bring you products from all over the world!" />
+		<link rel="stylesheet" type="text/css" href="css/{$css}" />
 		<link rel="stylesheet" media="(max-width: 800px)" href="css/mobile.css" />
 		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />

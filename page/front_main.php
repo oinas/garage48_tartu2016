@@ -61,8 +61,18 @@ $tmp = htmlspecialchars($loginUrl);
 $HTML[] = <<<EOF
 <div class="front-middle">
 <h1>CICO brings you what you desire</h1>
-Travelers can bring you products from all over the world!<br><br><br>
-<a href="{$tmp}" class="btn btn-primary btn-lg"><img src="css/fb_white_29.png" style="margin-right: 10px; margin-top: -2px;"> Log in with Facebook!</a>
+<span>Travelers can bring you products from all over the world!</span><br><br><br>
+<a href="{$tmp}" class="btn btn-primary btn-lg"><img src="css/fb_white_29.png" style="margin-right: 10px; margin-top: -2px;"> Log in with Facebook</a>
 <br><br><h1>Quick &amp; easy login</h1>
+</div>
+
+<div class="front-powered">
+<strong>POWERED BY</strong><br>
+<img src="css/cloudazure.jpg" width="200"><br>
+<img src="css/php.png" width="200"><br>
+<img src="css/garage48.png" width="200" class="makewhiteborder"><br>
+<img src="css/mongodb.png" width="93">
+<img src="css/facebookapi.jpg" width="93"><br>
+
 </div>
 EOF;
