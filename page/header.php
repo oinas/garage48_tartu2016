@@ -17,11 +17,13 @@ if(file_exists("../index2.html")){
 
 $notifications = $db->notifications;
 $n = $notifications->findOne(array("user" => $_SESSION['user']));
-$n['count'] = 1;
+
 if(isset($n['count']) && $n['count'] > 0){
 	$badge = '<div class="badge">' . $n['count'] . '</div>';
+	$not = "You have new notifications";
 } else {
 	$badge = "";
+	$not = "Look your notifications";
 }
 
 $HTML[] = <<<EOF
@@ -61,6 +63,12 @@ $HTML[] = <<<EOF
 			
 
 			<div class="menu">
+				<a href="?front_search"><span class="glyphicon glyphicon-search icon-large">
+					<div class="icon-large-title">Make search</div>
+				</span></a>
+				
+				<div class="bigspacer">&nbsp;</div>
+
 				<a href="?travel_plan"><span class="glyphicon glyphicon-plane icon-large">
 					<div class="icon-large-title">Look your travel plans</div>
 				</span></a>
@@ -79,11 +87,13 @@ $HTML[] = <<<EOF
 				
 				<div class="bigspacer">&nbsp;</div>
 
-				<a href="?wall"><span class="glyphicon glyphicon-bell icon-large">{$badge}</span>
+				<a href="?wall"><span class="glyphicon glyphicon-bell icon-large">{$badge}
+					<div class="icon-large-title">{$not}</div>
+				</span>
 				
 				<div class="bigspacer">&nbsp;</div></a>
 
-				<a><div class="glyphicon glyphicon-menu-hamburger icon-large" tabindex="1">
+				<div class="glyphicon glyphicon-menu-hamburger icon-large" tabindex="1">
 					<div class="icon-large-menu">
 						<ul>
 EOF;
@@ -91,29 +101,30 @@ EOF;
 
 
 $menu = array(
+	"1" => "Menu",
 	"wall" => "Notifications {$badge}",
-	"1" => "Travel plan",
-	"travel_plan/add" => "Create travel plan",
+	"2" => "Travel plan",
+	"travel_plan/add" => "<span class='glyphicon glyphicon-plus'></span> Create travel plan",
 	"travel_plan" => "My travel plans",
 	"travel_plan" => "Search travel plan",
 	"q=search&showall" => "Show all travel plans",
-	"2" => "Product requests",
-	"product_request/add" => "Make product request",
+	"3" => "Product requests",
+	"product_request/add" => "<span class='glyphicon glyphicon-plus'></span> Make product request",
 	"product_request" => "My product requests",
 	"travel_plan" => "Search product request",
-	"q=search&showall" => "Show all product requests",
+	"q=search_requesters&showall" => "Show all product requests",
 	"pending/view/pending" => "Show pending requests",
 	"pending/view/accepted" => "Show accepted requests",
-	"2" => "&nbsp;",
+	"4" => "&nbsp;",
 	"messages" => "Show messages",
-	"3" => "&nbsp;",
+	"5" => "&nbsp;",
 	"logout" => "Log out"
 );
 
 foreach($menu as $k => $v){
 	if(strlen($k) < 4){
 		$HTML[] = <<<EOF
-			<li>{$v}
+			<li class="menu-right-title">{$v}
 EOF;
 	} else {
 		$HTML[] = <<<EOF
@@ -125,7 +136,7 @@ EOF;
 	$HTML[] = <<<EOF
 						</ul>
 					</div>
-				</div></a>
+				</div>
 			</div>
 
 

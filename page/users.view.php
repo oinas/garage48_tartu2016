@@ -66,3 +66,6 @@ $_GET['userprofile'] = true;
 
 /** show search? */
 require_once "page/search.php";
+
+
+require_once "page/search_requesters.php";

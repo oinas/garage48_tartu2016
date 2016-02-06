@@ -3,6 +3,9 @@
 $requests = $db->requests;
 
 $HTML[] = <<<EOF
+	<div class="right">
+		<a href="?product/add" class="btn btn-success"><span class='glyphicon glyphicon-plus'></span> Create new product request</a>
+	</div>
 	<h1>My product requests connected with travel plan</h1>
 EOF;
 

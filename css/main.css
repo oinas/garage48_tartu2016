@@ -7,7 +7,9 @@ body, html, input, textarea {
 }
 
 .body {
-	min-width: 900px;
+	min-width: 600px;
+	max-width: 1400px;
+	margin: auto;
 }
 
 .front.body {
@@ -63,6 +65,11 @@ h1 {
 	background: #fff;
 	box-shadow: 0px 0px 10px #777;
 	padding: 0px 20px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 7;
 }
 
 .header-logo {
@@ -107,13 +114,12 @@ h1 {
 .content {
 	margin: auto;
 	padding: auto;
-	border-left: 1px solid #777;
-	border-right: 1px solid #777;
+	padding-top: 60px;
+	padding-bottom: 40px;
 }
 
 .content .inner {
 	padding: 20px;
-	background: #C7D0D5;
 }
 
 ul.side-bar-menu {
@@ -130,6 +136,8 @@ ul.side-bar-menu li {
 ul.side-bar-menu li a {
 	color: #000;
 	display: block;
+	text-align: left;
+	line-height: 30px;
 }
 
 .center {
@@ -299,4 +307,151 @@ table .headerSortUp {
 
 .makewhiteborder {
 	padding: 10px;
+}
+
+.front-search {
+	padding: 25px;
+	border: 1px solid #ccc;
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+.front-search h1 {
+	margin-bottom: 25px;
+}
+
+.front-search-extra {
+	margin-top: 20px;
+	font-variant: small-caps;
+}
+
+.btn-darkblue {
+	background: #147;
+}
+
+.inside-footer ul {
+	float: right;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.inside-footer ul li {
+	display: inline-block;
+}
+
+.inside-footer ul li a {
+	display: block;
+	padding: 0px 15px;
+}
+
+.inside-footer {
+	background: #fff;
+	color: #EC583A;
+	padding: 10px 20px;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	box-shadow: 0px 0px 10px #777;
+}
+
+.icon-large {
+	font-size: 1.5em;
+	padding-top: 12px;
+}
+
+.bigspacer {
+	display: inline-block;
+	width: 10px;
+}
+
+.icon-large:hover .icon-large-title {
+	display: block;
+}
+
+.icon-large-title {
+	display: none;
+	position: absolute;
+	top: 50px;
+	font-size: 0.7em;
+	left: -200px;
+	width: 250px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	background: #fff;
+	margin: auto;
+	text-align: center;
+	font-family: 'Raleway', sans-serif;
+	z-index: 9;
+}
+
+.icon-large:hover .icon-large-menu, 
+.icon-large:focus .icon-large-menu,
+.icon-large:active .icon-large-menu {
+	display: block;
+}
+
+.icon-large-menu {
+	display: none;
+	position: absolute;
+	top: 35px;
+	font-size: 0.7em;
+	left: -250px;
+	width: 300px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	background: #fff;
+	margin: auto;
+	text-align: center;
+	font-family: 'Raleway', sans-serif;
+	z-index: 11;
+}
+
+.icon-large-menu li {
+	display: block;
+	text-align: right;
+	float: right;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	width: 300px;
+}
+
+.icon-large .badge {
+	border-radius: 3px;
+	position: absolute;
+	top: 5px;
+	right: -10px;
+	color: #fff;
+	background: #e30;
+}
+
+.icon-large-menu .badge {
+	border-radius: 3px;
+	position: relative;
+	color: #fff;
+	background: #e30;
+	top: -3px;
+	left: 0px;
+}
+
+.menu-right-title {
+	margin-right: 15px;
+	font-size: 125%;
+}
+
+.left-menu-color a {
+	display: block;
+	background: #eee;
+	padding: 5px;
+	padding-left: 10px;
+}
+
+.left-menu-color a:hover {
+	background: #eef;
+}
+
+.circle {
+	border-radius: 10px;
+	margin-bottom: 5px;
 }

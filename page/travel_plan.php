@@ -3,6 +3,9 @@
 $travel_plans = $db->travel_plans;
 
 $HTML[] = <<<EOF
+	<div class="right">
+		<a href="?travel_plan/add" class="btn btn-success"><span class='glyphicon glyphicon-plus'></span> Add new travel plan</a>
+	</div>
 	<h1>Travel plans</h1>
 	<table class="table table-hover table-striped tablesorter" id="tablesorter">
 		<thead>

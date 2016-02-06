@@ -58,7 +58,7 @@ $tmp2 = count($results_requesters);
 
 if(isset($_GET['userprofile'])){
 	$HTML[] = <<<EOF
-		<h1>List of travel plans</h1>
+		<h1>List of product requests</h1>
 EOF;
 } else {
 	$HTML[] = <<<EOF
@@ -76,7 +76,7 @@ EOF;
 
 	</form>
 </div>
-<h1>Search results for travelers</h1>
+<h1>Search results for product requests</h1>
 EOF;
 }
 
