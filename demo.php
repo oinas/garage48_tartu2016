@@ -8,6 +8,7 @@ require_once "config.php";
 
 $users = $db->users;
 
+$l = 0;
 foreach($users->find() as $k => $v){
 	$rel = relativeTime($v['last']);
 	if(file_exists("../index2.html")){
@@ -22,6 +23,10 @@ EOF;
 			{$v['user']} &middot; {$v['first']} (last online {$rel})
 			</a><br><br>
 EOF;
+	}
+	$l++;
+	if($l > 5){
+		break;
 	}
 }
 

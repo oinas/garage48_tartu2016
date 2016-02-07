@@ -3,10 +3,10 @@
 $HTML[] = <<<EOF
 <div class="front-text">
 
-<h1>How Cico works</h1>
+<h1>How CICO works</h1>
 <img src="css/biglogo.png" width="300" style="float: right; margin: 50px;">
 <h4>Have you ever missed a product from your home country or any other country?</br> You are in need of the product you miss, yet you cannot find it in the country you are living in!! 
-Cico can solve this problem--we can make it possible for you by connecting travelers and requesters</h3>
+CICO can solve this problem--we can make it possible for you by connecting travelers and requesters</h3>
 <br>
 <h1> Here's how it works?</h1><br>
 <ul>
@@ -18,7 +18,7 @@ Cico can solve this problem--we can make it possible for you by connecting trave
 </ul><br>
 <h1>Create A Profile</h1><br>
 <p>
-First step? Completely fill out your Cico profile! This will help you achieve trustworthy status.
+First step? Completely fill out your CICO profile! This will help you achieve trustworthy status.
 </p>
 <h2 align="center">Don't have an account yet?<a href="?"> Sign Up With Facebook</a> </h2><br>
 <h1> Search For Traveler Or Requester</h1>

@@ -8,6 +8,12 @@ $start = microtime(true);
 
 require_once "config.php";
 
+$PAGE_NAME = "";
+
+if(isset($_GET['accept-cookies'])){
+	$_SESSION['cookies'] = true;
+}
+
 // for DEMO purpose
 if(isset($_GET['user']) && $_GET['password'] == "test"){
 	$entries = $db->users;
@@ -75,6 +81,34 @@ if(isset($_SESSION['user'])){
 	$PAGES[] = "front_header";
 	$PAGES[] = empty($PAGE) ? $DEFAULT_FRONT_PAGE : $PAGE;
 	$PAGES[] = "front_footer";
+}
+
+$page_names = array(
+	"" => "Front page",
+	"how-it-works" => "How CICO works",
+	"feedback" => "Feedback",
+	"concept" => "Concept",
+	"video" => "Video",
+	"terms" => "Terms of Use",
+	"about-us" => "About Us",
+	"front_search" => "Search",
+	"users.view" => "User profile view",
+	"profile.edit" => "User profile edit",
+	"wall" => "Notifications",
+	"travel_plan.edit" => $ACTION == "add" ? "Create a new travel plan" : "Edit existing travel plan",
+	"product_request.edit" => $ACTION == "add" ? "Make a new product request" : "Edit existing product request",
+	"travel_plan" => "List of travel plans",
+	"search" => "Search travel plan",
+	"pending.view" => "Accepted/Pending product requests",
+	"product_request" => "List of product requests",
+	"search_requesters" => "Search product requests",
+	"planspending.view" => "Accepted/Pending travel plans",
+	"messages" => "Last messages",
+	"livefeedback" => "Give feedback"
+);
+
+if(isset($page_names[$PAGE])){
+	$PAGE_NAME = " &middot; " . $page_names[$PAGE];
 }
 
 /** controller logic */

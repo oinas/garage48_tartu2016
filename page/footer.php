@@ -1,6 +1,10 @@
 <?php
 
 $HTML[] = <<<EOF
+			<div class="giveusfeedback">
+				<a href="?livefeedback">Give us feedback to improve service!</a>
+			</div>
+
 			<div class="inside-footer">
 				<ul class="menu-ul-right">
 					<li><a href="?how-it-works">How It Works?</a>

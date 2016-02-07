@@ -10,7 +10,7 @@ $HTML[] = <<<EOF
 <!DOCTYPE html> 
 <html lang=en>
 	<head>
-		<title>{$TITLE} &middot; {$PAGE}</title>
+		<title>{$TITLE}{$PAGE_NAME}</title>
 		<meta charset="utf-8" />
 		<base href="{$BASEHREF}" />
 		<link rel="shortcut icon" href="favicon.ico?v1" />
@@ -45,10 +45,23 @@ $HTML[] = <<<EOF
 				</ul>
 			</div>
 		</div>
+EOF;
+
+$HTML[] = <<<EOF
 
 		<div class="content">
 			<div class="inner">
 EOF;
+
+
+if(!isset($_SESSION['cookies'])){
+	$HTML[] = <<<EOF
+		<div class="cookies-messages" id="cookies-messages">
+			This site uses cookies to store information on your computer.
+			<a class="btn btn-primary cookie-right" href="?accept-cookies">Agree</a>
+		</div>
+EOF;
+}
 
 if(isset($_SESSION['SUCCESS']) && !empty($_SESSION['SUCCESS'])){
 	$HTML[] = '<div class="alert alert-success" role="alert">'

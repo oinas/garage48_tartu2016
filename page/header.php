@@ -55,7 +55,7 @@ $HTML[] = <<<EOF
 <!DOCTYPE html> 
 <html lang=en>
 	<head>
-		<title>{$TITLE} &middot; {$PAGE}</title>
+		<title>{$TITLE}{$PAGE_NAME}</title>
 		<meta charset="utf-8" />
 		<base href="{$BASEHREF}" />
 		<link rel="shortcut icon" href="favicon.ico?v1" />
