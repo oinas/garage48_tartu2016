@@ -175,7 +175,7 @@ $HTML[] = <<<EOF
 EOF;
 
 // hack to delete no entries found if we have not done any search
-if(!isset($_GET['profile']) && !isset($_GET['to'])){
+if(!isset($_GET['profile']) && !isset($_GET['to']) && !isset($_GET['showall'])){
 	$fix = count($HTML);
 	for($i = $fix - 1; $i > $fix - 6; $i--){
 		unset($HTML[$i]);
