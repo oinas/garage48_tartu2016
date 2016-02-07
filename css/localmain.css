@@ -682,7 +682,8 @@ a.btn {
 	line-height: 40px;
 }
 
-.cookie-right {
+a.cookie-right {
 	z-index: 12;
 	float: right;
+	color: #fff;
 }

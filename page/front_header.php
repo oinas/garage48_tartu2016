@@ -58,7 +58,8 @@ EOF;
 if(!isset($_SESSION['cookies'])){
 	$HTML[] = <<<EOF
 		<div class="cookies-messages" id="cookies-messages">
-			This site uses cookies to store information on your computer.
+			<!--This site uses cookies to store information on your computer.-->
+			We place small data files called cookies on your device. By browsing this site you consent to our use of cookies.
 			<a class="btn btn-primary cookie-right" href="?accept-cookies">Agree</a>
 		</div>
 EOF;
