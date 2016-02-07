@@ -71,7 +71,7 @@ if(isset($_SESSION['user'])){
 	}
 } else {
 	/** simple hack to not allow user to access login section */
-	$ALLOWED_PAGES = array("about-us", "login", "signup", "concept", "terms", "", "how-it-works", "feedback", "video");
+	$ALLOWED_PAGES = array("about-us", "login", "signup", "mobile", "concept", "terms", "", "how-it-works", "feedback", "video");
 	if(!in_array($PAGE, $ALLOWED_PAGES)){
 		$PAGE = "403";
 		// redirect logged out sessions
