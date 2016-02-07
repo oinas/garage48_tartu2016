@@ -55,7 +55,7 @@ foreach($travel_plans->find(array("user" => $_SESSION['user']))->sort(array("dat
 		<tr>
 			<td>{$i}
 				<a href="?product_request/edit/{$v['_id']}"><span class="glyphicon glyphicon-edit"></span></a>
-			<td><a href="?travel_plan/view/{$v['_id']}">{$v['from']}</a>
+			<td><a href="?product_request/view/{$v['_id']}">{$v['from']}</a>
 
 			<td>{$v['to']}
 			<td>{$v['date']}

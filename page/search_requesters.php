@@ -161,7 +161,7 @@ EOF;
 			<br>
 		</div>
 		<div class="search-button btn btn-warning">
-			<a href="?travel_plan/view/{$v['_id']}">More information &amp; Contact requester</a>
+			<a href="?product_request/view/{$v['_id']}">More information &amp; Contact requester</a>
 		</div>
 	</div>
 EOF;

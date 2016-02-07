@@ -27,8 +27,8 @@ if(isset($_POST['submit'])){
 			$_POST['added'] = date("Y-m-d H:i:s");
 			$travel_plans -> insert($_POST);
 			$ID = $_POST["_id"];
-			header("Location: ?travel_plan/view/{$ID}");
-			wallPost($_SESSION['user'], $_SESSION['user'], "requestmodified", "?travel_plan/view/{$ID}");
+			header("Location: ?product_request/view/{$ID}");
+			wallPost($_SESSION['user'], $_SESSION['user'], "requestmodified", "?product_request/view/{$ID}");
 			uploadFile("picture", $ID . $_SESSION['user']);
 			$SUCCESS[] = "You have successfully added new product request";
 		} else {
@@ -40,8 +40,8 @@ if(isset($_POST['submit'])){
 				die();
 			}
 			$ID = $_POST["_id"];
-			header("Location: ?travel_plan/view/{$ID}");
-			wallPost($_SESSION['user'], $_SESSION['user'], "requestcreated", "?travel_plan/view/{$ID}");
+			header("Location: ?product_request/view/{$ID}");
+			wallPost($_SESSION['user'], $_SESSION['user'], "requestcreated", "?product_request/view/{$ID}");
 			uploadFile("picture", $ID . $_SESSION['user']);
 			$SUCCESS[] = "You have successfully modified your product request";
 		}

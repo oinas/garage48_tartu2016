@@ -282,7 +282,7 @@ EOF;
 		if($request['status'] == 0){
 			$HTML[] = <<<EOF
 			<div class="content-box medium yellowback">
-			<h1>Your have request pending</h1>
+			<h1>Request is pending</h1>
 EOF;
 			if(isset($entry['requester'])){
 			$HTML[] = <<<EOF

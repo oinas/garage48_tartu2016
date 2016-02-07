@@ -6,7 +6,7 @@ $HTML[] = <<<EOF
 	<div class="right">
 		<a href="?travel_plan/add" class="btn btn-success"><span class='glyphicon glyphicon-plus'></span> Add new travel plan</a>
 	</div>
-	<h1>Travel plans waiting for requesters</h1>
+	<h1>Travel plans waiting for product requests</h1>
 	<table class="table table-hover table-striped tablesorter" id="tablesorter">
 		<thead>
 			<tr>
@@ -75,7 +75,7 @@ EOF;
 $requests = $db->requests;
 
 $HTML[] = <<<EOF
-	<h1>Travel plans added to requsters</h1>
+	<h1>Travel plans added to product requests</h1>
 EOF;
 
 $HTML[] = <<<EOF

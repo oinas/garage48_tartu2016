@@ -12,8 +12,11 @@ $menu = array(
 	"users/view/" . $_SESSION['user'] => '<span class="glyphicon glyphicon-user"></span> ' . $_SESSION['fb_name'],
 	"profile/edit" => '<span class="glyphicon glyphicon-pencil"></span> ' . "Edit profile",
 	"wall" => '<span class="glyphicon glyphicon-bell"></span> ' . "Notifications {$badge}",
-	"travel_plan/add" => '<span class="glyphicon glyphicon-plane"></span> ' . "Create travel plan",
-	"product_request/add" => '<span class="glyphicon glyphicon-briefcase"></span> ' . "Make product request",
+	"travel_plan" => '<span class="glyphicon glyphicon-plane"></span> ' . "Your travel plans",
+	"product_request" => '<span class="glyphicon glyphicon-briefcase"></span> ' . "Your product requests",
+
+//	"travel_plan/add" => '<span class="glyphicon glyphicon-plane"></span> ' . "Create travel plan",
+//	"product_request/add" => '<span class="glyphicon glyphicon-briefcase"></span> ' . "Make product request",
 	"front_search" => '<span class="glyphicon glyphicon-search"></span> ' . "Search",
 /*	"travel_plan" => "My travel plans",
 	"product_request" => "My product requests",

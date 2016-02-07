@@ -6,7 +6,7 @@ $HTML[] = <<<EOF
 	<div class="right">
 		<a href="?product_request/add" class="btn btn-success"><span class='glyphicon glyphicon-plus'></span> Create new product request</a>
 	</div>
-	<h1>My product requests connected with travel plan</h1>
+	<h1>My product requests connected with travelers</h1>
 EOF;
 
 $HTML[] = <<<EOF
@@ -77,7 +77,7 @@ $(document).ready(function() {
 EOF;
 
 $HTML[] = <<<EOF
-	<h1>My product requests not connected with travel plan</h1>
+	<h1>My product requests waiting for travelers</h1>
 EOF;
 
 
@@ -129,7 +129,7 @@ foreach($results_requesters as $k => $v){
 		<tr>
 			<td>{$i}
 				<a href="?product_request/edit/{$v['_id']}"><span class="glyphicon glyphicon-edit"></span></a>
-			<td><a href="?travel_plan/view/{$v['_id']}">{$v['from']}</a> 
+			<td><a href="?product_request/view/{$v['_id']}">{$v['from']}</a> 
 			<td>{$v['to']}
 			<td>{$v['date']}
 			<td>$pending/$accepted

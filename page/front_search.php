@@ -31,7 +31,7 @@ $HTML[] = <<<EOF
 
 <div class="front-search">
 	<form action="" method="GET">
-	<h1>Searching requester?</h1>
+	<h1>Searching product request?</h1>
 	<input type="hidden" name="q" value="search_requesters">
 	<input type="hidden" name="type" value="requester">
 

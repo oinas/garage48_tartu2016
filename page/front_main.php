@@ -45,7 +45,7 @@ if(file_exists("../index2.html")){
 $tmp = htmlspecialchars($loginUrl);
 $HTML[] = <<<EOF
 <div class="front-middle">
-<h1>CICO brings you what you desire</h1>
+<h1>CICO brings what you desire</h1>
 <span>Travelers can bring you products from all over the world!</span><br><br><br>
 <a href="{$tmp}" class="btn btn-primary btn-lg btn-darkblue"><img src="css/fb_white_29.png" style="margin-right: 10px; margin-top: -2px;"> Log in with Facebook</a>
 <br><br><h3>Try it yourself</h3>
