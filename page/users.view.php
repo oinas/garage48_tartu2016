@@ -78,7 +78,7 @@ $HTML[] = <<<EOF
 </div>
 EOF;
 
-$_GET['user'] = $_SESSION['user'];
+$_GET['user'] = $user['facebookid'];
 $_GET['to'] = "";
 $_GET['showall'] = true;
 $_GET['userprofile'] = true;
