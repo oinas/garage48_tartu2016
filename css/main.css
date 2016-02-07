@@ -45,7 +45,7 @@ body, html, input, textarea {
 	color: #000;
 	text-align: center;
 	position: relative;
-	transform: translateY(50%);
+	transform: translateY(25%);
 	background: url("white70.png");
 	font-weight: 700;
 }
@@ -121,7 +121,7 @@ h1 {
 	margin: auto;
 	padding: auto;
 	padding-top: 60px;
-	padding-bottom: 40px;
+	padding-bottom: 80px;
 }
 
 .content .inner {
@@ -651,4 +651,38 @@ a.btn {
 	font-size: 3em;
 	margin: 20px;
 	margin-right: 60px;
+}
+
+.giveusfeedback a {
+	position: fixed;
+	right: 10px;
+	bottom: 43px;
+	border: 1px solid #afa;
+	background: #cfc;
+	border-radius: 5px;
+	padding: 5px;
+	color: #000;
+}
+
+.giveusfeedback a:hover {
+	border: 1px solid #7a7;
+	background: #9c9;
+}
+
+.cookies-messages {
+	display: block;
+	position: fixed;
+	z-index: 11;
+	top: 0px; 
+	left: 0px;
+	right: 0px;
+	background: url("black70.png");
+	color: #fff;
+	padding: 10px 30px;
+	line-height: 40px;
+}
+
+.cookie-right {
+	z-index: 12;
+	float: right;
 }
