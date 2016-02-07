@@ -67,11 +67,11 @@ if(isset($_GET['revoke'])){
 }
 
 if(isset($_POST['submit']) && $_POST['submit'] == "Send message"){
-	if(strlen($_POST['user']) < 1 || empty($_POST['user'])){
+	if(!isset($_POST['chat']) || strlen($_POST['chat']) < 1 || empty($_POST['chat'])){
 		if($_POST['role'] == "requester"){
-			header("Location: ?travel_plan/{$ACTION}/{$ID}/#chat");	
+			header("Location: ?travel_plan/{$ACTION}/{$ID}/#chat-box");	
 		} else {
-			header("Location: ?travel_plan/{$ACTION}/{$ID}/#chat{$_POST['pos']}");	
+			header("Location: ?travel_plan/{$ACTION}/{$ID}/#chat-box{$_POST['pos']}");	
 		}
 		die();
 	}
@@ -161,12 +161,12 @@ if(empty($tmp)){
 	$tmp = "<ul><li>" . implode("<li>", $tmp) . "</ul>";
 }
 $usertmp = generateUserPicture($entry['user'], "chat-picture") . " " . generateUserLink($entry['user']);
-
+$entry['date'] = convertDate($entry['date']);
 if(isset($entry['requester'])){
 	$HTML[] = <<<EOF
 
 <a href="#" onclick="history.go(-1)"><span class="glyphicon glyphicon-chevron-left"></span> Back to search</a>
-<h1>Product request
+<h1 class="travel-plan-h1">Product request
 <a href="https://maps.google.com/?q={$entry['from']}" target="_blank">{$entry['from']}</a> 
 <small><span class="glyphicon glyphicon-chevron-right"></span></small>
 <a href="https://maps.google.com/?q={$entry['to']}" target="_blank">{$entry['to']}</a> 
@@ -327,7 +327,7 @@ EOF;
 				}
 				$id = "" . $v['_id'];
 				$time = relativeTime($v['update']);
-				if($v['which'] == 0){
+				if($v['which'] == 0 || isset($entry['requester'])){
 					$chatremove = <<<EOF
 						<div class="request-chat-remove">
 							<a href="?travel_plan/{$ACTION}/{$ID}/&remove={$id}" title="Remove message"><span class="glyphicon glyphicon-remove"></span></a>
@@ -345,7 +345,6 @@ EOF;
 					</div>
 EOF;
 			}
-			$HTML[] = '<a name="chat"></a></div>';
 
 			if(isset($_GET['onlychat'])){
 				for($i = $ONLYCHAT + 1; $i < count($HTML); $i++){
@@ -353,6 +352,8 @@ EOF;
 				}
 				die();
 			}
+
+			$HTML[] = '</div><a name="chat"></a>';
 			formHeader("");
 			formField("", "role", "hidden", "requester");
 			$HTML[] = <<<EOF
@@ -361,6 +362,11 @@ EOF;
 			formField("", "chat", "textarea");
 			formFooter("Send message");
 			$HTML[] = <<<EOF
+			<script>
+				setInterval(function(){
+				      $('#chat-box').load('?travel_plan/view/{$ID}/&onlychat');
+				 }, 5000);
+			</script>
 			</div>
 EOF;
 		} else {
@@ -420,8 +426,10 @@ EOF;
 			<div class="content-box medium">
 			<h1>{$t}</h1>
 			{$tmp}
+			<div id="chat-box{$k}">
 
 EOF;
+			$ONLYCHAT = count($HTML);
 			foreach($chats->find(array(	"travel" => $ID,
 								"user1" => $v['user'],
 								"user2" => $entry['user']))
@@ -433,10 +441,21 @@ EOF;
 				}
 				$time = relativeTime($_v['update']);
 				$id = "" . $_v['_id'];
+
+				if($_v['which'] == 1 || !isset($entry['requester'])){
+					$chatremove = <<<EOF
+						<div class="request-chat-remove">
+							<a href="?travel_plan/{$ACTION}/{$ID}/&remove={$id}" title="Remove message"><span class="glyphicon glyphicon-remove"></span></a>
+						</div>
+EOF;
+				} else {
+					$chatremove = "";
+				}
+
 				$HTML[] = <<<EOF
 					<div class="request-chat">
 						<div class="request-chat-remove">
-							<a href="?travel_plan/{$ACTION}/{$ID}/&remove={$id}" title="Remove message"><span class="glyphicon glyphicon-remove"></span></a>
+							{$chatremove}
 						</div>
 					{$pic}
 					{$_v['message']}<br>
@@ -444,14 +463,26 @@ EOF;
 					</div>
 EOF;
 			}
-			$HTML[] = '<a name="chat' . $l . '"></a>';
+
+			if(isset($_GET['onlychat' . $k])){
+				for($i = $ONLYCHAT; $i < count($HTML); $i++){
+					echo $HTML[$i];
+				}
+				die();
+			}
+			$HTML[] = '</div><a name="chat' . $k . '"></a>';
 			formHeader("");
 			formField("", "user1", "hidden", "{$v['user']}");
-			formField("", "pos", "hidden", "{$l}");
+			formField("", "pos", "hidden", "{$k}");
 			formField("", "role", "hidden", "traveler");
 			formField("", "chat", "textarea");
 			formFooter("Send message");
 			$HTML[] = <<<EOF
+			<script>
+				setInterval(function(){
+				      $('#chat-box{$k}').load('?travel_plan/view/{$ID}/&onlychat{$k}');
+				 }, 5000);
+			</script>
 			</div>
 EOF;
 		} else {

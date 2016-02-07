@@ -19,21 +19,6 @@ if(isset($_POST['submit'])){
 	}		
 }
 
-$HTML[] = <<<EOF
-<!--div class="alert alert-warning" role="alert" style="width: 50%; font-size: 1em;">
-Demo users: man, woman, user, traveler, requester<br>
-Password is test
-EOF;
-
-formHeader();
-formField("User", "user", "text");
-formField("Password", "password", "password");
-formFooter();
-
-$HTML[] = <<<EOF
-</div-->
-EOF;
-
 require_once "Facebook/autoload.php";
 if(file_exists("../index2.html")){
 $fb = new Facebook\Facebook([
@@ -63,7 +48,7 @@ $HTML[] = <<<EOF
 <h1>CICO brings you what you desire</h1>
 <span>Travelers can bring you products from all over the world!</span><br><br><br>
 <a href="{$tmp}" class="btn btn-primary btn-lg btn-darkblue"><img src="css/fb_white_29.png" style="margin-right: 10px; margin-top: -2px;"> Log in with Facebook</a>
-<br><br><h1>Quick &amp; easy login</h1>
+<br><br><h3>Try it yourself</h3>
 </div>
 
 <div class="front-powered">

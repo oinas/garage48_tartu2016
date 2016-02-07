@@ -7,7 +7,7 @@ $HTML[] = <<<EOF
 
 <div class="front-search">
 	<form action="" method="GET">
-	<h1>Looking for travellers?</h1>
+	<h1>Searching traveler?</h1>
 	<input type="hidden" name="q" value="search">
 	<input type="hidden" name="type" value="traveler">
 
@@ -19,7 +19,7 @@ $HTML[] = <<<EOF
 
 	</form>
 	<div class="front-search-extra">
-	If you are traveling yourself, help others out<br><br>
+	<span>If you are traveling yourself, help others out</span><br><br>
 	<a href="?travel_plan/add" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> SUBMIT NEW TRAVEL PLAN</a>
 	</div>
 </div>
@@ -31,7 +31,7 @@ $HTML[] = <<<EOF
 
 <div class="front-search">
 	<form action="" method="GET">
-	<h1>Looking for requesters?</h1>
+	<h1>Searching requester?</h1>
 	<input type="hidden" name="q" value="search_requesters">
 	<input type="hidden" name="type" value="requester">
 
@@ -43,7 +43,7 @@ $HTML[] = <<<EOF
 
 	</form>
 	<div class="front-search-extra">
-	If you did not find traveler, submit request for your product<br><br>
+	<span>If you did not find traveler, submit request for your product</span><br><br>
 	<a href="?product_request/add" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> SUBMIT NEW PRODUCT REQUEST</a>
 	</div>	
 </div>

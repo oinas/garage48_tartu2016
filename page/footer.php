@@ -12,7 +12,7 @@ $HTML[] = <<<EOF
 				</ul>
 
 				<div class="footer-left">
-					CICO &copy; 2016 | <a href="http://garage48.org/events/student-startup-camp-tartu-2016">Event SSC@Tartu 2016</a>
+					CICO &copy; 2016 | <a href="http://garage48.org/events/student-startup-camp-tartu-2016" target="_blank">Event SSC@Tartu 2016</a>
 				</div>
 			</div>
 EOF;

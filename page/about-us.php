@@ -4,6 +4,7 @@ $HTML[] = <<<EOF
 <div class="front-text">
 <h1>About Us</h1>
 <img src="css/biglogo.png" width="300" style="float: right; margin: 50px;">
+<br>
 <p>We, as a team of 6 people envision to make the life of people easier with our idea. The idea generated in time of a need of a product by the founder Adeel Ur Rahman. 
 </br>
 </br>

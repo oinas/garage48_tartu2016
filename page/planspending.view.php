@@ -6,12 +6,12 @@ $requests = $db->requests;
 if($ID == "pending"){
 	$status_is = 0;
 	$HTML[] = <<<EOF
-	<h1>Pending requests for your travel plans</h1>
+	<h1>Pending travel plans for your product requests</h1>
 EOF;
 } else {
 	$status_is = 1;
 	$HTML[] = <<<EOF
-	<h1>Accepted requests for your travel plans</h1>
+	<h1>Accepted travel plans for your product requests</h1>
 EOF;
 }
 
@@ -21,10 +21,11 @@ $HTML[] = <<<EOF
 		<thead>
 			<tr>
 				<th>#
-				<th>Departure
-				<th>Arrival
-				<th>Departure date
+				<th>To
+				<th>From
+				<th>Request ending
 				<th>Requester(s)
+				<th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,7 +33,7 @@ EOF;
 
 $i = 0;
 foreach($travel_plans->find(array("user" => $_SESSION['user']))->sort(array("date" => -1)) as $k => $v){
-	if(isset($v['requester'])){
+	if(!isset($v['requester'])){
 		continue;
 	}
 	$r = 0;
@@ -53,12 +54,14 @@ foreach($travel_plans->find(array("user" => $_SESSION['user']))->sort(array("dat
 	$HTML[] = <<<EOF
 		<tr>
 			<td>{$i}
-			<a href="?travel_plan/edit/{$v['_id']}"><span class="glyphicon glyphicon-edit"></span></a>
-			<td><a href="?travel_plan/view/{$v['_id']}">{$v['from']}</a> 
+				<a href="?product_request/edit/{$v['_id']}"><span class="glyphicon glyphicon-edit"></span></a>
+			<td><a href="?travel_plan/view/{$v['_id']}">{$v['from']}</a>
+
 			<td>{$v['to']}
 			<td>{$v['date']}
 			<td>{$v['requesters']}
-			<td><a href="?travel_plan/delete/{$v['_id']}"><span class="glyphicon glyphicon-remove"></span></a>
+			<td><a href="?product_request/delete/{$v['_id']}"><span class="glyphicon glyphicon-remove"></span></a>
+			
 		</tr>
 EOF;
 	}

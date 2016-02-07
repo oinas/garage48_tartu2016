@@ -4,6 +4,8 @@
 	Preliminary entry point for Garage48 hackathon. Change files in core/ folder.
 */
 
+$start = microtime(true);
+
 require_once "config.php";
 
 // for DEMO purpose
@@ -63,11 +65,12 @@ if(isset($_SESSION['user'])){
 	}
 } else {
 	/** simple hack to not allow user to access login section */
-	$ALLOWED_PAGES = array("about-us", "login", "signup", "concept", "", "how-it-works", "feedback", "video");
+	$ALLOWED_PAGES = array("about-us", "login", "signup", "concept", "terms", "", "how-it-works", "feedback", "video");
 	if(!in_array($PAGE, $ALLOWED_PAGES)){
 		$PAGE = "403";
 		// redirect logged out sessions
 		header("Location: {$BASEHREF}?");
+		die();
 	}
 	$PAGES[] = "front_header";
 	$PAGES[] = empty($PAGE) ? $DEFAULT_FRONT_PAGE : $PAGE;
@@ -118,3 +121,7 @@ if(!empty($ERROR)){
 if(!empty($SUCCESS)){
 	$_SESSION['SUCCESS'] = $SUCCESS;
 }
+
+$render_time = (int) ((microtime(true) - $start) * 1000);
+
+echo "<!-- Everything rendered in {$render_time} ms -->";

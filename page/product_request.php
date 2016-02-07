@@ -30,6 +30,9 @@ foreach($requests->find(array("user" => $_SESSION['user']))->sort(array("date" =
 	$travels = $db->travel_plans;
 
 	$travel = $travels->findOne(array("_id" => new MongoId($v['travel'])));
+	if(isset($travel['requester'])){
+		continue;
+	}
 	$i++;
 	$v['date'] = convertDate($travel['date'], false) . "<br>" . relativeTime(convertDateToTime($travel['date'], false));
 
@@ -50,6 +53,13 @@ foreach($requests->find(array("user" => $_SESSION['user']))->sort(array("date" =
 			<td>{$v['date']}
 			<td>$traveler
 			<td>$status
+		</tr>
+EOF;
+	}
+	if($i == 0){
+		$HTML[] = <<<EOF
+		<tr>
+			<td colspan="6">No entries found
 		</tr>
 EOF;
 	}
@@ -80,7 +90,8 @@ $HTML[] = <<<EOF
 				<th>From
 				<th>To
 				<th>Requests ends
-				<th>Pending/Accepted requests
+				<th>Requests<br><small>pending/accepted</small>
+				<th>
 			</tr>
 		</thead>
 		<tbody>
@@ -118,16 +129,22 @@ foreach($results_requesters as $k => $v){
 		<tr>
 			<td>{$i}
 				<a href="?product_request/edit/{$v['_id']}"><span class="glyphicon glyphicon-edit"></span></a>
-				<a href="?product_request/delete/{$v['_id']}"><span class="glyphicon glyphicon-remove"></span></a>
-
 			<td><a href="?travel_plan/view/{$v['_id']}">{$v['from']}</a> 
 			<td>{$v['to']}
 			<td>{$v['date']}
 			<td>$pending/$accepted
+			<td><a href="?product_request/delete/{$v['_id']}"><span class="glyphicon glyphicon-remove"></span></a>
 		</tr>
 EOF;
 }
 
+	if($i == 0){
+		$HTML[] = <<<EOF
+		<tr>
+			<td colspan="6">No entries found
+		</tr>
+EOF;
+	}
 
 
 	$HTML[] = <<<EOF

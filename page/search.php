@@ -45,13 +45,13 @@ if(isset($_GET['showall'])){
 			continue;
 		}
 		$match = 0;
-		if(strlen($_GET['from']) > 0 && preg_match("/{$_GET['from']}/i", $v['from'])){
+		if(isset($_GET['from']) && strlen($_GET['from']) > 0 && preg_match("/{$_GET['from']}/i", $v['from'])){
 			$match++;
 		}
-		if(strlen($_GET['to']) > 0 && preg_match("/{$_GET['to']}/i", $v['to'])){
+		if(isset($_GET['to']) && strlen($_GET['to']) > 0 && preg_match("/{$_GET['to']}/i", $v['to'])){
 			$match++;
 		}
-		if(strlen($_GET['from']) > 0 && strlen($_GET['to']) > 0){
+		if(isset($_GET['from']) && isset($_GET['to']) && strlen($_GET['from']) > 0 && strlen($_GET['to']) > 0){
 			if($match == 2){
 				if(isset($v['requester'])){
 					$results_requesters[] = $v;
@@ -94,6 +94,19 @@ EOF;
 
 	</form>
 </div>
+<script>
+$( "#from1" ).autocomplete({
+	source: "ajax/existing_cities.php",
+	minLength: 1
+});
+$( "#to1" ).autocomplete({
+	source: "ajax/existing_cities.php",
+	minLength: 1
+});
+</script>
+EOF;
+
+	$HTML[] = <<<EOF
 <h1>Search results for travelers</h1>
 EOF;
 }
@@ -161,5 +174,10 @@ $HTML[] = <<<EOF
 
 EOF;
 
-
-
+// hack to delete no entries found if we have not done any search
+if(!isset($_GET['profile']) && !isset($_GET['to'])){
+	$fix = count($HTML);
+	for($i = $fix - 1; $i > $fix - 6; $i--){
+		unset($HTML[$i]);
+	}
+}

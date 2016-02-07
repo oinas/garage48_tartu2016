@@ -20,6 +20,12 @@ body, html, input, textarea {
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
+	max-width: inherit;
+}
+
+.front.body .inner {
+	max-width: 1200px;
+	margin: auto;
 }
 
 .front .front-text {
@@ -28,7 +34,7 @@ body, html, input, textarea {
 	background: #fff;
 	opacity: 0.95;
 	padding: 30px;
-	margin-top: 90px;
+	margin-top: 0px;
 }
 
 .front-middle {
@@ -230,7 +236,7 @@ table .headerSortUp {
 }
 
 .content-box {
-	margin: 10px;
+	margin: 10px 0px 10px 0px;
 	padding: 20px;
 	border: 1px solid #ccc;
 }
@@ -305,6 +311,26 @@ table .headerSortUp {
 	margin: 5px;
 }
 
+.front-middle h3 {
+	margin: 0px;
+	margin-bottom: 15px;
+}
+
+@media (max-width: 950px) {
+	.front-powered {
+		margin-top: 100px;
+		left: 0px;
+		position: relative;
+		color: #fff;
+	}
+}
+
+@media (min-width: 951px) and (max-width: 1150px) {
+	.front-middle {
+		left: -100px;
+	}
+}
+
 .makewhiteborder {
 	padding: 10px;
 }
@@ -318,15 +344,27 @@ table .headerSortUp {
 
 .front-search h1 {
 	margin-bottom: 25px;
+	font-variant: small-caps;
+	font-weight: 700;
 }
 
 .front-search-extra {
 	margin-top: 20px;
+}
+
+.front-search-extra span {
+	font-size: 1.3em;
 	font-variant: small-caps;
 }
 
 .btn-darkblue {
 	background: #147;
+}
+
+.front-middle a.btn {
+	padding-top: 10px;
+	padding-bottom: 7px;
+	color: #fff;
 }
 
 .inside-footer ul {
@@ -373,7 +411,7 @@ table .headerSortUp {
 .icon-large-title {
 	display: none;
 	position: absolute;
-	top: 50px;
+	top: 55px;
 	font-size: 0.7em;
 	left: -200px;
 	width: 250px;
@@ -384,15 +422,28 @@ table .headerSortUp {
 	text-align: center;
 	font-family: 'Raleway', sans-serif;
 	z-index: 9;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #aaa;
+}
+
+.icon-large {
+    outline: none;
+    cursor: hand;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 2px;
+    border-radius: 5px;
+    color: #337ab7;
+}
+
+.icon-large:hover {
+    background: #eee;
 }
 
 .icon-large:hover .icon-large-menu, 
 .icon-large:focus .icon-large-menu,
 .icon-large:active .icon-large-menu {
 	display: block;
-    outline: none;
-    cursor: hand;
-    cursor: pointer;
 }
 
 *:focus {
@@ -402,26 +453,34 @@ table .headerSortUp {
 .icon-large-menu {
 	display: none;
 	position: absolute;
-	top: 35px;
+	top: 42px;
 	font-size: 0.7em;
 	left: -250px;
 	width: 300px;
 	padding: 5px;
 	border: 1px solid #ccc;
-	background: #fff;
+	background: url("white90.png");
 	margin: auto;
 	text-align: center;
 	font-family: 'Raleway', sans-serif;
 	z-index: 11;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #aaa;
+	padding-bottom: 15px;
+	padding-top: 5px;
 }
 
 .icon-large-menu li {
 	display: block;
 	text-align: right;
 	float: right;
-	margin-bottom: 3px;
-	margin-top: 3px;
 	width: 300px;
+	color: #000;
+}
+
+li.menu-right-title {
+	margin-top: 7px;
+	margin-bottom: 7px;
 }
 
 .icon-large .badge {
@@ -445,6 +504,21 @@ table .headerSortUp {
 .menu-right-title {
 	margin-right: 15px;
 	font-size: 125%;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+.icon-large-menu ul li a {
+	display: block;
+	padding: 8px;
+	margin-left: 17px;
+	margin-right: 5px;
+}
+
+.icon-large-menu ul li a:hover {
+	background: #337ab7;
+	text-decoration: none;
+	color: #fff;
 }
 
 .left-menu-color a {
@@ -455,7 +529,9 @@ table .headerSortUp {
 }
 
  .left-menu-color a:hover {
-	background: #fff;
+	background: #337ab7;
+	color: #fff;
+	text-decoration: none;
 }
 
 .circle {
@@ -480,6 +556,8 @@ table .headerSortUp {
 .btn-warning {
 	padding: 0px;
 	background: #fea;
+	font-weight: 700;
+	border: 1px solid #e5e600;
 }
 
 .btn-warning:hover a {
@@ -495,7 +573,10 @@ table .headerSortUp {
 
 .btn-success {
 	padding: 0px;
-	background: #9f6;
+	background: #b3ffb3;
+	color: #000;
+	border: 1px solid #00e600;
+	font-weight: 700;
 }
 
 .btn-success:hover a {
@@ -511,4 +592,63 @@ input.btn {
 a.btn {
 	padding: 10px;
 	color: #000;
+}
+
+.glyphicon-remove {
+	color: #ff3333;
+}
+
+.glyphicon-remove:hover {
+	color: #ff9999;
+}
+
+.tablesorter {
+	margin-top: 20px;
+}
+
+.travel-plan-h1 {
+	margin-top: 5px;
+	margin-bottom: 12px;
+}
+
+.wall-large {
+	float: left;
+	font-size: 1.5em;
+	border: 5px solid #777;
+	padding: 5px;
+	color: #777;
+	clear: both;
+	margin-right: 15px;
+	border-radius: 5px;
+}
+
+.glyphicon-comment.wall-large {
+	color: #37a;
+	border-color: #37a;
+}
+
+.glyphicon-ok.wall-large {
+	color: #3a7;
+	border-color: #3a7;
+}
+
+.glyphicon-remove.wall-large {
+	color: #a33;
+	border-color: #a33;
+}
+
+.glyphicon-plane.wall-large {
+	color: #3aa;
+	border-color: #3aa;
+}
+
+.glyphicon-briefcase.wall-large {
+	color: #aa3;
+	border-color: #aa3;
+}
+
+.alert .glyphicon {
+	font-size: 3em;
+	margin: 20px;
+	margin-right: 60px;
 }

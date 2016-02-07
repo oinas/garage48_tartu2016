@@ -21,7 +21,9 @@ foreach($walls->find(array("user1" => $_SESSION['user']))->sort(array("update" =
 	}
 }
 
+$i = 0;
 foreach($messages as $k => $v){
+	$i++;
 	$tmp = $v['value'];
 	$d = "";
 	$fellow = $tmp['user2'];
@@ -69,17 +71,53 @@ foreach($messages as $k => $v){
 	if(empty($d)){
 		echo $tmp['event'] . "<br>";
 	}
+
 	$t = relativeTime($tmp['update']);
+	$ico = "exclamation-sign";
+	if(preg_match("/request/", $tmp['event'])){
+		$ico = "briefcase";
+	}
+	if(preg_match("/chat/", $tmp['event'])){
+		$ico = "comment";
+	}
+	if(preg_match("/travel/", $tmp['event'])){
+		$ico = "plane";
+	}
+	if(preg_match("/pending/", $d)){
+		$ico = "hourglass";
+	}
+	if(preg_match("/rejected/", $d)){
+		$ico = "remove";
+	}
+	if(preg_match("/revoke/", $tmp['event'])){
+		$ico = "remove";
+	}
+	if(preg_match("/deleted/", $tmp['event'])){
+		$ico = "remove";
+	}
+	if(preg_match("/accepted/", $tmp['event'])){
+		$ico = "ok";
+	}
 	$badge = $v['count'] > 1 ? ' &middot; <div class="badge">' . $v['count'] . '</div>' : '';
 	if(!empty($d)){
 		$HTML[] = <<<EOF
 			<div class="wall-event">
+			<span class="glyphicon glyphicon-{$ico} wall-large"></span>
 			{$d}
 			<br>
 			<small>{$t}</small>{$badge}
+			<div style="clear: both;"></div>
 			</div>
 EOF;
 	}
+}
+
+if($i == 0){
+	$HTML[] = <<<EOF
+			<div class="wall-event">
+				No entries found
+			</div>
+EOF;
 }
 
 $notifications = $db->notifications;

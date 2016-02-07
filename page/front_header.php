@@ -46,7 +46,7 @@ $HTML[] = <<<EOF
 			</div>
 		</div>
 
-		<div class="content>
+		<div class="content">
 			<div class="inner">
 EOF;
 

@@ -14,6 +14,7 @@ $menu = array(
 	"wall" => '<span class="glyphicon glyphicon-bell"></span> ' . "Notifications {$badge}",
 	"travel_plan/add" => '<span class="glyphicon glyphicon-plane"></span> ' . "Create travel plan",
 	"product_request/add" => '<span class="glyphicon glyphicon-briefcase"></span> ' . "Make product request",
+	"front_search" => '<span class="glyphicon glyphicon-search"></span> ' . "Search",
 /*	"travel_plan" => "My travel plans",
 	"product_request" => "My product requests",
 	"pending/view/pending" => "Show pending requests",
