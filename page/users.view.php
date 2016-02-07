@@ -79,6 +79,7 @@ $HTML[] = <<<EOF
 EOF;
 
 $_GET['user'] = $_SESSION['user'];
+$_GET['to'] = "";
 $_GET['showall'] = true;
 $_GET['userprofile'] = true;
 
