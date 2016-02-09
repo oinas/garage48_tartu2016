@@ -365,7 +365,7 @@ EOF;
 			<script>
 				setInterval(function(){
 				      $('#chat-box').load('?travel_plan/view/{$ID}/&onlychat');
-				 }, 5000);
+				 }, 60000);
 			</script>
 			</div>
 EOF;
@@ -481,7 +481,7 @@ EOF;
 			<script>
 				setInterval(function(){
 				      $('#chat-box{$k}').load('?travel_plan/view/{$ID}/&onlychat{$k}');
-				 }, 5000);
+				 }, 60000);
 			</script>
 			</div>
 EOF;
